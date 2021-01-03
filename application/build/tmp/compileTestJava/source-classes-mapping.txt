@@ -1,0 +1,2 @@
+app/majime/MajimeApplicationTests.java
+ app.majime.MajimeApplicationTests

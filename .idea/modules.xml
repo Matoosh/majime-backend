@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/majime.iml" filepath="$PROJECT_DIR$/.idea/modules/majime.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/majime-backend-gradle.iml" filepath="$PROJECT_DIR$/.idea/modules/majime-backend-gradle.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/adapter/majime-backend-gradle.adapter.iml" filepath="$PROJECT_DIR$/.idea/modules/adapter/majime-backend-gradle.adapter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/adapter/controller/majime-backend-gradle.adapter.controller.iml" filepath="$PROJECT_DIR$/.idea/modules/adapter/controller/majime-backend-gradle.adapter.controller.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/adapter/controller/majime-backend-gradle.adapter.controller.main.iml" filepath="$PROJECT_DIR$/.idea/modules/adapter/controller/majime-backend-gradle.adapter.controller.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/adapter/controller/majime-backend-gradle.adapter.controller.test.iml" filepath="$PROJECT_DIR$/.idea/modules/adapter/controller/majime-backend-gradle.adapter.controller.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/adapter/repository/majime-backend-gradle.adapter.db.iml" filepath="$PROJECT_DIR$/.idea/modules/adapter/repository/majime-backend-gradle.adapter.db.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/adapter/repository/majime-backend-gradle.adapter.db.main.iml" filepath="$PROJECT_DIR$/.idea/modules/adapter/repository/majime-backend-gradle.adapter.db.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/adapter/repository/majime-backend-gradle.adapter.db.test.iml" filepath="$PROJECT_DIR$/.idea/modules/adapter/repository/majime-backend-gradle.adapter.db.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/adapter/majime-backend-gradle.controller.iml" filepath="$PROJECT_DIR$/.idea/modules/adapter/majime-backend-gradle.controller.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/domain/majime-backend-gradle.domain.iml" filepath="$PROJECT_DIR$/.idea/modules/domain/majime-backend-gradle.domain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/domain/majime-backend-gradle.domain.main.iml" filepath="$PROJECT_DIR$/.idea/modules/domain/majime-backend-gradle.domain.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/domain/majime-backend-gradle.domain.test.iml" filepath="$PROJECT_DIR$/.idea/modules/domain/majime-backend-gradle.domain.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/majime-backend-gradle.main.iml" filepath="$PROJECT_DIR$/.idea/modules/majime-backend-gradle.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/majime-backend-gradle.test.iml" filepath="$PROJECT_DIR$/.idea/modules/majime-backend-gradle.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/usecase/majime-backend-gradle.usecase.iml" filepath="$PROJECT_DIR$/.idea/modules/usecase/majime-backend-gradle.usecase.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/usecase/majime-backend-gradle.usecase.main.iml" filepath="$PROJECT_DIR$/.idea/modules/usecase/majime-backend-gradle.usecase.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/usecase/majime-backend-gradle.usecase.test.iml" filepath="$PROJECT_DIR$/.idea/modules/usecase/majime-backend-gradle.usecase.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/majime.main.iml" filepath="$PROJECT_DIR$/.idea/modules/majime.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/majime.test.iml" filepath="$PROJECT_DIR$/.idea/modules/majime.test.iml" />
+    </modules>
+  </component>
+</project>
