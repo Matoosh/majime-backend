@@ -1,2 +1,0 @@
-app/majime/MajimeApplication.java
- app.majime.MajimeApplication
