@@ -31,15 +31,18 @@ public class SampleController {
         if(sample.isPresent()){
             return ResponseEntity.ok(sample.get());
         }else{
-            throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, "Sample Not Found");
+            return ResponseEntity.notFound().build();
         }
     }
 
     @PostMapping()
     public ResponseEntity<Sample> addNewSample(@RequestBody Sample newSample){
-        repository.save(newSample);
-        return ResponseEntity.ok(newSample);
+        Optional<Sample> sampleFromDb = repository.findBySampleNo(newSample.getSampleNo());
+        if(sampleFromDb.isPresent()) {
+            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
+        }
+        Sample savedSample = repository.save(newSample);
+        return ResponseEntity.ok(savedSample);
     }
 
     @DeleteMapping("/{id}")
@@ -61,7 +64,7 @@ public class SampleController {
             sample.setStatus(newSample.getStatus());
             repository.save(sample);
             return ResponseEntity.ok(sample);
-        }else{
+        } else {
             return ResponseEntity.notFound().build();
         }
     }
