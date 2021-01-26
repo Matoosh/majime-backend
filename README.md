@@ -5,7 +5,7 @@ MajimeLIMS is a Laboratory Information Management System created by a group of s
 ````
 git clone https://github.com/Matoosh/majime-backend
 ````
-####In IntelliJ IDEA
+#### In IntelliJ IDEA
 ```
 File -> Open -> majime-backend/pom.xml
 ```
