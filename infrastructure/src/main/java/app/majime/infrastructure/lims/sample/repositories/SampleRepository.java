@@ -7,6 +7,5 @@ import org.springframework.lang.NonNull;
 import java.util.Optional;
 
 public interface SampleRepository extends CrudRepository<Sample,Long> {
-    @NonNull
-    Optional<Sample> findById(Long id);
+    Optional<Sample> findBySampleNo(String sampleNumber);
 }
