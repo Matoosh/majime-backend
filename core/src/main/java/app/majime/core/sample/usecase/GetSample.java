@@ -1,10 +1,15 @@
 package app.majime.core.sample.usecase;
 
-import app.majime.core.sample.Sample;
 
-import java.util.List;
+public interface GetSample {
 
-public class GetSample {
+    Long getId();
 
+    int getSample_no();
+    int getQuantity();
+    int getStatus();
+    int getBatch_id();
+    int getUser_id();
+    int getSpecification_id();
 
 }
