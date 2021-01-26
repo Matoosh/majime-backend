@@ -1,5 +1,6 @@
 package app.majime.core.sample;
 
+import app.majime.core.user.User;
 import lombok.*;
 
 import javax.persistence.*;
@@ -27,11 +28,12 @@ public class Sample {
 
     private int status;
 
-    private int batch_id;
+    private int batchId;
 
-    private int user_id;
+    private int specificationId;
 
-    private int specification_id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
 
     protected Sample() {}
 
