@@ -32,8 +32,8 @@ public class Sample {
 
     private int specificationId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private User user;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    private User user;
 
     protected Sample() {}
 
