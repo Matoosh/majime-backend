@@ -1,4 +1,4 @@
-package app.majime.core.sample;
+package app.majime.core.manufacturer;
 import lombok.*;
 import javax.persistence.*;
 
