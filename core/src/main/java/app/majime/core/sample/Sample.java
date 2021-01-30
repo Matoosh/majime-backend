@@ -9,8 +9,8 @@ import javax.persistence.*;
 @Getter
 @Setter
 @AllArgsConstructor
-//@NoArgsConstructor
 @RequiredArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
 public class Sample {
 
@@ -19,20 +19,23 @@ public class Sample {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sample_seq")
     private Long id;
 
-    @NonNull
-    @Column(name = "sample_no")
+    @Column(name = "sample_no", length = 50, nullable = false)
     private String sampleNo;
 
+    @Column(nullable = false)
     private int quantity;
 
-    private int status;
+    @Column(nullable = false)
+    private Long status;
 
-    private int batch_id;
+    @Column(nullable = false)
+    private Long batch_id;
 
-    private int user_id;
+    @Column(nullable = false)
+    private Long user_id;
 
-    private int specification_id;
+    @Column(nullable = false)
+    private Long specification_id;
 
-    protected Sample() {}
 
 }
