@@ -3,7 +3,7 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "manufacturer")
+@Table(name = "manufacturer", schema = "public")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -19,9 +19,14 @@ public class Manufacturer {
     private Long id;
 
     @NonNull
-    @Column(name = "manufacturer_no")
+    @Column(name = "name")
     private String name;
+
+    @NonNull
+    @Column(name = "deleted")
     private char deleted;
+
+    @Column(name = "address_id")
     private Long address_id;
 
     protected Manufacturer() {
