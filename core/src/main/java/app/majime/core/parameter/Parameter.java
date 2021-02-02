@@ -29,7 +29,7 @@ public class Parameter {
 
     private int unitId;
 
-    private int specification_id;
+    private int specificationId;
 
     public Parameter() {
     }
