@@ -23,7 +23,7 @@ public class Material {
     @NonNull
     private String name;
 
-    private Long user_id;
+    private Long userId;
 
     protected Material() {}
 }
