@@ -27,7 +27,7 @@ public class OutOfSpec {
     @NonNull
     private String value;
 
-    private Long result_id;
+    private Long resultId;
 
     protected OutOfSpec() {}
 }
