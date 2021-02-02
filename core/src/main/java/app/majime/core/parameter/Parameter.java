@@ -27,7 +27,7 @@ public class Parameter {
     // limit changed to border == limit is SQL sensitive
     private int border;
 
-    private int unit_id;
+    private int unitId;
 
     private int specification_id;
 
