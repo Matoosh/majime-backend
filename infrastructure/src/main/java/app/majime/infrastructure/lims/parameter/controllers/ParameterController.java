@@ -55,7 +55,7 @@ public class ParameterController {
         }
         catch (EmptyResultDataAccessException exc) {
             throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, "Sample Not Found", exc);
+                    HttpStatus.NOT_FOUND, "Parameter Not Found", exc);
         }
     }
 
