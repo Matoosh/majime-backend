@@ -12,7 +12,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(RestConstants.APPLICATION_NAME + RestConstants.API_VERSION_1 + RestConstants.RESOURCE_MANUFACURER)
+@RequestMapping(RestConstants.APPLICATION_NAME + RestConstants.API_VERSION_1 + RestConstants.RESOURCE_MANUFACTURER)
 public class ManufacturerController {
 
     private ManufacturerRepository repository;
@@ -39,7 +39,7 @@ public class ManufacturerController {
 
     @PostMapping()
     public ResponseEntity<Manufacturer> addNewManufacturer(@RequestBody Manufacturer newManufacturer) {
-        Optional<Manufacturer> manufacturerFromDb = repository.findByManufacturerByName(newManufacturer.getName());
+        Optional<Manufacturer> manufacturerFromDb = repository.findByName(newManufacturer.getName());
         if (manufacturerFromDb.isPresent()) {
             return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
         }

@@ -4,5 +4,5 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.Optional;
 
 public interface ManufacturerRepository extends CrudRepository<Manufacturer,Long> {
-    Optional<Manufacturer> findByManufacturerByName(String name);
+    Optional<Manufacturer> findByName(String name);
 }
