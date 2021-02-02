@@ -7,4 +7,6 @@ public class RestConstants {
     public static final String RESOURCE_MANUFACTURER = "/manufacturer";
     public static final String RESOURCE_SAMPLE = "/sample";
     public static final String RESOURCE_USER = "/user";
+    public static final String RESOURCE_MATERIAL = "/material";
+    public static final String RESOURCE_OUTOFSPEC = "/outofspec";
 }
