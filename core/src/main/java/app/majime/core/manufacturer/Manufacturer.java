@@ -27,7 +27,7 @@ public class Manufacturer {
     private char deleted;
 
     @Column(name = "address_id")
-    private Long address_id;
+    private Long addressId;
 
     protected Manufacturer() {
 
