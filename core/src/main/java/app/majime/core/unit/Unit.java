@@ -23,5 +23,5 @@ public class Unit {
 
     private String value;
 
-    private Long user_id;
+    private Long userId;
 }

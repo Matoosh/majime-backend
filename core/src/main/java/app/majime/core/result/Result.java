@@ -23,10 +23,10 @@ public class Result {
 
     private int status;
 
-    private Long sample_id;
+    private Long sampleId;
 
-    private Long parameter_id;
+    private Long parameterId;
 
-    private Long user_id;
+    private Long userId;
 
 }
