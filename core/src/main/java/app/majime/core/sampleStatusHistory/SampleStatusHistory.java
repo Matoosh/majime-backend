@@ -10,6 +10,7 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @RequiredArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
 public class SampleStatusHistory {
     @Id
@@ -17,15 +18,17 @@ public class SampleStatusHistory {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sample_status_history_seq")
     private Long id;
 
-    @Column(length = 50, nullable = false)
+    @NonNull
+    @Column(length = 50)
     private String oldValue;
 
-    @Column(length = 50, nullable = false)
+    @NonNull
+    @Column(length = 50)
     private String newValue;
 
-    @Column(nullable = false)
+    @NonNull
     private Long userId;
 
-    @Column(nullable = false)
+    @NonNull
     private Long sampleId;
 }

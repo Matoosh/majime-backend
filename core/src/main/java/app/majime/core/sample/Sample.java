@@ -19,23 +19,24 @@ public class Sample {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sample_seq")
     private Long id;
 
-    @Column(name = "sample_no", length = 50, nullable = false)
+    @NonNull
+    @Column(name = "sample_no", length = 50)
     private String sampleNo;
 
-    @Column(nullable = false)
+    @NonNull
     private int quantity;
 
-    @Column(nullable = false)
+    @NonNull
     private Long status;
 
-    @Column(nullable = false)
-    private Long batch_id;
+    @NonNull
+    private Long batchId;
 
-    @Column(nullable = false)
-    private Long user_id;
+    @NonNull
+    private Long userId;
 
-    @Column(nullable = false)
-    private Long specification_id;
+    @NonNull
+    private Long specificationId;
 
 
 }

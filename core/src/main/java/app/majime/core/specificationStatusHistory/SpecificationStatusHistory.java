@@ -18,15 +18,17 @@ public class SpecificationStatusHistory {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "specification_status_history_seq")
     private Long id;
 
-    @Column(length = 50, nullable = false)
+    @NonNull
+    @Column(length = 50)
     private String oldValue;
 
-    @Column(length = 50, nullable = false)
+    @NonNull
+    @Column(length = 50)
     private String newValue;
 
-    @Column(nullable = false)
+    @NonNull
     private Long specificationId;
 
-    @Column(nullable = false)
+    @NonNull
     private Long userId;
 }
