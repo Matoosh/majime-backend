@@ -10,6 +10,7 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @RequiredArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
 public class SampleLab {
     @Id
@@ -17,12 +18,12 @@ public class SampleLab {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sample_lab_seq")
     private Long id;
 
-    @Column
+    @NonNull
     private int quantity;
 
-    @Column
+    @NonNull
     private Long sampleId;
 
-    @Column
+    @NonNull
     private Long labId;
 }

@@ -18,21 +18,22 @@ public class Specification {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "specification_seq")
     private Long id;
 
-    @Column(unique = true, length = 50, nullable = false)
+    @NonNull
+    @Column(unique = true, length = 50)
     private String specificationNo;
 
-    @Column(length = 1, nullable = false)
+    @NonNull
+    @Column(length = 1)
     private String confirmed;
 
-    @Column(nullable = false)
+    @NonNull
     private Long materialId;
 
-    @Column
     private Long acceptedBy;
 
-    @Column(nullable = false)
+    @NonNull
     private Long userId;
 
-    @Column(nullable = false)
+    @NonNull
     private Long status;
 }

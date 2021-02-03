@@ -19,12 +19,13 @@ public class Supplier {
     private Long id;
 
     @NonNull
-    @Column(length = 50, nullable = false)
+    @Column(length = 50)
     private String name;
 
-    @Column(length = 1, nullable = false)
+    @NonNull
+    @Column(length = 1)
     private String deleted;
 
-    @Column(nullable = false)
+    @NonNull
     private Long addressId;
 }
