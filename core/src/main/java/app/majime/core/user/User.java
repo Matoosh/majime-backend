@@ -46,7 +46,6 @@ public class User {
     private int batch_id;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
     private Set<Sample> samples;
 
     protected User() {}
