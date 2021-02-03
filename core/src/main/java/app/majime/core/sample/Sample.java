@@ -10,8 +10,8 @@ import javax.persistence.*;
 @Getter
 @Setter
 @AllArgsConstructor
-//@NoArgsConstructor
 @RequiredArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
 public class Sample {
 
@@ -21,20 +21,23 @@ public class Sample {
     private Long id;
 
     @NonNull
-    @Column(name = "sample_no")
+    @Column(name = "sample_no", length = 50)
     private String sampleNo;
 
+    @NonNull
     private int quantity;
 
-    private int status;
+    @NonNull
+    private Long status;
 
-    private int batchId;
+    @NonNull
+    private Long batchId;
 
-    private int specificationId;
+    @NonNull
+    private Long userId;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    private User user;
+    @NonNull
+    private Long specificationId;
 
-    protected Sample() {}
 
 }
