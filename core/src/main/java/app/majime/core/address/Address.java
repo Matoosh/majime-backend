@@ -21,19 +21,28 @@ public class Address {
     private Long id;
 
     @NonNull
-    private String zipCode;
+    private String apartmentNumber;
 
     @NonNull
     private String city;
 
     @NonNull
+    private String district;
+
+    @NonNull
+    private String houseNumber;
+
+    @NonNull
+    private String postCode;
+
+    @NonNull
     private String street;
 
     @NonNull
-    private String number;
+    private String postOffice;
 
     @NonNull
-    private String country;
+    private String countryCode;
 
     private char deleted;
 
