@@ -62,11 +62,10 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateStatus(@PathVariable(value = "id") Long id,@RequestBody User newUser){
+    public ResponseEntity<User> updateUser(@PathVariable(value = "id") Long id,@RequestBody User newUser){
         Optional<User> userOptional = repository.findById(id);
         if(userOptional.isPresent()){
             User user = userOptional.get();
-            user.setStatus(newUser.getStatus());
             repository.save(user);
             return ResponseEntity.ok(user);
         } else {
