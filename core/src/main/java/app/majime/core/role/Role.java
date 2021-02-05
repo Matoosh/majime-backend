@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @AllArgsConstructor
-//@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @RequiredArgsConstructor
 @ToString
 public class Role {
@@ -22,5 +22,4 @@ public class Role {
     @NonNull
     private String name;
 
-    protected Role() {}
 }

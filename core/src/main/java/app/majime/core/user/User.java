@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "user",schema = "public")
+@Table(name = "lab_user")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -16,34 +16,30 @@ import java.util.Set;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name="user_seq", sequenceName="lab_user_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq")
     private Long id;
 
     @NonNull
-    @Column(name = "first_name")
     private String firstName;
 
     @NonNull
-    @Column(name = "last_name")
     private String lastName;
 
     @NonNull
-    @Column(name = "login")
     private String login;
 
     @NonNull
-    @Column(name = "password")
     private String password;
 
     @NonNull
-    @Column(name = "email")
     private String email;
 
     private String phone;
 
-    private int status;
+    private Long roleId;
 
-    private int batch_id;
+    private Long labId;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Sample> samples;
