@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-//@RequiredArgsConstructor
+@RequiredArgsConstructor
 @ToString
 public class Unit {
 
