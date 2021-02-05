@@ -1,16 +1,17 @@
 package app.majime.core.unit;
 
+import app.majime.core.user.User;
 import lombok.*;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "unit", schema = "public")
+@Entity(name = "Unit")
+@Table(name = "unit")
 @Getter
 @Setter
 @AllArgsConstructor
-//@NoArgsConstructor
-@RequiredArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+//@RequiredArgsConstructor
 @ToString
 public class Unit {
 
@@ -19,9 +20,13 @@ public class Unit {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "unit_seq")
     private Long id;
 
+    @NonNull
     private String name;
 
+    @NonNull
     private String value;
 
-    private Long userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }
