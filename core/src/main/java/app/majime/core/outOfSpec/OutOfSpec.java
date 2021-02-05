@@ -5,7 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "outofspec")
+@Table(name = "out_of_spec")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -15,8 +15,8 @@ import javax.persistence.*;
 public class OutOfSpec {
 
     @Id
-    @SequenceGenerator(name="outofspec_seq", sequenceName="outofspec_id_seq", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "outofspec_seq")
+    @SequenceGenerator(name="out_of_spec_seq", sequenceName="out_of_spec_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "out_of_spec_seq")
     private Long id;
 
     @NonNull
