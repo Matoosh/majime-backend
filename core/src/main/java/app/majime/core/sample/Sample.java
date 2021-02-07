@@ -1,6 +1,7 @@
 package app.majime.core.sample;
 
 import app.majime.core.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -34,10 +35,11 @@ public class Sample {
     private Long batchId;
 
     @NonNull
-    private Long userId;
-
-    @NonNull
     private Long specificationId;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @JsonIgnoreProperties("samples")
+    private User user;
 
 }
