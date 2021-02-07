@@ -50,7 +50,6 @@ public class User implements SampleOperations {
     @JsonIgnoreProperties("user")
     private Set<Sample> samples;
 
-
     @Override
     public void addSample(Sample sample){
         samples.add(sample);
@@ -62,7 +61,6 @@ public class User implements SampleOperations {
         samples.remove(sample);
         sample.setUser(this);
     }
-
 
     protected User() {}
 

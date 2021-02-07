@@ -81,9 +81,6 @@ public class UserController {
         if(userOptional.isPresent()){
             User user = userOptional.get();
             user.addSample(sample.get());
-//            Set<Sample> samples = userOptional.get().getSamples();
-//            samples.add(sample.get());
-//            user.setSamples(samples);
             repository.save(user);
             return ResponseEntity.ok(user);
         } else {
