@@ -1,6 +1,8 @@
 package app.majime.core.user;
 
 import app.majime.core.sample.Sample;
+import app.majime.core.user.usecase.SampleOperations;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -13,7 +15,7 @@ import java.util.Set;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @ToString
-public class User {
+public class User implements SampleOperations {
 
     @Id
     @SequenceGenerator(name="user_seq", sequenceName="lab_user_id_seq", allocationSize = 1)
@@ -41,8 +43,24 @@ public class User {
 
     private Long labId;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(
+            mappedBy = "user",
+            fetch = FetchType.LAZY
+    )
+    @JsonIgnoreProperties("user")
     private Set<Sample> samples;
+
+    @Override
+    public void addSample(Sample sample){
+        samples.add(sample);
+        sample.setUser(this);
+    }
+
+    @Override
+    public void removeSample(Sample sample){
+        samples.remove(sample);
+        sample.setUser(this);
+    }
 
     protected User() {}
 

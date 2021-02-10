@@ -1,6 +1,7 @@
 package app.majime.infrastructure.lims.user.controllers;
 
 import app.majime.core.sample.Sample;
+import app.majime.core.user.usecase.SampleOperations;
 import app.majime.core.user.User;
 import app.majime.infrastructure.lims.constants.RestConstants;
 import app.majime.infrastructure.lims.sample.controllers.SampleController;
@@ -79,9 +80,7 @@ public class UserController {
         Optional<Sample> sample = sampleRepository.findById(sampleId);
         if(userOptional.isPresent()){
             User user = userOptional.get();
-            Set<Sample> samples = userOptional.get().getSamples();
-            samples.add(sample.get());
-            user.setSamples(samples);
+            user.addSample(sample.get());
             repository.save(user);
             return ResponseEntity.ok(user);
         } else {
