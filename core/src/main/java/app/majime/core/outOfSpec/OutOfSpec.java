@@ -1,5 +1,6 @@
 package app.majime.core.outOfSpec;
 
+import app.majime.core.result.Result;
 import lombok.*;
 
 import javax.persistence.*;
@@ -27,5 +28,7 @@ public class OutOfSpec {
     @NonNull
     private String value;
 
-    private Long resultId;
+    @OneToOne
+    @JoinColumn(name = "result_id", referencedColumnName = "id")
+    private Result result;
 }

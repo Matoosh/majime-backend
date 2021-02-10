@@ -1,5 +1,6 @@
 package app.majime.core.result;
 
+import app.majime.core.outOfSpec.OutOfSpec;
 import lombok.*;
 
 import javax.persistence.*;
@@ -28,5 +29,8 @@ public class Result {
     private Long parameterId;
 
     private Long userId;
+
+    @OneToOne(mappedBy = "result")
+    private OutOfSpec outOfSpec;
 
 }
