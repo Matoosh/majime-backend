@@ -1,7 +1,18 @@
 package app.majime.core.user;
 
+import app.majime.core.batch.Batch;
+import app.majime.core.certificate.Certificate;
+import app.majime.core.lab.Lab;
+import app.majime.core.material.Material;
+import app.majime.core.result.Result;
+import app.majime.core.resultStatusHistory.ResultStatusHistory;
+import app.majime.core.role.Role;
 import app.majime.core.sample.Sample;
-import app.majime.core.user.usecase.SampleOperations;
+import app.majime.core.sampleStatusHistory.SampleStatusHistory;
+import app.majime.core.specification.Specification;
+import app.majime.core.specificationStatusHistory.SpecificationStatusHistory;
+import app.majime.core.unit.Unit;
+import app.majime.core.user.usecase.UserOperations;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
@@ -14,8 +25,9 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @RequiredArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
-public class User implements SampleOperations {
+public class User implements UserOperations {
 
     @Id
     @SequenceGenerator(name="user_seq", sequenceName="lab_user_id_seq", allocationSize = 1)
@@ -39,14 +51,30 @@ public class User implements SampleOperations {
 
     private String phone;
 
-    private Long roleId;
+    @NonNull
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
 
-    private Long labId;
+    @OneToMany(fetch = FetchType.LAZY)
+    private Set<Certificate> certificates;
 
-    @OneToMany(
-            mappedBy = "user",
-            fetch = FetchType.LAZY
-    )
+    @OneToMany(fetch = FetchType.LAZY)
+    private Set<Batch> batches;
+
+    @ManyToOne
+    @JoinColumn(name = "lab_id")
+    @JsonIgnoreProperties("users")
+    private Lab lab;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    private Set<ResultStatusHistory> resultStatusHistories;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    private Set<SampleStatusHistory> sampleStatusHistories;
+
+    //Bidirectional
+    @OneToMany(fetch = FetchType.LAZY)
     @JsonIgnoreProperties("user")
     private Set<Sample> samples;
 
@@ -62,6 +90,20 @@ public class User implements SampleOperations {
         sample.setUser(this);
     }
 
-    protected User() {}
+    //Unidirectional
+    @OneToMany(fetch = FetchType.LAZY)
+    private Set<SpecificationStatusHistory> specificationStatusHistories;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    private Set<Specification> specifications;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    private Set<Result> results;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    private Set<Material> materials;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    private Set<Unit> units;
 
 }

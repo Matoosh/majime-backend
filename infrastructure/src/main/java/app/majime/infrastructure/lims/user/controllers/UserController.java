@@ -1,10 +1,8 @@
 package app.majime.infrastructure.lims.user.controllers;
 
 import app.majime.core.sample.Sample;
-import app.majime.core.user.usecase.SampleOperations;
 import app.majime.core.user.User;
 import app.majime.infrastructure.lims.constants.RestConstants;
-import app.majime.infrastructure.lims.sample.controllers.SampleController;
 import app.majime.infrastructure.lims.sample.repositories.SampleRepository;
 import app.majime.infrastructure.lims.user.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
-import java.util.Set;
 
 @RestController
 @RequestMapping(RestConstants.APPLICATION_NAME + RestConstants.API_VERSION_1 + RestConstants.RESOURCE_USER)
