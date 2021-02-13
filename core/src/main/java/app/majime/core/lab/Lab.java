@@ -1,5 +1,6 @@
 package app.majime.core.lab;
 
+import app.majime.core.address.Address;
 import lombok.*;
 
 import javax.persistence.*;
@@ -9,7 +10,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @AllArgsConstructor
-//@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @RequiredArgsConstructor
 @ToString
 
@@ -23,10 +24,10 @@ public class Lab {
     @NonNull
     private String name;
 
-    @NonNull
-    private String adressId;
+    @OneToOne
+    //@MapsId
+    @JoinColumn(name = "address_id")
+    private Address address;
 
     private char deleted;
-
-    protected Lab() {}
 }

@@ -1,13 +1,16 @@
 package app.majime.core.manufacturer;
+import app.majime.core.address.Address;
+import app.majime.core.batch.Batch;
 import lombok.*;
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "manufacturer", schema = "public")
 @Getter
 @Setter
 @AllArgsConstructor
-//@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @RequiredArgsConstructor
 @ToString
 
@@ -19,17 +22,22 @@ public class Manufacturer {
     private Long id;
 
     @NonNull
-    @Column(name = "name")
     private String name;
 
     @NonNull
-    @Column(name = "deleted")
     private char deleted;
 
-    @Column(name = "address_id")
+    @OneToMany(mappedBy="manufacturer")
+    private Set<Batch> batch;
+
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "address_id")
+    private Address address;
+
+    /*
+    @NonNull
     private Long addressId;
+    */
 
-    protected Manufacturer() {
-
-    }
 }

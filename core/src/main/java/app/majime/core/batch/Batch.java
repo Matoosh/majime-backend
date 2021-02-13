@@ -1,5 +1,7 @@
 package app.majime.core.batch;
 
+import app.majime.core.manufacturer.Manufacturer;
+import app.majime.core.supplier.Supplier;
 import lombok.*;
 
 import javax.persistence.*;
@@ -9,7 +11,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @AllArgsConstructor
-//@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @RequiredArgsConstructor
 @ToString
 
@@ -23,16 +25,16 @@ public class Batch {
     @NonNull
     private String batchNo;
 
-    @NonNull
-    private Long supplierId;
+    @ManyToOne
+    @JoinColumn(name = "supplier_id")
+    private Supplier supplier;
 
-    @NonNull
-    private Long manufacturerId;
+    @ManyToOne
+    @JoinColumn(name = "manufacturer_id")
+    private Manufacturer manufacturer;
 
     @NonNull
     private Long userId;
 
     private char deleted;
-
-    protected Batch() {}
 }
