@@ -1,15 +1,18 @@
 package app.majime.core.permission;
 
+import app.majime.core.rolePermission.RolePermission;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "permission")
 @Getter
 @Setter
 @AllArgsConstructor
-//@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @RequiredArgsConstructor
 @ToString
 public class Permission {
@@ -28,5 +31,8 @@ public class Permission {
     @NonNull
     private String description;
 
-    protected Permission() {}
+    @OneToMany(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties("permission")
+    private Set<RolePermission> rolePermissions;
+
 }

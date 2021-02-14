@@ -1,5 +1,8 @@
 package app.majime.core.rolePermission;
 
+import app.majime.core.permission.Permission;
+import app.majime.core.role.Role;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -9,8 +12,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @AllArgsConstructor
-//@NoArgsConstructor
-@RequiredArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
 public class RolePermission {
 
@@ -20,10 +22,16 @@ public class RolePermission {
     private Long id;
 
     @NonNull
-    private Long roleId;
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    @JsonIgnoreProperties("rolePermissions")
+    private Role role;
 
     @NonNull
-    private Long permissionId;
+    @ManyToOne
+    @JoinColumn(name = "permission_id")
+    @JsonIgnoreProperties("rolePermissions")
+    private Permission permission;
 
-    protected RolePermission() {}
+
 }
