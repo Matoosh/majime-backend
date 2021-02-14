@@ -36,5 +36,7 @@ public class Batch {
     @NonNull
     private Long userId;
 
-    private char deleted;
+    @NonNull
+    @Column(length = 1)
+    private String deleted;
 }

@@ -29,5 +29,7 @@ public class Lab {
     @JoinColumn(name = "address_id")
     private Address address;
 
-    private char deleted;
+    @NonNull
+    @Column(length = 1)
+    private String deleted;
 }
