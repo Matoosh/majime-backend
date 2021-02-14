@@ -12,4 +12,9 @@ public class RestConstants {
     public static final String RESOURCE_PARAMETER = "/parameter";
     public static final String RESOURCE_RESULT = "/result";
     public static final String RESOURCE_UNIT = "/unit";
+    public static final String RESOURCE_BATCH = "/batch";
+    public static final String RESOURCE_SUPPLIER = "/supplier";
+    public static final String RESOURCE_CERTIFICATE = "/certificate";
+    public static final String RESOURCE_ADDRESS = "/address";
+    public static final String RESOURCE_LAB = "/lab";
 }

@@ -1,5 +1,6 @@
 package app.majime.core.address;
 
+import app.majime.core.manufacturer.Manufacturer;
 import lombok.*;
 
 import javax.persistence.*;
@@ -9,7 +10,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @AllArgsConstructor
-//@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @RequiredArgsConstructor
 @ToString
 
@@ -44,7 +45,13 @@ public class Address {
     @NonNull
     private String countryCode;
 
-    private char deleted;
+    /*
+    No i teraz jest pytanie, bo jak adres w tym jednym polu może odnosić się do 3 tablic? Nie może, bo będzie konflikt
+    nazw kluczy. Więc w tym kierunku chyba nie mapujemy. Inna opcja to 3 osobne tabele z adresami albo włączyć adresy
+    do tabel z Batch, Lab i Manufacturer
+    @OneToOne(mappedBy="address")
+    private Address address;
+     */
 
-    protected Address() {}
+    private char deleted;
 }
