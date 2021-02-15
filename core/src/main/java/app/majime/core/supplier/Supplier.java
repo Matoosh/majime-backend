@@ -1,8 +1,11 @@
 package app.majime.core.supplier;
 
+import app.majime.core.address.Address;
+import app.majime.core.batch.Batch;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "supplier")
@@ -26,6 +29,11 @@ public class Supplier {
     @Column(length = 1)
     private String deleted;
 
-    @NonNull
-    private Long addressId;
+    @OneToMany(mappedBy="manufacturer")
+    private Set<Batch> batch;
+
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "address_id")
+    private Address address;
 }

@@ -1,8 +1,11 @@
 package app.majime.core.role;
 
+import app.majime.core.rolePermission.RolePermission;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "role")
@@ -21,5 +24,15 @@ public class Role {
 
     @NonNull
     private String name;
+
+    @NonNull
+    private String code;
+
+    @NonNull
+    private String description;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties("role")
+    private Set<RolePermission> rolePermissions;
 
 }

@@ -1,5 +1,7 @@
 package app.majime.core.sampleLab;
 
+import app.majime.core.sample.Sample;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -22,7 +24,10 @@ public class SampleLab {
     private int quantity;
 
     @NonNull
-    private Long sampleId;
+    @ManyToOne
+    @JoinColumn(name = "sample_id")
+    @JsonIgnoreProperties("sampleLabs")
+    private Sample sample;
 
     @NonNull
     private Long labId;
