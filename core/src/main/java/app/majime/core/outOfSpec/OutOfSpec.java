@@ -29,6 +29,6 @@ public class OutOfSpec {
     private String value;
 
     @OneToOne
-    @JoinColumn(name = "result_id", referencedColumnName = "id")
+    @JoinColumn(name = "result_id")
     private Result result;
 }

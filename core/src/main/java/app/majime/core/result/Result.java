@@ -39,7 +39,4 @@ public class Result {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToOne(mappedBy = "result")
-    private OutOfSpec outOfSpec;
-
 }
