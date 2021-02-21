@@ -65,7 +65,8 @@ public class ResultController {
         Optional<Result> resultOptional = repository.findById(id);
         if(resultOptional.isPresent()){
             Result result = resultOptional.get();
-            result.setStatus(newResult.getStatus());
+            //TODO make updateStatus (by using Dictonary as relation definied in Result class).
+//            result.setStatus(newResult.getStatus());
             repository.save(result);
             return ResponseEntity.ok(result);
         } else {
