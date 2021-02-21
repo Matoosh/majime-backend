@@ -97,7 +97,5 @@ public class User implements UserOperations {
     @OneToMany(fetch = FetchType.LAZY)
     private Set<Material> materials;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    private Set<Unit> units;
 
 }
