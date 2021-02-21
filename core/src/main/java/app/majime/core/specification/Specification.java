@@ -45,4 +45,11 @@ public class Specification {
     @JoinColumn(name = "dictionary_id")
     @JsonIgnoreProperties("dictionarySpecification")
     private Dictionary dictionary;
+
+    @NonNull
+    @ManyToOne
+    @JoinColumn(name = "specification_id")
+    @JsonIgnoreProperties("materialSpecifications")
+    private Specification specification;
+    
 }

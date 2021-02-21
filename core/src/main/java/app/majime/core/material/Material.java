@@ -1,16 +1,20 @@
 package app.majime.core.material;
 
+import app.majime.core.sampleLab.SampleLab;
+import app.majime.core.specification.Specification;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "material")
 @Getter
 @Setter
 @AllArgsConstructor
-//@NoArgsConstructor
 @RequiredArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
 
 public class Material {
@@ -25,5 +29,12 @@ public class Material {
 
     private Long userId;
 
-    protected Material() {}
+    @OneToMany(fetch = FetchType.LAZY)
+    private Set<Specification> materialSpecifications;
+
+    @NonNull
+    @ManyToOne
+    @JoinColumn(name = "material_id")
+    @JsonIgnoreProperties("materials")
+    private Material material;
 }
