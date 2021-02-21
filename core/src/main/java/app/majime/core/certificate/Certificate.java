@@ -1,5 +1,8 @@
 package app.majime.core.certificate;
 
+import app.majime.core.batch.Batch;
+import app.majime.core.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -9,8 +12,8 @@ import javax.persistence.*;
 @Getter
 @Setter
 @AllArgsConstructor
-//@NoArgsConstructor
 @RequiredArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
 
 public class Certificate {
@@ -26,13 +29,26 @@ public class Certificate {
     @NonNull
     private String name;
 
+    /* Creates error
     @NonNull
     private Long batchId;
+    */
 
     @NonNull
     private Long acceptedBy;
 
     private char deleted;
 
-    protected Certificate() {}
+    @NonNull
+    @ManyToOne
+    @JoinColumn(name = "batch_id")
+    @JsonIgnoreProperties("batchCertificates")
+    private Batch batch;
+
+    @NonNull
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @JsonIgnoreProperties("userCertificates")
+    private User user;
+
 }

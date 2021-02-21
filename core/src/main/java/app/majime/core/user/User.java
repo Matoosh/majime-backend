@@ -78,18 +78,6 @@ public class User implements UserOperations {
     @JsonIgnoreProperties("user")
     private Set<Sample> samples;
 
-    @Override
-    public void addSample(Sample sample){
-        samples.add(sample);
-        sample.setUser(this);
-    }
-
-    @Override
-    public void removeSample(Sample sample){
-        samples.remove(sample);
-        sample.setUser(this);
-    }
-
     //Unidirectional
     @OneToMany(fetch = FetchType.LAZY)
     private Set<SpecificationStatusHistory> specificationStatusHistories;
@@ -105,5 +93,19 @@ public class User implements UserOperations {
 
     @OneToMany(fetch = FetchType.LAZY)
     private Set<Unit> units;
+
+    @Override
+    public void addSample(Sample sample){
+        samples.add(sample);
+        sample.setUser(this);
+    }
+
+    @Override
+    public void removeSample(Sample sample){
+        samples.remove(sample);
+        sample.setUser(this);
+    }
+
+
 
 }
