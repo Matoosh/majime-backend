@@ -1,5 +1,8 @@
 package app.majime.core.result;
 
+import app.majime.core.dictionary.Dictionary;
+import app.majime.core.sample.Sample;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -28,5 +31,11 @@ public class Result {
     private Long parameterId;
 
     private Long userId;
+
+    @NonNull
+    @ManyToOne
+    @JoinColumn(name = "dictionary_id")
+    @JsonIgnoreProperties("dictionaryResult")
+    private Dictionary dictionary;
 
 }

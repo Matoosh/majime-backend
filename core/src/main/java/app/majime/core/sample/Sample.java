@@ -1,5 +1,6 @@
 package app.majime.core.sample;
 
+import app.majime.core.dictionary.Dictionary;
 import app.majime.core.sample.usecase.SampleOperations;
 import app.majime.core.sampleLab.SampleLab;
 import app.majime.core.user.User;
@@ -49,6 +50,12 @@ public class Sample implements SampleOperations {
     //TODO @ManyToOne from SampleLab if necessary
     @OneToMany(fetch = FetchType.LAZY)
     private Set<SampleLab> sampleLabs;
+
+    @NonNull
+    @ManyToOne
+    @JoinColumn(name = "dictionary_id")
+    @JsonIgnoreProperties("dictionaryResult")
+    private Dictionary dictionary;
 
     @Override
     public void addSampleLab(SampleLab sampleLab) {

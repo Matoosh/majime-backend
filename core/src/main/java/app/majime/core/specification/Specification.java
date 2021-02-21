@@ -1,5 +1,8 @@
 package app.majime.core.specification;
 
+import app.majime.core.dictionary.Dictionary;
+import app.majime.core.sample.Sample;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -36,4 +39,10 @@ public class Specification {
 
     @NonNull
     private Long status;
+
+    @NonNull
+    @ManyToOne
+    @JoinColumn(name = "dictionary_id")
+    @JsonIgnoreProperties("dictionarySpecification")
+    private Dictionary dictionary;
 }
