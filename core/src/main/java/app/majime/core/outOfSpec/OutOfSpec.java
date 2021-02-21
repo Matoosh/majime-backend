@@ -9,8 +9,8 @@ import javax.persistence.*;
 @Getter
 @Setter
 @AllArgsConstructor
-//@NoArgsConstructor
 @RequiredArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
 public class OutOfSpec {
 
@@ -26,8 +26,7 @@ public class OutOfSpec {
 
     @NonNull
     private String value;
-
+/* error here
     private Long resultId;
-
-    protected OutOfSpec() {}
+*/
 }

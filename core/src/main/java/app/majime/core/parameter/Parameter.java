@@ -9,8 +9,8 @@ import javax.persistence.*;
 @Getter
 @Setter
 @AllArgsConstructor
-//@NoArgsConstructor
 @RequiredArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
 public class Parameter {
 
@@ -31,6 +31,4 @@ public class Parameter {
 
     private int specificationId;
 
-    public Parameter() {
-    }
 }

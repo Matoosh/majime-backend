@@ -1,7 +1,7 @@
 package app.majime.core.material;
 
-import app.majime.core.sampleLab.SampleLab;
 import app.majime.core.specification.Specification;
+import app.majime.core.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
@@ -26,15 +26,15 @@ public class Material {
 
     @NonNull
     private String name;
-
+/* error here
     private Long userId;
-
+*/
     @OneToMany(fetch = FetchType.LAZY)
     private Set<Specification> materialSpecifications;
 
     @NonNull
     @ManyToOne
-    @JoinColumn(name = "material_id")
-    @JsonIgnoreProperties("materials")
-    private Material material;
+    @JoinColumn(name = "user_id")
+    @JsonIgnoreProperties("users")
+    private User user;
 }

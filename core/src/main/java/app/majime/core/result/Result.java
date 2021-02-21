@@ -25,13 +25,13 @@ public class Result {
     private String value;
 
     private int status;
-
+/* error here
     private Long sampleId;
 
     private Long parameterId;
 
     private Long userId;
-
+*/
     @NonNull
     @ManyToOne
     @JoinColumn(name = "dictionary_id")

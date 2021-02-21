@@ -25,10 +25,11 @@ public class ResultStatusHistory {
     @NonNull
     @Column(length = 50)
     private String newValue;
-
+/* error here
     @NonNull
     private Long resultId;
 
     @NonNull
     private Long userId;
+*/
 }

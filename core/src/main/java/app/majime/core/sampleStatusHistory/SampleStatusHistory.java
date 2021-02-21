@@ -28,12 +28,13 @@ public class SampleStatusHistory {
     @NonNull
     @Column(length = 50)
     private String newValue;
-
+/* error here
     @NonNull
     private Long userId;
 
     @NonNull
     private Long sampleId;
+ */
 
     @NonNull
     @ManyToOne

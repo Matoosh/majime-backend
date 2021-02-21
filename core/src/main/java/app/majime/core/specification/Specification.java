@@ -2,10 +2,13 @@ package app.majime.core.specification;
 
 import app.majime.core.dictionary.Dictionary;
 import app.majime.core.sample.Sample;
+import app.majime.core.sampleLab.SampleLab;
+import app.majime.core.specificationStatusHistory.SpecificationStatusHistory;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "specification")
@@ -28,15 +31,15 @@ public class Specification {
     @NonNull
     @Column(length = 1)
     private String confirmed;
-
+/* error here
     @NonNull
     private Long materialId;
-
+*/
     private Long acceptedBy;
-
+/* error here
     @NonNull
     private Long userId;
-
+*/
     @NonNull
     private Long status;
 
@@ -48,8 +51,11 @@ public class Specification {
 
     @NonNull
     @ManyToOne
-    @JoinColumn(name = "specification_id")
+    @JoinColumn(name = "material_id")
     @JsonIgnoreProperties("materialSpecifications")
     private Specification specification;
-    
+
+    @OneToMany(fetch = FetchType.LAZY)
+    private Set<SpecificationStatusHistory> specificationStatusHistories;
+
 }
