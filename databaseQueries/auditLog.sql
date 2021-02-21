@@ -1,5 +1,5 @@
-DROP TABLE audit_log;
-DROP TYPE dml_type;
+--DROP TABLE audit_log;
+--DROP TYPE dml_type;
 
 CREATE TYPE dml_type AS ENUM ('INSERT', 'UPDATE', 'DELETE');
 
