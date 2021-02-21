@@ -1,5 +1,6 @@
 package app.majime.core.result;
 
+import app.majime.core.dictionary.Dictionary;
 import app.majime.core.outOfSpec.OutOfSpec;
 import app.majime.core.parameter.Parameter;
 import app.majime.core.sample.Sample;
@@ -25,7 +26,9 @@ public class Result {
 
     private String value;
 
-    private int status;
+    @ManyToOne
+    @JoinColumn(name = "status")
+    private Dictionary dictionary;
 
     @ManyToOne
     @JoinColumn(name = "sample_id")
