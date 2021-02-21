@@ -21,7 +21,7 @@ public class OutOfSpec {
     private Long id;
 
     @NonNull
-    private String text;
+    private String description;
 
     private char error;
 
