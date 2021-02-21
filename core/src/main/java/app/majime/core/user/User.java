@@ -68,9 +68,6 @@ public class User implements UserOperations {
     private Lab lab;
 
     @OneToMany(fetch = FetchType.LAZY)
-    private Set<ResultStatusHistory> resultStatusHistories;
-
-    @OneToMany(fetch = FetchType.LAZY)
     private Set<SampleStatusHistory> sampleStatusHistories;
 
     //Bidirectional
@@ -96,9 +93,6 @@ public class User implements UserOperations {
 
     @OneToMany(fetch = FetchType.LAZY)
     private Set<Specification> specifications;
-
-    @OneToMany(fetch = FetchType.LAZY)
-    private Set<Result> results;
 
     @OneToMany(fetch = FetchType.LAZY)
     private Set<Material> materials;
