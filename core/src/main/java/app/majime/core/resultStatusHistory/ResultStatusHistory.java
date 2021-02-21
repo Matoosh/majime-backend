@@ -1,5 +1,7 @@
 package app.majime.core.resultStatusHistory;
 
+import app.majime.core.result.Result;
+import app.majime.core.user.User;
 import lombok.*;
 
 import javax.persistence.*;
@@ -26,9 +28,11 @@ public class ResultStatusHistory {
     @Column(length = 50)
     private String newValue;
 
-    @NonNull
-    private Long resultId;
+    @ManyToOne
+    @JoinColumn(name = "result_id")
+    private Result result;
 
-    @NonNull
-    private Long userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }
