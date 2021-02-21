@@ -3,6 +3,7 @@ package app.majime.core.sample;
 import app.majime.core.dictionary.Dictionary;
 import app.majime.core.sample.usecase.SampleOperations;
 import app.majime.core.sampleLab.SampleLab;
+import app.majime.core.sampleStatusHistory.SampleStatusHistory;
 import app.majime.core.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
@@ -56,6 +57,9 @@ public class Sample implements SampleOperations {
     @JoinColumn(name = "dictionary_id")
     @JsonIgnoreProperties("dictionaryResult")
     private Dictionary dictionary;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    private Set<SampleStatusHistory> sampleStatusHistory;
 
     @Override
     public void addSampleLab(SampleLab sampleLab) {
