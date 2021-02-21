@@ -33,7 +33,7 @@ public class Supplier {
     private Set<Batch> batch;
 
     @OneToOne
-    @MapsId
+    //@MapsId
     @JoinColumn(name = "address_id")
     private Address address;
 }

@@ -45,13 +45,5 @@ public class Address {
     @NonNull
     private String countryCode;
 
-    /*
-    No i teraz jest pytanie, bo jak adres w tym jednym polu może odnosić się do 3 tablic? Nie może, bo będzie konflikt
-    nazw kluczy. Więc w tym kierunku chyba nie mapujemy. Inna opcja to 3 osobne tabele z adresami albo włączyć adresy
-    do tabel z Batch, Lab i Manufacturer
-    @OneToOne(mappedBy="address")
-    private Address address;
-     */
-
     private char deleted;
 }
