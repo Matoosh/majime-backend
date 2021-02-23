@@ -1,6 +1,5 @@
 package app.majime.core.address;
 
-import app.majime.core.manufacturer.Manufacturer;
 import lombok.*;
 
 import javax.persistence.*;
