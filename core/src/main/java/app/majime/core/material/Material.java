@@ -26,9 +26,7 @@ public class Material {
 
     @NonNull
     private String name;
-/* error here
-    private Long userId;
-*/
+
     @OneToMany(fetch = FetchType.LAZY)
     private Set<Specification> materialSpecifications;
 

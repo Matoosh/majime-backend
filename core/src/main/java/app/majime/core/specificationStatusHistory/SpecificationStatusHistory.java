@@ -28,13 +28,7 @@ public class SpecificationStatusHistory {
     @NonNull
     @Column(length = 50)
     private String newValue;
-/* error here
-    @NonNull
-    private Long specificationId;
 
-    @NonNull
-    private Long userId;
-*/
     @NonNull
     @ManyToOne
     @JoinColumn(name = "user_id")

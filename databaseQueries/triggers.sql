@@ -5,7 +5,7 @@ DROP TRIGGER dictionary_audit_trigger ON dictionary;
 DROP TRIGGER lab_audit_trigger ON lab;
 DROP TRIGGER manufacturer_audit_trigger ON manufacturer;
 DROP TRIGGER material_audit_trigger ON material;
-DROP TRIGGER outofspec_audit_trigger ON outofspec;
+DROP TRIGGER out_of_spec_audit_trigger ON out_of_spec;
 DROP TRIGGER parameter_audit_trigger ON parameter;
 DROP TRIGGER permission_audit_trigger ON permission;
 DROP TRIGGER result_audit_trigger ON result;
@@ -48,8 +48,8 @@ CREATE TRIGGER material_audit_trigger
     AFTER INSERT OR UPDATE OR DELETE ON material
     FOR EACH ROW EXECUTE FUNCTION audit_trigger_func();
 
-CREATE TRIGGER outofspec_audit_trigger
-    AFTER INSERT OR UPDATE OR DELETE ON outofspec
+CREATE TRIGGER out_of_spec_audit_trigger
+    AFTER INSERT OR UPDATE OR DELETE ON out_of_spec
     FOR EACH ROW EXECUTE FUNCTION audit_trigger_func();
 
 CREATE TRIGGER parameter_audit_trigger

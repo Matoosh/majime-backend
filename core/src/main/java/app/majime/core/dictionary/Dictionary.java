@@ -2,7 +2,6 @@ package app.majime.core.dictionary;
 
 import app.majime.core.result.Result;
 import app.majime.core.sample.Sample;
-import app.majime.core.sampleLab.SampleLab;
 import app.majime.core.specification.Specification;
 import lombok.*;
 

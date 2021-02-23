@@ -31,13 +31,7 @@ public class Manufacturer {
     private Set<Batch> batch;
 
     @OneToOne
-    //@MapsId
+
     @JoinColumn(name = "address_id")
     private Address address;
-
-    /*
-    @NonNull
-    private Long addressId;
-    */
-
 }

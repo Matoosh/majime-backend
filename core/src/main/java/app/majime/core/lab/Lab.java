@@ -25,7 +25,7 @@ public class Lab {
     private String name;
 
     @OneToOne
-    //@MapsId
+
     @JoinColumn(name = "address_id")
     private Address address;
 

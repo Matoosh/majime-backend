@@ -2,7 +2,6 @@ package app.majime.core.batch;
 
 import app.majime.core.certificate.Certificate;
 import app.majime.core.manufacturer.Manufacturer;
-import app.majime.core.sampleLab.SampleLab;
 import app.majime.core.supplier.Supplier;
 import app.majime.core.user.User;
 import lombok.*;
@@ -28,10 +27,7 @@ public class Batch {
 
     @NonNull
     private String batchNo;
-/* error here
-    @NonNull
-    private Long userId;
-*/
+
     @NonNull
     @Column(length = 1)
     private String deleted;
