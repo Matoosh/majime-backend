@@ -1,0 +1,685 @@
+{
+	"info": {
+		"_postman_id": "79172199-8c8e-4b6d-88d9-386ef50c3709",
+		"name": "LIMS_inż",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Manufacturer",
+			"item": [
+				{
+					"name": "MFGR_change_deleted_y/n",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Index",
+								"value": "s1234",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n    {\r\n\r\n    \"deleted\" : \"y\"\r\n  \r\n    }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/majime/v1/manufacturer/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"majime",
+								"v1",
+								"manufacturer",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add MFGR",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Index",
+								"value": "s1234",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n    {\r\n    \"id\": 3,\r\n    \"name\" : \"LuxLekProPharm3\",\r\n    \"deleted\" : \"n\",\r\n    \"address_id\" : \"123\"\r\n    }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/majime/v1/manufacturer",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"majime",
+								"v1",
+								"manufacturer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all mfgr",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Index",
+								"value": "s1234",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/majime/v1/manufacturer/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"majime",
+								"v1",
+								"manufacturer",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Material",
+			"item": [
+				{
+					"name": "material_get_all",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Index",
+								"value": "s1234",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/majime/v1/material",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"majime",
+								"v1",
+								"material"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "material_add",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Index",
+								"value": "s1234",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"amelinowy żwacz\",\r\n    \"user_id\" : 443\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/majime/v1/material",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"majime",
+								"v1",
+								"material"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "material_change_name",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Index",
+								"value": "s1234",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n    {\r\n\r\n    \"name\" : \"znal\"\r\n  \r\n    }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/majime/v1/material/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"majime",
+								"v1",
+								"material",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "material_delete_by_id",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Index",
+								"value": "s1234",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/majime/v1/material/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"majime",
+								"v1",
+								"material",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Out of Specification",
+			"item": [
+				{
+					"name": "outOfSpec_add",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Index",
+								"value": "s1234",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"text\": \"lorem ipsum, lorem ipsum\",\r\n    \"error\" : \"n\",\r\n    \"value\" : \"2 łyżki masła\",\r\n    \"result_id\" : 320\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/majime/v1/outofspec",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"majime",
+								"v1",
+								"outofspec"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "outOfSpec_get_all",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Index",
+								"value": "s1234",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/majime/v1/outofspec",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"majime",
+								"v1",
+								"outofspec"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "outOfSpec_update_error",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Index",
+								"value": "s1234",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"error\" : \"f\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/majime/v1/outofspec/updateError/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"majime",
+								"v1",
+								"outofspec",
+								"updateError",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "outOfSpec_update_value",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Index",
+								"value": "s1234",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"value\" : \"fa fa rafa\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/majime/v1/outofspec/updateValue/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"majime",
+								"v1",
+								"outofspec",
+								"updateValue",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Parameter",
+			"item": [
+				{
+					"name": "parameter_get_all",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Index",
+								"value": "s1234",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/majime/v1/parameter",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"majime",
+								"v1",
+								"parameter"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "parameter_add",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Index",
+								"value": "s1234",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"moc\",\r\n    \"type\" : \"kamehameha\",\r\n    \"border\" : 6,\r\n    \"unit_id\" : 321,\r\n    \"specification_id\": 444\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/majime/v1/parameter",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"majime",
+								"v1",
+								"parameter"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "parameter_edit_border",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Index",
+								"value": "s1234",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"border\" : 800\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/majime/v1/parameter/border/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"majime",
+								"v1",
+								"parameter",
+								"border",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "parameter_edit_type",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Index",
+								"value": "s1234",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\" : \"dobra zupa, pomidorowa\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/majime/v1/parameter/type/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"majime",
+								"v1",
+								"parameter",
+								"type",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "parameter_delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Index",
+								"value": "s1234",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/majime/v1/parameter/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"majime",
+								"v1",
+								"parameter",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "swagger_json_documentation",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Index",
+						"value": "s1234",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/v2/api-docs",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v2",
+						"api-docs"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
