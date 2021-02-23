@@ -1,10 +1,9 @@
 package app.majime.core.specification;
 
 import app.majime.core.dictionary.Dictionary;
-import app.majime.core.sample.Sample;
-import app.majime.core.sampleLab.SampleLab;
 import app.majime.core.specificationStatusHistory.SpecificationStatusHistory;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import app.majime.core.material.Material;
+import app.majime.core.user.User;
 import lombok.*;
 
 import javax.persistence.*;
@@ -31,31 +30,25 @@ public class Specification {
     @NonNull
     @Column(length = 1)
     private String confirmed;
-/* error here
-    @NonNull
-    private Long materialId;
-*/
-    private Long acceptedBy;
-/* error here
-    @NonNull
-    private Long userId;
-*/
-    @NonNull
-    private Long status;
-
-    @NonNull
-    @ManyToOne
-    @JoinColumn(name = "dictionary_id")
-    @JsonIgnoreProperties("dictionarySpecification")
-    private Dictionary dictionary;
-
-    @NonNull
-    @ManyToOne
-    @JoinColumn(name = "material_id")
-    @JsonIgnoreProperties("materialSpecifications")
-    private Specification specification;
-
+ 
     @OneToMany(fetch = FetchType.LAZY)
     private Set<SpecificationStatusHistory> specificationStatusHistories;
 
+    @ManyToOne
+    @JoinColumn(name = "material_id")
+    private Material material;
+
+    @ManyToOne
+    @JoinColumn(name = "accepted_by")
+    private User acceptedBy;
+
+    @NonNull
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @NonNull
+    @ManyToOne
+    @JoinColumn(name = "status")
+    private Dictionary status;
 }

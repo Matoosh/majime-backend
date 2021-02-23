@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.Optional;
 
 public interface OutOfSpecRepository  extends CrudRepository<OutOfSpec,Long> {
-    Optional<OutOfSpec> findByText(String text);
+    Optional<OutOfSpec> findByDescription(String description);
 }
 
 

@@ -1,8 +1,10 @@
 package app.majime.core.result;
 
 import app.majime.core.dictionary.Dictionary;
+import app.majime.core.outOfSpec.OutOfSpec;
+import app.majime.core.parameter.Parameter;
 import app.majime.core.sample.Sample;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import app.majime.core.user.User;
 import lombok.*;
 
 import javax.persistence.*;
@@ -24,18 +26,19 @@ public class Result {
 
     private String value;
 
-    private int status;
-/* error here
-    private Long sampleId;
-
-    private Long parameterId;
-
-    private Long userId;
-*/
-    @NonNull
     @ManyToOne
-    @JoinColumn(name = "dictionary_id")
-    @JsonIgnoreProperties("dictionaryResult")
+    @JoinColumn(name = "status")
     private Dictionary dictionary;
 
+    @ManyToOne
+    @JoinColumn(name = "sample_id")
+    private Sample sample;
+
+    @ManyToOne
+    @JoinColumn(name = "parameter_id")
+    private Parameter parameter;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }
