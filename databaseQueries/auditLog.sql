@@ -4,8 +4,8 @@ DROP TYPE dml_type;
 CREATE TYPE dml_type AS ENUM ('INSERT', 'UPDATE', 'DELETE');
 
 CREATE TABLE IF NOT EXISTS audit_log (
-                                         id SERIAL PRIMARY KEY,
-                                         tab_name varchar(255) NOT NULL,
+    id SERIAL PRIMARY KEY,
+    tab_name varchar(255) NOT NULL,
     element_id bigint NOT NULL,
     old_row_data jsonb,
     new_row_data jsonb,
