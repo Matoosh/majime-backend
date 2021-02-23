@@ -1,33 +1,34 @@
 package app.majime.core.outOfSpec;
 
+import app.majime.core.result.Result;
 import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "outofspec")
+@Table(name = "out_of_spec")
 @Getter
 @Setter
 @AllArgsConstructor
-//@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @RequiredArgsConstructor
 @ToString
 public class OutOfSpec {
 
     @Id
-    @SequenceGenerator(name="outofspec_seq", sequenceName="outofspec_id_seq", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "outofspec_seq")
+    @SequenceGenerator(name="out_of_spec_seq", sequenceName="out_of_spec_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "out_of_spec_seq")
     private Long id;
 
     @NonNull
-    private String text;
+    private String description;
 
     private char error;
 
     @NonNull
     private String value;
 
-    private Long resultId;
-
-    protected OutOfSpec() {}
+    @OneToOne
+    @JoinColumn(name = "result_id")
+    private Result result;
 }

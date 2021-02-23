@@ -1,5 +1,7 @@
 package app.majime.core.parameter;
 
+import app.majime.core.specification.Specification;
+import app.majime.core.unit.Unit;
 import lombok.*;
 
 import javax.persistence.*;
@@ -9,7 +11,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @AllArgsConstructor
-//@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @RequiredArgsConstructor
 @ToString
 public class Parameter {
@@ -24,13 +26,14 @@ public class Parameter {
 
     private String type;
 
-    // limit changed to border == limit is SQL sensitive
     private int border;
 
-    private int unitId;
+    @ManyToOne
+    @JoinColumn(name = "unit_id")
+    private Unit unit;
 
-    private int specificationId;
+    @ManyToOne
+    @JoinColumn(name = "specification_id")
+    private Specification specification;
 
-    public Parameter() {
-    }
 }

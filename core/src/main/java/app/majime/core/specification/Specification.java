@@ -1,5 +1,8 @@
 package app.majime.core.specification;
 
+import app.majime.core.dictionary.Dictionary;
+import app.majime.core.material.Material;
+import app.majime.core.user.User;
 import lombok.*;
 
 import javax.persistence.*;
@@ -27,13 +30,21 @@ public class Specification {
     private String confirmed;
 
     @NonNull
-    private Long materialId;
+    @ManyToOne
+    @JoinColumn(name = "material_id")
+    private Material material;
 
-    private Long acceptedBy;
+    @ManyToOne
+    @JoinColumn(name = "accepted_by")
+    private User acceptedBy;
 
     @NonNull
-    private Long userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @NonNull
-    private Long status;
+    @ManyToOne
+    @JoinColumn(name = "status")
+    private Dictionary status;
 }

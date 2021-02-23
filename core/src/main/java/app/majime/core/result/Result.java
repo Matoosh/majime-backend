@@ -1,5 +1,10 @@
 package app.majime.core.result;
 
+import app.majime.core.dictionary.Dictionary;
+import app.majime.core.outOfSpec.OutOfSpec;
+import app.majime.core.parameter.Parameter;
+import app.majime.core.sample.Sample;
+import app.majime.core.user.User;
 import lombok.*;
 
 import javax.persistence.*;
@@ -21,12 +26,20 @@ public class Result {
 
     private String value;
 
-    private int status;
+    @ManyToOne
+    @JoinColumn(name = "status")
+    private Dictionary dictionary;
 
-    private Long sampleId;
+    @ManyToOne
+    @JoinColumn(name = "sample_id")
+    private Sample sample;
 
-    private Long parameterId;
+    @ManyToOne
+    @JoinColumn(name = "parameter_id")
+    private Parameter parameter;
 
-    private Long userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
 }
