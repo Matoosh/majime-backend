@@ -1,5 +1,8 @@
 package app.majime.core.specificationStatusHistory;
 
+import app.majime.core.specification.Specification;
+import app.majime.core.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -25,10 +28,23 @@ public class SpecificationStatusHistory {
     @NonNull
     @Column(length = 50)
     private String newValue;
-
+/* error here
     @NonNull
     private Long specificationId;
 
     @NonNull
     private Long userId;
+*/
+    @NonNull
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @JsonIgnoreProperties("users")
+    private User user;
+
+    @NonNull
+    @ManyToOne
+    @JoinColumn(name = "specification_id")
+    @JsonIgnoreProperties("specifications")
+    private Specification specification;
+
 }

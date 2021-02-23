@@ -1,10 +1,14 @@
 package app.majime.core.batch;
 
+import app.majime.core.certificate.Certificate;
 import app.majime.core.manufacturer.Manufacturer;
+import app.majime.core.sampleLab.SampleLab;
 import app.majime.core.supplier.Supplier;
+import app.majime.core.user.User;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "batch")
@@ -24,6 +28,13 @@ public class Batch {
 
     @NonNull
     private String batchNo;
+/* error here
+    @NonNull
+    private Long userId;
+*/
+    @NonNull
+    @Column(length = 1)
+    private String deleted;
 
     @ManyToOne
     @JoinColumn(name = "supplier_id")
@@ -33,10 +44,11 @@ public class Batch {
     @JoinColumn(name = "manufacturer_id")
     private Manufacturer manufacturer;
 
-    @NonNull
-    private Long userId;
+    @OneToMany(fetch = FetchType.LAZY)
+    private Set<Certificate> batchCertificates;
 
-    @NonNull
-    @Column(length = 1)
-    private String deleted;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
 }

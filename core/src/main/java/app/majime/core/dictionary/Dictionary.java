@@ -1,16 +1,21 @@
 package app.majime.core.dictionary;
 
+import app.majime.core.result.Result;
+import app.majime.core.sample.Sample;
+import app.majime.core.sampleLab.SampleLab;
+import app.majime.core.specification.Specification;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "dictionary")
 @Getter
 @Setter
 @AllArgsConstructor
-//@NoArgsConstructor
 @RequiredArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
 
 public class Dictionary {
@@ -31,5 +36,12 @@ public class Dictionary {
 
     private char deleted;
 
-    protected Dictionary() {}
+    @OneToMany(fetch = FetchType.LAZY)
+    private Set<Sample> dictionarySample;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    private Set<Result> dictionaryResult;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    private Set<Specification> dictionarySpecification;
 }

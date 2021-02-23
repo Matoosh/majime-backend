@@ -1,5 +1,8 @@
 package app.majime.core.sampleStatusHistory;
 
+import app.majime.core.sample.Sample;
+import app.majime.core.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -25,10 +28,24 @@ public class SampleStatusHistory {
     @NonNull
     @Column(length = 50)
     private String newValue;
-
+/* error here
     @NonNull
     private Long userId;
 
     @NonNull
     private Long sampleId;
+ */
+
+    @NonNull
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @JsonIgnoreProperties("users")
+    private User user;
+
+    @NonNull
+    @ManyToOne
+    @JoinColumn(name = "sample_id")
+    @JsonIgnoreProperties("samples")
+    private Sample sample;
+
 }

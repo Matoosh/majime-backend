@@ -1,11 +1,13 @@
 package app.majime.core.specification;
 
 import app.majime.core.dictionary.Dictionary;
+import app.majime.core.specificationStatusHistory.SpecificationStatusHistory;
 import app.majime.core.material.Material;
 import app.majime.core.user.User;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "specification")
@@ -28,8 +30,10 @@ public class Specification {
     @NonNull
     @Column(length = 1)
     private String confirmed;
+ 
+    @OneToMany(fetch = FetchType.LAZY)
+    private Set<SpecificationStatusHistory> specificationStatusHistories;
 
-    @NonNull
     @ManyToOne
     @JoinColumn(name = "material_id")
     private Material material;

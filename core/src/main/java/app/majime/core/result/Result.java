@@ -41,5 +41,4 @@ public class Result {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-
 }
