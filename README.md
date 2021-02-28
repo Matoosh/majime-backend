@@ -1,15 +1,24 @@
 # MajimeLIMS
 MajimeLIMS is a Laboratory Information Management System created by a group of students.
 
-## Usage
+## Requirements
+- Java 11
+- Spring Boot 2.4
+- Lombok
+
+## Getting started
+#### Console
 ````
 git clone https://github.com/Matoosh/majime-backend
 ````
-#### In IntelliJ IDEA
+#### IntelliJ IDEA
 ```
 File -> Open -> majime-backend/pom.xml
 ```
-## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
-Please make sure to update tests as appropriate.
+## Contributors
+<table>
+  <td align="center"><a href="https://github.com/Pirer24"><img src="https://avatars.githubusercontent.com/u/36137210?v=4" width="100px;" alt="Pirer24"/><br /><sub><b>Pirer24</b></sub></a><br /><a href="https://github.com/Matoosh/majime-backend/commits?author=Pirer24" title="Code">💻</a></td>
+  <td align="center"><a href="https://github.com/Matoosh"><img src="https://avatars.githubusercontent.com/u/19360197?v=4" width="100px;" alt="Matoosh"/><br /><sub><b>Matoosh</b></sub></a><br /><a href="https://github.com/Matoosh/majime-backend/commits?author=Matoosh" title="Code">💻</a></td>
+  <td align="center"><a href="https://github.com/MaciejMSK"><img src="https://avatars.githubusercontent.com/u/61659423?v=4" width="100px;" alt="MaciejMSK"/><br /><sub><b>MaciejMSK</b></sub></a><br /><a href="https://github.com/Matoosh/majime-backend/commits?author=MaciejMSK" title="Code">💻</a></td>
+  <td align="center"><a href="https://github.com/s16600"><img src="https://avatars.githubusercontent.com/u/61659844?v=4" width="100px;" alt="16600"/><br /><sub><b>16600</b></sub></a><br /><a href="https://github.com/Matoosh/majime-backend/commits?author=s16600" title="Code">💻</a></td>
+</table>
