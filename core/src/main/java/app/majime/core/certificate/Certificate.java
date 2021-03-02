@@ -29,11 +29,6 @@ public class Certificate {
     @NonNull
     private String name;
 
-    /* Creates error
-    @NonNull
-    private Long batchId;
-    */
-
     @NonNull
     private Long acceptedBy;
 
