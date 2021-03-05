@@ -2,6 +2,7 @@ package app.majime.infrastructure.lims.sample;
 
 import app.majime.core.sample.Sample;
 import app.majime.infrastructure.lims.RestConstants;
+import app.majime.infrastructure.lims.sample.DTOs.SampleDTO;
 import app.majime.infrastructure.lims.sample.services.ISampleService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class SampleController {
     public SampleController(SampleRepository sampleRepository){this.repository = sampleRepository;}
 
     @GetMapping()
-    public Iterable<Sample> getAll() {
+    public Iterable<SampleDTO> getAll() {
 //        return repository.findAll();
       return sampleService.allSamples();
     }

@@ -1,8 +1,8 @@
 package app.majime.infrastructure.lims.sample.services;
 
-import app.majime.core.sample.Sample;
+import app.majime.infrastructure.lims.sample.DTOs.SampleDTO;
 
 public interface ISampleService {
 
-    Iterable<Sample> allSamples();
+    Iterable<SampleDTO> allSamples();
 }
