@@ -1,12 +1,10 @@
 package app.majime.infrastructure.lims.sample.DTOs;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
-@RequiredArgsConstructor
-@ToString
 public class SampleDTO {
 
     private Long id;

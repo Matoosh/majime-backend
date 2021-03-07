@@ -7,12 +7,10 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.List;
 
 @Service
 public class SampleService implements ISampleService{
-    private HashMap<Long, Sample> sampleMap;
     private SampleRepository repository;
     private ModelMapper modelMapper;
 
@@ -23,7 +21,7 @@ public class SampleService implements ISampleService{
 
     @Override
     public Iterable<SampleDTO> allSamples() {
-        List<Sample> samples = (List<Sample>) repository.findAll();
+        Iterable<Sample> samples = repository.findAll();
         Iterable<SampleDTO> sampleDTOS =
                 modelMapper.map(samples, new TypeToken<List<SampleDTO>>() {}.getType());
 //        List<SampleDTO> sampleDTOS =
