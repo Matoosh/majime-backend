@@ -2,6 +2,9 @@ package app.majime.infrastructure.lims.sample;
 
 import app.majime.core.sample.Sample;
 import app.majime.infrastructure.lims.RestConstants;
+import app.majime.infrastructure.lims.sample.DTOs.SampleDTO;
+import app.majime.infrastructure.lims.sample.services.ISampleService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
@@ -18,10 +21,19 @@ public class SampleController {
     private SampleRepository repository;
 
     @Autowired
+    private ISampleService sampleService;
+
+    @Autowired
+    private ModelMapper modelMapper;
+
+    @Autowired
     public SampleController(SampleRepository sampleRepository){this.repository = sampleRepository;}
 
     @GetMapping()
-    public Iterable<Sample> getAll() {return repository.findAll();}
+    public Iterable<SampleDTO> getAll() {
+//        return repository.findAll();
+      return sampleService.allSamples();
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<Sample> getById(@PathVariable(value = "id") Long id){
