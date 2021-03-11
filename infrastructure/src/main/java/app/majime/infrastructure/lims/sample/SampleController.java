@@ -45,14 +45,23 @@ public class SampleController {
         }
     }
 
+//    @PostMapping
+//    @ResponseStatus(HttpStatus.CREATED)
+//    @ResponseBody
+//    public PostDto createPost(@RequestBody PostDto postDto) {
+//        Post post = convertToEntity(postDto);
+//        Post postCreated = postService.createPost(post));
+//        return convertToDto(postCreated);
+//    }
+
     @PostMapping()
-    public ResponseEntity<Sample> addNewSample(@RequestBody Sample newSample){
-        Optional<Sample> sampleFromDb = repository.findBySampleNo(newSample.getSampleNo());
-        if(sampleFromDb.isPresent()) {
+    public ResponseEntity<SampleDTO> addNewSample(@RequestBody SampleDTO newSampleDTO){
+        if(sampleService.valid(newSampleDTO)){
+            SampleDTO sampleDTO = sampleService.createSample(newSampleDTO);
+            return ResponseEntity.ok(sampleDTO);
+        }else{
             return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
         }
-        Sample savedSample = repository.save(newSample);
-        return ResponseEntity.ok(savedSample);
     }
 
     @DeleteMapping("/{id}")
