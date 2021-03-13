@@ -43,12 +43,10 @@ public class SampleController {
 
     @PostMapping()
     public ResponseEntity<SampleDTO> addNewSample(@RequestBody SampleDTO newSampleDTO) {
-        if (!sampleService.isExist(newSampleDTO)) {
-            SampleDTO sampleDTO = sampleService.createSample(newSampleDTO);
-            return ResponseEntity.ok(sampleDTO);
-        } else {
+        if (sampleService.isExist(newSampleDTO))
             return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
-        }
+        SampleDTO sampleDTO = sampleService.createSample(newSampleDTO);
+        return ResponseEntity.ok(sampleDTO);
     }
 
     @DeleteMapping("/{id}")
