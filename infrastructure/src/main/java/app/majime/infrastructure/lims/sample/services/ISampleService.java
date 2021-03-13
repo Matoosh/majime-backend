@@ -7,9 +7,15 @@ public interface ISampleService {
 
     Iterable<SampleDTO> allSamples();
 
+    SampleDTO getById(Long id);
+
     SampleDTO createSample(SampleDTO newSampleDTO);
+
+    SampleDTO updateStatus(Long id,Long newStatus);
 
     Sample convertToEntity(SampleDTO newSampleDTO);
 
-    boolean valid(SampleDTO newSampleDTO);
+    SampleDTO convertToDTO(Sample sample);
+
+    boolean isExist(SampleDTO newSampleDTO);
 }
