@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "manufacturer", schema = "public")
+@Table(name = "manufacturer")
 @Getter
 @Setter
 @AllArgsConstructor

@@ -41,7 +41,7 @@ public class Specification {
 
     private String reason;
  
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "specification")
     private Set<SpecificationStatusHistory> specificationStatusHistories;
 
     @ManyToOne
@@ -61,4 +61,6 @@ public class Specification {
     @ManyToOne
     @JoinColumn(name = "status")
     private Dictionary status;
+
+
 }

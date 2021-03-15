@@ -37,15 +37,13 @@ public class SpecificationStatusHistory {
     private String reason;
 
     @NonNull
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    @JsonIgnoreProperties("users")
     private User user;
 
     @NonNull
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "specification_id")
-    @JsonIgnoreProperties("specifications")
     private Specification specification;
 
 }

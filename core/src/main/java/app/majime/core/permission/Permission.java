@@ -38,8 +38,7 @@ public class Permission {
 
     private String reason;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties("permission")
+    @OneToMany(mappedBy = "permission")
     private Set<RolePermission> rolePermissions;
 
 }

@@ -31,13 +31,11 @@ public class RolePermission {
     @NonNull
     @ManyToOne
     @JoinColumn(name = "role_id")
-    @JsonIgnoreProperties("rolePermissions")
     private Role role;
 
     @NonNull
     @ManyToOne
     @JoinColumn(name = "permission_id")
-    @JsonIgnoreProperties("rolePermissions")
     private Permission permission;
 
 

@@ -60,10 +60,10 @@ public class User implements UserOperations {
     @JoinColumn(name = "role_id")
     private Role role;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user")
     private Set<Certificate> certificates;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user")
     private Set<Batch> batches;
 
     @ManyToOne
@@ -71,22 +71,21 @@ public class User implements UserOperations {
     @JsonIgnoreProperties("users")
     private Lab lab;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user")
     private Set<SampleStatusHistory> sampleStatusHistories;
 
     //Bidirectional
-    @OneToMany(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties("user")
+    @OneToMany(mappedBy = "user")
     private Set<Sample> samples;
 
     //Unidirectional
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user")
     private Set<SpecificationStatusHistory> specificationStatusHistories;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user")
     private Set<Specification> specifications;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user")
     private Set<Material> materials;
 
 

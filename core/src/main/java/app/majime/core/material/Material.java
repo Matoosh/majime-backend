@@ -34,7 +34,7 @@ public class Material {
 
     private String reason;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "material")
     private Set<Specification> materialSpecifications;
 
     @NonNull

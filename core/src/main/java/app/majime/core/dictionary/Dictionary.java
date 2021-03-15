@@ -40,12 +40,12 @@ public class Dictionary {
 
     private String reason;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "dictionary")
     private Set<Sample> dictionarySample;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "dictionary")
     private Set<Result> dictionaryResult;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "status")
     private Set<Specification> dictionarySpecification;
 }
