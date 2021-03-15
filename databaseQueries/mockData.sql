@@ -7,18 +7,21 @@
 SELECT disableTriggers(TABLE_NAME) FROM information_schema.tables WHERE table_schema = 'public';
 SELECT truncTable(TABLE_NAME) FROM information_schema.tables WHERE table_schema = 'public';
 
-INSERT INTO address(id, deleted, country_code, city, district, street, house_number, apartment_number, post_code, post_office) VALUES
-(0, 'F', 'PL', 'Warszawa', 'Ochota', 'Zielna', '11', '5', '09-500', 'Warszawa'),
-(1, 'F', 'PL', 'Kutno', null, 'Sienkiewicza', '25', NULL, '05-123', 'Kutno'),
-(2, 'F', 'PL', 'Kutno', null, 'Sklęczkowska', '123', '5', '05-123', 'Warszawa'),
-(3, 'F', 'PL', 'Warszawa', 'Ochota', 'Zielna', '11', '5', '09-500', 'Warszawa'),
-(4, 'F', 'PL', 'Łódź', null, 'Biała', '2', '53', '11-300', 'Łódź'),
-(5, 'F', 'PL', 'Toruń', null, 'Gagarina', '11', '2', '11-200', 'Toruń'),
-(6, 'F', 'IN', 'Mumbai', null, 'Queens str.', '11', '2', '12345', 'Mumbai'),
-(7, 'F', 'CN', 'Wuchan', null, 'HuangHo', '11', '2', '54321', 'Wuchan 19'),
-(8, 'F', 'PL', 'Konin', null, 'Zielona', '11', '2', '05-200', 'Konin'),
-(9, 'F', 'PL', 'Delhi', null, 'Ghandi str.', '123', '25a', '400700', 'Delhi 5'),
-(10,'F', 'PL', 'Toruń', null, 'Gagarina', '11', '2', '11-200', 'Toruń');
+INSERT INTO
+    address	(id,	apartment_number			,	city	,	country_code	,	created_by	,	deleted	,	district	,	house_number	,	post_code	,	post_office	,	reason	,	street)
+VALUES
+(0,	'11',	'Warszawa',	'PL',	'user',	'false',	'Ochota',	'1',	'09-500',	'Warszawa',	null,	'Zielna'	),
+(1,	'25',	'Kutno',	'PL',	'user',	'false',	null,	'5',	'05-123',	'Kutno',	null,	'Sienkiewicza'	),
+(2,	'123',	'Kutno',	'PL',	'user',	'false',	null,	'1123',	'05-123',	'Warszawa',	null,	'Sklęczkowska'	),
+(3,	'11',	'Warszawa',	'PL',	'user',	'false',	'Ochota',	'131',	'09-500',	'Warszawa',	null,	'Zielna'	),
+(4,	'2',	'Łódź',	    'PL',	'user',	'false',	null,	'21',	'11-300',	'Łódź',	null,	'Biała'	),
+(5,	'11',	'Toruń',	'PL',	'user',	'false',	null,	'151',	'11-200',	'Toruń',	null,	'Gagarina'	),
+(6,	'str.',	'Mumbai',	'IN',	'user',	'false',	null,	'str.1',	'2',	'12345',	null,	'Queens'	),
+(7,	'11',	'Wuchan',	'CN',	'user',	'false',	null,	'161',	'54321',	'Wuchan',	null,	'HuangHo'	),
+(8,	'11',	'Konin',	'PL',	'user',	'false',	null,	'171',	'05-200',	'Konin',	null,	'Zielona'	),
+(9,	'56',	'Delhi',	'PL',	'user',	'true',	    null,	'str.1',	'25a',	'400700',	null,	'Ghandi'	),
+(10, '2',	null,	    'Toruń','user',	'true',	    'Gagarina',	'2',	'Toruń',	null,	null,	'11'	);
+
 
 --powinien być internal batch no i manufacturer batch no (dla produktów własnych jest to ten sam numer)
 INSERT INTO "batch" ("id", "batch_no", "deleted", "manufacturer_id", "supplier_id", "user_id") VALUES
