@@ -1,5 +1,5 @@
 --OGÓLNE
---Wszystkie tabele powinny mieć deleted (rozmawialiśmy, że robimu char)
+--Wszystkie tabele powinny mieć deleted (rozmawialiśmy, że robimu char // zmieniamy na String (ms))
 --Jeśli chcemy do logu wpisywać przyczynę i autora zmiany, to powinniśmy dodać do każdej tabel dodać pola "user" i "reason" i wypełniać je wartościami
 --(dla pierwszej zmiany jakaś wartość default) i te wartości powinnismy zaciągać triggerem do tabeli audit_log.
 --czasem podwójne tabele

@@ -27,6 +27,13 @@ public class Material {
     @NonNull
     private String name;
 
+    @NonNull
+    private String deleted;
+
+    private String createdBy;
+
+    private String reason;
+
     @OneToMany(fetch = FetchType.LAZY)
     private Set<Specification> materialSpecifications;
 

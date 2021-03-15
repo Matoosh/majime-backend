@@ -33,7 +33,12 @@ public class Dictionary {
     @NonNull
     private String value;
 
-    private char deleted;
+    @NonNull
+    private String deleted;
+
+    private String createdBy;
+
+    private String reason;
 
     @OneToMany(fetch = FetchType.LAZY)
     private Set<Sample> dictionarySample;

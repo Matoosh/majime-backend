@@ -49,6 +49,13 @@ public class User implements UserOperations {
     private String phone;
 
     @NonNull
+    private String deleted;
+
+    private String createdBy;
+
+    private String reason;
+
+    @NonNull
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
@@ -94,7 +101,4 @@ public class User implements UserOperations {
         samples.remove(sample);
         sample.setUser(this);
     }
-
-
-
 }

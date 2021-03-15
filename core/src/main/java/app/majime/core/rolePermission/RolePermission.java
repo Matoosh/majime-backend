@@ -22,6 +22,13 @@ public class RolePermission {
     private Long id;
 
     @NonNull
+    private String deleted;
+
+    private String createdBy;
+
+    private String reason;
+
+    @NonNull
     @ManyToOne
     @JoinColumn(name = "role_id")
     @JsonIgnoreProperties("rolePermissions")

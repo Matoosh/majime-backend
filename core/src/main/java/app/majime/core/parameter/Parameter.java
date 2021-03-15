@@ -2,6 +2,7 @@ package app.majime.core.parameter;
 
 import app.majime.core.specification.Specification;
 import app.majime.core.unit.Unit;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -21,12 +22,20 @@ public class Parameter {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "parameter_seq")
     private Long id;
 
-    @NonNull
     private String name;
 
     private String type;
 
-    private int border;
+    private String border;
+
+    @NonNull
+    private String deleted;
+
+    private String createdBy;
+
+    private String reason;
+
+    private String accuracy;
 
     @ManyToOne
     @JoinColumn(name = "unit_id")

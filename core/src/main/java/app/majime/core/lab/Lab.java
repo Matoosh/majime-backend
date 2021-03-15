@@ -24,12 +24,14 @@ public class Lab {
     @NonNull
     private String name;
 
-    @OneToOne
+    @NonNull
+    private String deleted;
 
+    private String createdBy;
+
+    private String reason;
+
+    @OneToOne
     @JoinColumn(name = "address_id")
     private Address address;
-
-    @NonNull
-    @Column(length = 1)
-    private String deleted;
 }

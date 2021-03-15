@@ -25,12 +25,16 @@ public class Batch {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "batch_seq")
     private Long id;
 
-    @NonNull
-    private String batchNo;
+    private String internalBatchNo;
+
+    private String manufacturerBatchNo;
 
     @NonNull
-    @Column(length = 1)
     private String deleted;
+
+    private String createdBy;
+
+    private String reason;
 
     @ManyToOne
     @JoinColumn(name = "supplier_id")

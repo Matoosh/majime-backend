@@ -44,5 +44,10 @@ public class Address {
     @NonNull
     private String countryCode;
 
-    private char deleted;
+    @NonNull
+    private String deleted;
+
+    private String createdBy;
+
+    private String reason;
 }

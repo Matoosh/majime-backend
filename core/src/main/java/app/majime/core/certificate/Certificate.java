@@ -32,7 +32,12 @@ public class Certificate {
     @NonNull
     private Long acceptedBy;
 
-    private char deleted;
+    @NonNull
+    private String deleted;
+
+    private String createdBy;
+
+    private String reason;
 
     @NonNull
     @ManyToOne

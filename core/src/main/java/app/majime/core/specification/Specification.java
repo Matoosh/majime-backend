@@ -30,6 +30,16 @@ public class Specification {
     @NonNull
     @Column(length = 1)
     private String confirmed;
+
+    @NonNull
+    private String name;
+
+    @NonNull
+    private String deleted;
+
+    private String createdBy;
+
+    private String reason;
  
     @OneToMany(fetch = FetchType.LAZY)
     private Set<SpecificationStatusHistory> specificationStatusHistories;

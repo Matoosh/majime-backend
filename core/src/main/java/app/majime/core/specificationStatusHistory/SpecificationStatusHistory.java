@@ -30,6 +30,13 @@ public class SpecificationStatusHistory {
     private String newValue;
 
     @NonNull
+    private String deleted;
+
+    private String createdBy;
+
+    private String reason;
+
+    @NonNull
     @ManyToOne
     @JoinColumn(name = "user_id")
     @JsonIgnoreProperties("users")

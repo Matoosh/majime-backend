@@ -25,7 +25,11 @@ public class Manufacturer {
     private String name;
 
     @NonNull
-    private char deleted;
+    private String deleted;
+
+    private String createdBy;
+
+    private String reason;
 
     @OneToMany(mappedBy="manufacturer")
     private Set<Batch> batch;
