@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.List;
 import java.util.Optional;
 
 import static app.majime.infrastructure.lims.sample.SampleNew.buildFrom;
@@ -21,7 +22,7 @@ class SampleController {
     private final SampleService sampleService;
 
     @GetMapping
-    Iterable<SampleDto> getAll() {
+    List<SampleDto> getAll() {
         return sampleService.findAll().stream()
                 .map(SampleNew::toDto)
                 .collect(toList());
