@@ -1,10 +1,9 @@
 package app.majime.infrastructure.lims.sample;
 
-import app.majime.core.sample.Sample;
-import org.springframework.data.repository.CrudRepository;
-
+import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
-public interface SampleRepository extends CrudRepository<Sample, Long> {
-    Optional<Sample> findBySampleNo(String sampleNumber);
+interface SampleRepository extends JpaRepository<SampleNew, Long> {
+
+    Optional<SampleNew> findBySampleNo(String sampleNumber);
 }

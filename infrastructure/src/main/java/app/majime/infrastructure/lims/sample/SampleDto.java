@@ -1,17 +1,16 @@
-package app.majime.infrastructure.lims.sample.DTOs;
+package app.majime.infrastructure.lims.sample;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class SampleDTO {
+@Builder
+class SampleDto {
 
     private Long id;
-
     private String sampleNo;
-
     private int quantity;
-
-    private Long status;
+    private SampleStatus status;
 }

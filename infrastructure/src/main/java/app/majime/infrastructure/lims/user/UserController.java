@@ -3,7 +3,6 @@ package app.majime.infrastructure.lims.user;
 import app.majime.core.sample.Sample;
 import app.majime.core.user.User;
 import app.majime.infrastructure.lims.RestConstants;
-import app.majime.infrastructure.lims.sample.SampleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
@@ -18,8 +17,6 @@ import java.util.Optional;
 public class UserController {
 
     private UserRepository repository;
-    @Autowired
-    private SampleRepository sampleRepository;
 
     @Autowired
     public UserController(UserRepository userRepository){this.repository = userRepository;}
@@ -70,17 +67,17 @@ public class UserController {
         }
     }
 
-    @PutMapping("/{id}/sample/{sampleId}")
-    public ResponseEntity<User> addSampleToUser(@PathVariable(value = "id") Long id,@PathVariable(value = "id") Long sampleId){
-        Optional<User> userOptional = repository.findById(id);
-        Optional<Sample> sample = sampleRepository.findById(sampleId);
-        if(userOptional.isPresent()){
-            User user = userOptional.get();
-            user.addSample(sample.get());
-            repository.save(user);
-            return ResponseEntity.ok(user);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
+//    @PutMapping("/{id}/sample/{sampleId}")
+//    public ResponseEntity<User> addSampleToUser(@PathVariable(value = "id") Long id,@PathVariable(value = "id") Long sampleId){
+//        Optional<User> userOptional = repository.findById(id);
+//        Optional<Sample> sample = sampleRepository.findById(sampleId);
+//        if(userOptional.isPresent()){
+//            User user = userOptional.get();
+//            user.addSample(sample.get());
+//            repository.save(user);
+//            return ResponseEntity.ok(user);
+//        } else {
+//            return ResponseEntity.notFound().build();
+//        }
+//    }
 }

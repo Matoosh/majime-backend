@@ -1,73 +1,65 @@
 package app.majime.infrastructure.lims.sample;
 
 import app.majime.infrastructure.lims.RestConstants;
-import app.majime.infrastructure.lims.sample.DTOs.SampleDTO;
-import app.majime.infrastructure.lims.sample.services.ISampleService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
-import java.util.NoSuchElementException;
+import javax.persistence.EntityNotFoundException;
+import java.util.Optional;
+
+import static app.majime.infrastructure.lims.sample.SampleNew.buildFrom;
+import static java.util.stream.Collectors.toList;
+import static org.springframework.http.ResponseEntity.*;
 
 @RestController
 @RequestMapping(RestConstants.APPLICATION_NAME + RestConstants.API_VERSION_1 + RestConstants.RESOURCE_SAMPLE)
-public class SampleController {
+@RequiredArgsConstructor
+class SampleController {
 
-    private final SampleRepository repository;
+    private final SampleService sampleService;
 
-    @Autowired
-    private ISampleService sampleService;
-
-    @Autowired
-    public SampleController(SampleRepository sampleRepository) {
-        this.repository = sampleRepository;
-    }
-
-    @GetMapping()
-    public Iterable<SampleDTO> getAll() {
-        return sampleService.allSamples();
+    @GetMapping
+    Iterable<SampleDto> getAll() {
+        return sampleService.findAll().stream()
+                .map(SampleNew::toDto)
+                .collect(toList());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<SampleDTO> getById(@PathVariable(value = "id") Long id) {
-        try {
-            SampleDTO sampleDTO = sampleService.getById(id);
-            return ResponseEntity.ok(sampleDTO);
-        } catch (NoSuchElementException notFound) {
-            return ResponseEntity.notFound().build();
+    ResponseEntity<SampleDto> getById(@PathVariable(value = "id") Long id) {
+        Optional<SampleNew> sampleOptional = sampleService.findById(id);
+
+        if (sampleOptional.isPresent()) {
+            return ok(sampleOptional.get().toDto());
+        } else {
+            return notFound().build();
         }
     }
 
-    @PostMapping()
-    public ResponseEntity<SampleDTO> addNewSample(@RequestBody SampleDTO newSampleDTO) {
-        if (sampleService.isExist(newSampleDTO))
-            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
-        SampleDTO sampleDTO = sampleService.createSample(newSampleDTO);
-        return ResponseEntity.ok(sampleDTO);
+    @PostMapping
+    ResponseEntity<SampleDto> addNewSample(@RequestBody SampleDto sampleDto) {
+        if (sampleService.isExist(sampleDto)) {
+            return status(HttpStatus.UNPROCESSABLE_ENTITY).build();
+        }
+
+        return ok(sampleService.create(buildFrom(sampleDto)).toDto());
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable(value = "id") Long id) {
-        try {
-            repository.deleteById(id);
-        } catch (EmptyResultDataAccessException exc) {
-            throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, "Sample Not Found", exc);
-        }
+    void delete(@PathVariable(value = "id") Long id) {
+        sampleService.deleteById(id);
     }
 
     @PutMapping("/{id}/{statusCode}")
-    public ResponseEntity<SampleDTO> updateStatus(@PathVariable(value = "id") Long id, @PathVariable(value = "statusCode") Long statusCode) {
+    ResponseEntity<SampleDto> updateStatus(@PathVariable(value = "id") Long id, @PathVariable(value = "statusCode") Long statusCode) {
         try {
-            SampleDTO sampleDTO = sampleService.updateStatus(id, statusCode);
-            return ResponseEntity.ok(sampleDTO);
-        } catch (NoSuchElementException notFound) {
-            return ResponseEntity.notFound().build();
+            SampleDto sampleDTO = sampleService.updateStatus(id, statusCode).toDto();
+
+            return ok(sampleDTO);
+        } catch (EntityNotFoundException enfe) {
+            return notFound().build();
         }
     }
-
-
 }
