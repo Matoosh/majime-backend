@@ -1,7 +1,6 @@
 package app.majime.infrastructure.lims.batch;
 
 
-import app.majime.core.batch.Batch;
 import app.majime.infrastructure.lims.RestConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;

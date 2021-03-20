@@ -1,9 +1,10 @@
 package app.majime.infrastructure.lims.sample;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+
 import java.util.Optional;
 
-interface SampleRepository extends JpaRepository<SampleNew, Long> {
+interface SampleRepository extends JpaRepository<Sample, Long> {
 
-    Optional<SampleNew> findBySampleNo(String sampleNumber);
+    Optional<Sample> findBySampleNo(String sampleNumber);
 }

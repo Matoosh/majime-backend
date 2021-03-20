@@ -10,7 +10,7 @@ import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
-import static app.majime.infrastructure.lims.sample.SampleNew.buildFrom;
+import static app.majime.infrastructure.lims.sample.Sample.buildFrom;
 import static java.util.stream.Collectors.toList;
 import static org.springframework.http.ResponseEntity.*;
 
@@ -24,13 +24,13 @@ class SampleController {
     @GetMapping
     List<SampleDto> getAll() {
         return sampleService.findAll().stream()
-                .map(SampleNew::toDto)
+                .map(Sample::toDto)
                 .collect(toList());
     }
 
     @GetMapping("/{id}")
     ResponseEntity<SampleDto> getById(@PathVariable(value = "id") Long id) {
-        Optional<SampleNew> sampleOptional = sampleService.findById(id);
+        Optional<Sample> sampleOptional = sampleService.findById(id);
 
         if (sampleOptional.isPresent()) {
             return ok(sampleOptional.get().toDto());
@@ -53,8 +53,8 @@ class SampleController {
         sampleService.deleteById(id);
     }
 
-    @PutMapping("/{id}/{statusCode}")
-    ResponseEntity<SampleDto> updateStatus(@PathVariable(value = "id") Long id, @PathVariable(value = "statusCode") Long statusCode) {
+    @PutMapping("/{id}/{status}")
+    ResponseEntity<SampleDto> updateStatus(@PathVariable(value = "id") Long id, @PathVariable(value = "status") SampleStatus statusCode) {
         try {
             SampleDto sampleDTO = sampleService.updateStatus(id, statusCode).toDto();
 

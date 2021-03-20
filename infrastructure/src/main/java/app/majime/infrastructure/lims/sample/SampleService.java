@@ -7,34 +7,32 @@ import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
-import static app.majime.infrastructure.lims.sample.SampleStatus.NEW;
-
 @Service
 @RequiredArgsConstructor
 class SampleService {
 
     private final SampleRepository sampleRepository;
 
-    List<SampleNew> findAll() {
+    List<Sample> findAll() {
         return sampleRepository.findAll();
     }
 
-    Optional<SampleNew> findById(Long id) {
+    Optional<Sample> findById(Long id) {
         return sampleRepository.findById(id);
     }
 
-    SampleNew create(SampleNew sampleNew) {
-        sampleNew.setStatus(NEW);
-        return sampleRepository.save(sampleNew);
+    Sample create(Sample sample) {
+        sample.setStatus(SampleStatus.NEW);
+        return sampleRepository.save(sample);
     }
 
-    SampleNew updateStatus(Long id, Long newStatus) throws EntityNotFoundException {
-        Optional<SampleNew> sampleOptional = sampleRepository.findById(id);
+    Sample updateStatus(Long id, SampleStatus newStatus) throws EntityNotFoundException {
+        Optional<Sample> sampleOptional = sampleRepository.findById(id);
 
         if (sampleOptional.isPresent()) {
-            SampleNew sampleNew = sampleOptional.get();
-            sampleNew.setStatus(SampleStatus.fromValue(newStatus));
-            return sampleRepository.save(sampleNew);
+            Sample sample = sampleOptional.get();
+            sample.setStatus(newStatus);
+            return sampleRepository.save(sample);
         }
 
         throw new EntityNotFoundException("Not found SampleNew id = " + id);

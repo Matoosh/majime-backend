@@ -1,7 +1,5 @@
 package app.majime.infrastructure.lims.user;
 
-import app.majime.core.sample.Sample;
-import app.majime.core.user.User;
 import app.majime.infrastructure.lims.RestConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;

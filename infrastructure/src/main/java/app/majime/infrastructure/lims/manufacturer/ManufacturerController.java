@@ -1,5 +1,4 @@
 package app.majime.infrastructure.lims.manufacturer;
-import app.majime.core.manufacturer.Manufacturer;
 import app.majime.infrastructure.lims.RestConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;

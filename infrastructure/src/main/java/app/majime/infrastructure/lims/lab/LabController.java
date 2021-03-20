@@ -1,6 +1,5 @@
 package app.majime.infrastructure.lims.lab;
 
-import app.majime.core.lab.Lab;
 import app.majime.infrastructure.lims.RestConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -39,7 +38,7 @@ public class LabController {
 
     @PostMapping()
     public ResponseEntity<Lab> addNewLab(@RequestBody Lab newLab) {
-        Optional<Lab> labFromDb = repository.findByName(newLab.getName());
+        Optional<Lab> labFromDb = repository.findById(newLab.getId());
         if (labFromDb.isPresent()) {
             return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
         }

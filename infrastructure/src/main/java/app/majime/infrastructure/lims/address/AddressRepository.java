@@ -1,6 +1,5 @@
 package app.majime.infrastructure.lims.address;
 
-import app.majime.core.address.Address;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;

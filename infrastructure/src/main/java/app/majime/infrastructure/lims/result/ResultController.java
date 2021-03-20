@@ -1,6 +1,5 @@
 package app.majime.infrastructure.lims.result;
 
-import app.majime.core.result.Result;
 import app.majime.infrastructure.lims.RestConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -38,7 +37,7 @@ public class ResultController {
 
     @PostMapping()
     public ResponseEntity<Result> addNewResult(@RequestBody Result newResult){
-        Optional<Result> resultFromDb = repository.findByValue(newResult.getValue());
+        Optional<Result> resultFromDb = repository.findById(newResult.getId());
         if(resultFromDb.isPresent()) {
             return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
         }

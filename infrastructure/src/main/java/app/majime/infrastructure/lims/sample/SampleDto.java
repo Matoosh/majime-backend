@@ -9,8 +9,8 @@ import lombok.Setter;
 @Builder
 class SampleDto {
 
-    private Long id;
-    private String sampleNo;
-    private int quantity;
-    private SampleStatus status;
+    Long id;
+    String sampleNo;
+    int quantity;
+    SampleStatus status;
 }

@@ -1,6 +1,5 @@
 package app.majime.infrastructure.lims.address;
 
-import app.majime.core.address.Address;
 import app.majime.infrastructure.lims.RestConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;

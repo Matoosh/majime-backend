@@ -1,8 +1,6 @@
 package app.majime.infrastructure.lims.parameter;
 
-import app.majime.core.parameter.Parameter;
 import app.majime.infrastructure.lims.RestConstants;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
