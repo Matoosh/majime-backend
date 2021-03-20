@@ -33,14 +33,19 @@ public class Dictionary {
     @NonNull
     private String value;
 
-    private char deleted;
+    @NonNull
+    private String deleted;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    private String createdBy;
+
+    private String reason;
+
+    @OneToMany(mappedBy = "dictionary")
     private Set<Sample> dictionarySample;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "dictionary")
     private Set<Result> dictionaryResult;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "status")
     private Set<Specification> dictionarySpecification;
 }

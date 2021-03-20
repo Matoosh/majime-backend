@@ -28,6 +28,13 @@ public class ResultStatusHistory {
     @Column(length = 50)
     private String newValue;
 
+    @NonNull
+    private String deleted;
+
+    private String createdBy;
+
+    private String reason;
+
     @ManyToOne
     @JoinColumn(name = "result_id")
     private Result result;

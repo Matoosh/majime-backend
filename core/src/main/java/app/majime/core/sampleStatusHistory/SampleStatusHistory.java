@@ -22,6 +22,13 @@ public class SampleStatusHistory {
     private Long id;
 
     @NonNull
+    private String deleted;
+
+    private String createdBy;
+
+    private String reason;
+
+    @NonNull
     @Column(length = 50)
     private String oldValue;
 

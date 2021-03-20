@@ -5,13 +5,13 @@ import lombok.*;
 
 import javax.persistence.*;
 
-@Entity(name = "Unit")
 @Table(name = "unit")
+@Entity(name = "unit")
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @RequiredArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
 public class Unit {
 
@@ -25,6 +25,13 @@ public class Unit {
 
     @NonNull
     private String value;
+
+    @NonNull
+    private String deleted;
+
+    private String createdBy;
+
+    private String reason;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

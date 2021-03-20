@@ -31,8 +31,14 @@ public class Role {
     @NonNull
     private String description;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties("role")
+    @NonNull
+    private String deleted;
+
+    private String createdBy;
+
+    private String reason;
+
+    @OneToMany(mappedBy = "role")
     private Set<RolePermission> rolePermissions;
 
 }

@@ -31,8 +31,14 @@ public class Permission {
     @NonNull
     private String description;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties("permission")
+    @NonNull
+    private String deleted;
+
+    private String createdBy;
+
+    private String reason;
+
+    @OneToMany(mappedBy = "permission")
     private Set<RolePermission> rolePermissions;
 
 }
