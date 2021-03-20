@@ -1,8 +1,6 @@
 package app.majime.lims.batch;
 
 import app.majime.lims.certificate.Certificate;
-import app.majime.lims.manufacturer.Manufacturer;
-import app.majime.lims.supplier.Supplier;
 import app.majime.lims.user.User;
 import lombok.*;
 

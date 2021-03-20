@@ -6,7 +6,7 @@ import lombok.*;
 import javax.persistence.*;
 
 @Table(name = "unit")
-@Entity(name = "unit")
+@Entity()
 @Getter
 @Setter
 @AllArgsConstructor

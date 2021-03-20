@@ -12,7 +12,7 @@ import javax.persistence.*;
 @RequiredArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
-public class OutOfSpec {
+class OutOfSpec {
 
     @Id
     @SequenceGenerator(name="out_of_spec_seq", sequenceName="out_of_spec_id_seq", allocationSize = 1)

@@ -1,6 +1,5 @@
-package app.majime.lims.specificationStatusHistory;
+package app.majime.lims.specification;
 
-import app.majime.lims.specification.Specification;
 import app.majime.lims.user.User;
 import lombok.*;
 
@@ -14,7 +13,7 @@ import javax.persistence.*;
 @RequiredArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
-public class SpecificationStatusHistory {
+class SpecificationStatusHistory {
     @Id
     @SequenceGenerator(name="specification_status_history_seq", sequenceName="specification_status_history_id_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "specification_status_history_seq")

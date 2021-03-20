@@ -1,7 +1,5 @@
 package app.majime.lims.specification;
 
-import app.majime.lims.dictionary.Dictionary;
-import app.majime.lims.specificationStatusHistory.SpecificationStatusHistory;
 import app.majime.lims.user.User;
 import lombok.*;
 
@@ -42,6 +40,8 @@ public class Specification {
     private String createdBy;
 
     private String reason;
+
+    private SpecificationStatus status;
  
     @OneToMany(mappedBy = "specification")
     private Set<SpecificationStatusHistory> specificationStatusHistories;
@@ -58,11 +58,5 @@ public class Specification {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-
-    @NonNull
-    @ManyToOne
-    @JoinColumn(name = "status")
-    private Dictionary status;
-
 
 }

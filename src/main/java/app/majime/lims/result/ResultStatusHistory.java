@@ -1,6 +1,5 @@
-package app.majime.lims.resultStatusHistory;
+package app.majime.lims.result;
 
-import app.majime.lims.result.Result;
 import app.majime.lims.user.User;
 import lombok.*;
 
@@ -14,7 +13,7 @@ import javax.persistence.*;
 @RequiredArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
-public class ResultStatusHistory {
+class ResultStatusHistory {
     @Id
     @SequenceGenerator(name="result_status_history_seq", sequenceName="result_status_history_id_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "result_status_history_seq")

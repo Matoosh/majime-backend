@@ -1,29 +1,27 @@
-package app.majime.lims.supplier;
+package app.majime.lims.batch;
 
 import app.majime.lims.address.Address;
-import app.majime.lims.batch.Batch;
 import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "supplier")
+@Table(name = "manufacturer")
 @Getter
 @Setter
 @AllArgsConstructor
-@RequiredArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@RequiredArgsConstructor
 @ToString
-public class Supplier {
+class Manufacturer {
 
     @Id
-    @SequenceGenerator(name="supplier_seq", sequenceName="supplier_id_seq", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "supplier_seq")
+    @SequenceGenerator(name="manufacturer_seq", sequenceName="manufacturer_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "manufacturer_seq")
     private Long id;
 
     @NonNull
-    @Column(length = 50)
     private String name;
 
     @NonNull
@@ -37,7 +35,6 @@ public class Supplier {
     private Set<Batch> batch;
 
     @OneToOne
-    //@MapsId
     @JoinColumn(name = "address_id")
     private Address address;
 }

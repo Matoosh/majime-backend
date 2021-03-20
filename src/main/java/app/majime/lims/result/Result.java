@@ -1,6 +1,5 @@
 package app.majime.lims.result;
 
-import app.majime.lims.dictionary.Dictionary;
 import app.majime.lims.parameter.Parameter;
 import app.majime.lims.sample.Sample;
 import app.majime.lims.user.User;
@@ -33,9 +32,7 @@ public class Result {
     private String reason;
 
     // STATUS:
-    @ManyToOne
-    @JoinColumn(name = "status")
-    private Dictionary dictionary;
+    private ResultStatus status;
 
     @ManyToOne
     @JoinColumn(name = "sample_id")

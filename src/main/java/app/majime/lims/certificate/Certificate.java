@@ -2,7 +2,6 @@ package app.majime.lims.certificate;
 
 import app.majime.lims.batch.Batch;
 import app.majime.lims.user.User;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -30,9 +29,6 @@ public class Certificate {
     private String name;
 
     @NonNull
-    private Long acceptedBy;
-
-    @NonNull
     private String deleted;
 
     private String createdBy;
@@ -42,13 +38,11 @@ public class Certificate {
     @NonNull
     @ManyToOne
     @JoinColumn(name = "batch_id")
-    @JsonIgnoreProperties("batchCertificates")
     private Batch batch;
 
     @NonNull
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    @JsonIgnoreProperties("userCertificates")
+    @JoinColumn(name = "acceptedBy")
     private User user;
 
 }

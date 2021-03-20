@@ -1,9 +1,7 @@
 package app.majime.lims.sample;
 
 import app.majime.lims.batch.Batch;
-import app.majime.lims.dictionary.Dictionary;
 import app.majime.lims.sampleLab.SampleLab;
-import app.majime.lims.sampleStatusHistory.SampleStatusHistory;
 import app.majime.lims.specification.Specification;
 import lombok.*;
 
@@ -52,14 +50,10 @@ public class Sample {
     private Specification specification;
 
     //TODO @ManyToOne from SampleLab if necessary
-    @OneToMany(fetch = LAZY)
+    @OneToMany(fetch = LAZY,mappedBy = "sample")
     private Set<SampleLab> sampleLabs;
 
-    @ManyToOne
-    @JoinColumn(name = "dictionary_id")
-    private Dictionary dictionary;
-
-    @OneToMany(fetch = LAZY)
+    @OneToMany(fetch = LAZY,mappedBy = "sample")
     private Set<SampleStatusHistory> sampleStatusHistory;
 
     @NonNull

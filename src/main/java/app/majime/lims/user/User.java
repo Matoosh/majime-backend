@@ -3,9 +3,7 @@ package app.majime.lims.user;
 import app.majime.lims.batch.Batch;
 import app.majime.lims.certificate.Certificate;
 import app.majime.lims.lab.Lab;
-import app.majime.lims.sampleStatusHistory.SampleStatusHistory;
 import app.majime.lims.specification.Specification;
-import app.majime.lims.specificationStatusHistory.SpecificationStatusHistory;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
@@ -67,12 +65,12 @@ public class User {
     @JsonIgnoreProperties("users")
     private Lab lab;
 
-    @OneToMany(mappedBy = "user")
-    private Set<SampleStatusHistory> sampleStatusHistories;
-
-    //Unidirectional
-    @OneToMany(mappedBy = "user")
-    private Set<SpecificationStatusHistory> specificationStatusHistories;
+//    @OneToMany(mappedBy = "user")
+//    private Set<SampleStatusHistory> sampleStatusHistories;
+//
+//    //Unidirectional
+//    @OneToMany(mappedBy = "user")
+//    private Set<SpecificationStatusHistory> specificationStatusHistories;
 
     @OneToMany(mappedBy = "user")
     private Set<Specification> specifications;

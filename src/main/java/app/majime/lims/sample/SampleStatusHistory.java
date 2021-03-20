@@ -1,6 +1,5 @@
-package app.majime.lims.sampleStatusHistory;
+package app.majime.lims.sample;
 
-import app.majime.lims.sample.Sample;
 import app.majime.lims.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
@@ -15,7 +14,7 @@ import javax.persistence.*;
 @RequiredArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
-public class SampleStatusHistory {
+class SampleStatusHistory {
     @Id
     @SequenceGenerator(name="sample_status_history_seq", sequenceName="sample_status_history_id_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sample_status_history_seq")
