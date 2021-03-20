@@ -35,6 +35,9 @@ public class Specification {
     private String name;
 
     @NonNull
+    private String type;
+
+    @NonNull
     private String deleted;
 
     private String createdBy;
