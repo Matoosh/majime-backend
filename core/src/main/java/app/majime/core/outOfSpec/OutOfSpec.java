@@ -21,12 +21,24 @@ public class OutOfSpec {
     private Long id;
 
     @NonNull
-    private String description;
+    private String name;
 
-    private char error;
+    @NonNull
+    private String simple_investigation;
+
+    private String complete_investigation;
+
+    private String error;
 
     @NonNull
     private String value;
+
+    @NonNull
+    private String deleted;
+
+    private String createdBy;
+
+    private String reason;
 
     @OneToOne
     @JoinColumn(name = "result_id")

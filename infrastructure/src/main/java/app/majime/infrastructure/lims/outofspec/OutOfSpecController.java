@@ -40,7 +40,7 @@ public class OutOfSpecController {
 
     @PostMapping()
     public ResponseEntity<OutOfSpec> addNewOutOfSpec(@RequestBody OutOfSpec newOutOfSpec) {
-        Optional<OutOfSpec> outOfSpecFromDb = repository.findByDescription(newOutOfSpec.getDescription());
+        Optional<OutOfSpec> outOfSpecFromDb = repository.findById(newOutOfSpec.getId());
         if (outOfSpecFromDb.isPresent()) {
             return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
         }

@@ -16,6 +16,7 @@ import java.util.Set;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
 public class Supplier {
+
     @Id
     @SequenceGenerator(name="supplier_seq", sequenceName="supplier_id_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "supplier_seq")
@@ -26,8 +27,11 @@ public class Supplier {
     private String name;
 
     @NonNull
-    @Column(length = 1)
     private String deleted;
+
+    private String createdBy;
+
+    private String reason;
 
     @OneToMany(mappedBy="manufacturer")
     private Set<Batch> batch;

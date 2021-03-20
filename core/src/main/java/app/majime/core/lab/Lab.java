@@ -1,9 +1,11 @@
 package app.majime.core.lab;
 
 import app.majime.core.address.Address;
+import app.majime.core.user.User;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "lab")
@@ -24,12 +26,17 @@ public class Lab {
     @NonNull
     private String name;
 
-    @OneToOne
+    @NonNull
+    private String deleted;
 
+    private String createdBy;
+
+    private String reason;
+
+    @OneToOne
     @JoinColumn(name = "address_id")
     private Address address;
 
-    @NonNull
-    @Column(length = 1)
-    private String deleted;
+    @OneToMany(mappedBy = "lab")
+    private Set<User> LabUser;
 }

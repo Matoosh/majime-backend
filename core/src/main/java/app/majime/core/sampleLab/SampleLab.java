@@ -1,5 +1,6 @@
 package app.majime.core.sampleLab;
 
+import app.majime.core.lab.Lab;
 import app.majime.core.sample.Sample;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
@@ -21,7 +22,14 @@ public class SampleLab {
     private Long id;
 
     @NonNull
-    private int quantity;
+    private String quantity;
+
+    @NonNull
+    private String deleted;
+
+    private String createdBy;
+
+    private String reason;
 
     @NonNull
     @ManyToOne
@@ -30,5 +38,8 @@ public class SampleLab {
     private Sample sample;
 
     @NonNull
-    private Long labId;
+    @ManyToOne
+    @JoinColumn(name = "lab_id")
+    @JsonIgnoreProperties("labsSamples")
+    private Lab lab;
 }

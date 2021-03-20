@@ -1,7 +1,6 @@
 package app.majime.core.result;
 
 import app.majime.core.dictionary.Dictionary;
-import app.majime.core.outOfSpec.OutOfSpec;
 import app.majime.core.parameter.Parameter;
 import app.majime.core.sample.Sample;
 import app.majime.core.user.User;
@@ -10,10 +9,11 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "result", schema = "public")
+@Table(name = "result")
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @RequiredArgsConstructor
 @ToString
 public class Result {
@@ -25,6 +25,14 @@ public class Result {
 
     private String value;
 
+    @NonNull
+    private String deleted;
+
+    private String createdBy;
+
+    private String reason;
+
+    // STATUS:
     @ManyToOne
     @JoinColumn(name = "status")
     private Dictionary dictionary;

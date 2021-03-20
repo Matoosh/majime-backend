@@ -30,15 +30,20 @@ public class SpecificationStatusHistory {
     private String newValue;
 
     @NonNull
-    @ManyToOne
+    private String deleted;
+
+    private String createdBy;
+
+    private String reason;
+
+    @NonNull
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    @JsonIgnoreProperties("users")
     private User user;
 
     @NonNull
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "specification_id")
-    @JsonIgnoreProperties("specifications")
     private Specification specification;
 
 }

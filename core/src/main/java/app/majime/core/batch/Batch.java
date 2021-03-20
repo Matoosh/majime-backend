@@ -2,6 +2,7 @@ package app.majime.core.batch;
 
 import app.majime.core.certificate.Certificate;
 import app.majime.core.manufacturer.Manufacturer;
+import app.majime.core.sample.Sample;
 import app.majime.core.supplier.Supplier;
 import app.majime.core.user.User;
 import lombok.*;
@@ -25,26 +26,32 @@ public class Batch {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "batch_seq")
     private Long id;
 
-    @NonNull
-    private String batchNo;
+    private String internalBatchNo;
+
+    private String manufacturerBatchNo;
 
     @NonNull
-    @Column(length = 1)
     private String deleted;
 
-    @ManyToOne
+    private String createdBy;
+
+    private String reason;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "supplier_id")
     private Supplier supplier;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "manufacturer_id")
     private Manufacturer manufacturer;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    private Set<Certificate> batchCertificates;
-
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
+    @OneToMany(mappedBy = "batch")
+    private Set<Certificate> batchCertificates;
+
+//    @OneToMany(mappedBy = "batch")
+//    private Set<Sample> batchSamples;
 }
