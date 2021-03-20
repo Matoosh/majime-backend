@@ -12,21 +12,21 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(RestConstants.APPLICATION_NAME + RestConstants.API_VERSION_1 + RestConstants.RESOURCE_PARAMETER)
-public class ParameterController {
+class ParameterController {
 
     private ParameterRepository repository;
 
     @Autowired
-    public ParameterController(ParameterRepository parametersRepository){
+    ParameterController(ParameterRepository parametersRepository){
         this.repository = parametersRepository;}
 
     @GetMapping()
-    public Iterable<Parameter> getAll() {
+    Iterable<Parameter> getAll() {
         return repository.findAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Parameter> getById(@PathVariable(value = "id") Long id){
+    ResponseEntity<Parameter> getById(@PathVariable(value = "id") Long id){
         Optional<Parameter> parameter = repository.findById(id);
         if(parameter.isPresent()){
             return ResponseEntity.ok(parameter.get());
@@ -36,7 +36,7 @@ public class ParameterController {
     }
 
     @PostMapping()
-    public ResponseEntity<Parameter> addNewParameter(@RequestBody Parameter newParameter){
+    ResponseEntity<Parameter> addNewParameter(@RequestBody Parameter newParameter){
         Optional<Parameter> parameterFromDb = repository.findByName(newParameter.getName());
         if(parameterFromDb.isPresent()) {
             return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
@@ -46,7 +46,7 @@ public class ParameterController {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable(value = "id") Long id){
+    void delete(@PathVariable(value = "id") Long id){
         try {
             repository.deleteById(id);
         }
@@ -57,7 +57,7 @@ public class ParameterController {
     }
 
     @PutMapping("/border/{id}")
-    public ResponseEntity<Parameter> updateStatus(@PathVariable(value = "id") Long id,@RequestBody Parameter newParameter){
+    ResponseEntity<Parameter> updateStatus(@PathVariable(value = "id") Long id,@RequestBody Parameter newParameter){
         Optional<Parameter> parameterOptional = repository.findById(id);
         if(parameterOptional.isPresent()){
             Parameter parameter = parameterOptional.get();
@@ -70,7 +70,7 @@ public class ParameterController {
     }
 
     @PutMapping("/type/{id}")
-    public ResponseEntity<Parameter> updateType(@PathVariable(value = "id") Long id,@RequestBody Parameter newParameter){
+    ResponseEntity<Parameter> updateType(@PathVariable(value = "id") Long id,@RequestBody Parameter newParameter){
         Optional<Parameter> parameterOptional = repository.findById(id);
         if(parameterOptional.isPresent()){
             Parameter parameter = parameterOptional.get();

@@ -14,21 +14,21 @@ import java.util.Optional;
 @RestController
 @RequestMapping(RestConstants.APPLICATION_NAME + RestConstants.API_VERSION_1 + RestConstants.RESOURCE_BATCH)
 
-public class BatchController {
+class BatchController {
     private BatchRepository repository;
 
     @Autowired
-    public BatchController(BatchRepository batchRepository) {
+    BatchController(BatchRepository batchRepository) {
         this.repository = batchRepository;
     }
 
     @GetMapping()
-    public Iterable<Batch> getAll() {
+    Iterable<Batch> getAll() {
         return repository.findAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Batch> getById(@PathVariable(value = "id") Long id) {
+    ResponseEntity<Batch> getById(@PathVariable(value = "id") Long id) {
         Optional<Batch> batch = repository.findById(id);
         if (batch.isPresent()) {
             return ResponseEntity.ok(batch.get());
@@ -38,7 +38,7 @@ public class BatchController {
     }
 
     @PostMapping()
-    public ResponseEntity<Batch> addNewBatch(@RequestBody Batch newBatch) {
+    ResponseEntity<Batch> addNewBatch(@RequestBody Batch newBatch) {
         Optional<Batch> batchFromDb = repository.findById(newBatch.getId());
         if (batchFromDb.isPresent()) {
             return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
@@ -48,7 +48,7 @@ public class BatchController {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable(value = "id") Long id) {
+    void delete(@PathVariable(value = "id") Long id) {
         try {
             repository.deleteById(id);
         } catch (EmptyResultDataAccessException exc) {
@@ -58,7 +58,7 @@ public class BatchController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Batch> updateDeleted(@PathVariable(value = "id") Long id, @RequestBody Batch newBatch) {
+    ResponseEntity<Batch> updateDeleted(@PathVariable(value = "id") Long id, @RequestBody Batch newBatch) {
         Optional<Batch> batchOptional = repository.findById(id);
         if (batchOptional.isPresent()) {
             Batch batch = batchOptional.get();

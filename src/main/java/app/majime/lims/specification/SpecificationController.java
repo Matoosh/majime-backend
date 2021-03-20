@@ -12,22 +12,22 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(RestConstants.APPLICATION_NAME + RestConstants.API_VERSION_1 + RestConstants.RESOURCE_SPECIFICATION)
-public class SpecificationController {
+class SpecificationController {
 
     private SpecificationRepository repository;
 
     @Autowired
-    public SpecificationController(SpecificationRepository repository) {
+    SpecificationController(SpecificationRepository repository) {
         this.repository = repository;
     }
 
     @GetMapping()
-    public Iterable<Specification> getAll() {
+    Iterable<Specification> getAll() {
         return repository.findAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Specification> getById(@PathVariable(value = "id") Long id) {
+    ResponseEntity<Specification> getById(@PathVariable(value = "id") Long id) {
         Optional<Specification> specFromDb = repository.findById(id);
         return specFromDb.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }

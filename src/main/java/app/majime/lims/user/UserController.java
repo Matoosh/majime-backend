@@ -12,18 +12,18 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(RestConstants.APPLICATION_NAME + RestConstants.API_VERSION_1 + RestConstants.RESOURCE_USER)
-public class UserController {
+class UserController {
 
     private UserRepository repository;
 
     @Autowired
-    public UserController(UserRepository userRepository){this.repository = userRepository;}
+    UserController(UserRepository userRepository){this.repository = userRepository;}
 
     @GetMapping()
-    public Iterable<User> getAll() {return repository.findAll();}
+    Iterable<User> getAll() {return repository.findAll();}
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getById(@PathVariable(value = "id") Long id){
+    ResponseEntity<User> getById(@PathVariable(value = "id") Long id){
         Optional<User> user = repository.findById(id);
         if(user.isPresent()){
             return ResponseEntity.ok(user.get());
@@ -33,7 +33,7 @@ public class UserController {
     }
 
     @PostMapping()
-    public ResponseEntity<User> addNewUser(@RequestBody User newUser){
+    ResponseEntity<User> addNewUser(@RequestBody User newUser){
         Optional<User> userFromDb = repository.findByEmail(newUser.getEmail());
         if(userFromDb.isPresent()) {
             return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
@@ -43,7 +43,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable(value = "id") Long id){
+    void delete(@PathVariable(value = "id") Long id){
         try {
             repository.deleteById(id);
         }
@@ -54,7 +54,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable(value = "id") Long id,@RequestBody User newUser){
+    ResponseEntity<User> updateUser(@PathVariable(value = "id") Long id,@RequestBody User newUser){
         Optional<User> userOptional = repository.findById(id);
         if(userOptional.isPresent()){
             User user = userOptional.get();
@@ -66,7 +66,7 @@ public class UserController {
     }
 
 //    @PutMapping("/{id}/sample/{sampleId}")
-//    public ResponseEntity<User> addSampleToUser(@PathVariable(value = "id") Long id,@PathVariable(value = "id") Long sampleId){
+//    ResponseEntity<User> addSampleToUser(@PathVariable(value = "id") Long id,@PathVariable(value = "id") Long sampleId){
 //        Optional<User> userOptional = repository.findById(id);
 //        Optional<Sample> sample = sampleRepository.findById(sampleId);
 //        if(userOptional.isPresent()){

@@ -13,21 +13,21 @@ import java.util.Optional;
 @RestController
 @RequestMapping(RestConstants.APPLICATION_NAME + RestConstants.API_VERSION_1 + RestConstants.RESOURCE_LAB)
 
-public class LabController {
+class LabController {
     private LabRepository repository;
 
     @Autowired
-    public LabController(LabRepository labRepository) {
+    LabController(LabRepository labRepository) {
         this.repository = labRepository;
     }
 
     @GetMapping()
-    public Iterable<Lab> getAll() {
+    Iterable<Lab> getAll() {
         return repository.findAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Lab> getById(@PathVariable(value = "id") Long id) {
+    ResponseEntity<Lab> getById(@PathVariable(value = "id") Long id) {
         Optional<Lab> lab = repository.findById(id);
         if (lab.isPresent()) {
             return ResponseEntity.ok(lab.get());
@@ -37,7 +37,7 @@ public class LabController {
     }
 
     @PostMapping()
-    public ResponseEntity<Lab> addNewLab(@RequestBody Lab newLab) {
+    ResponseEntity<Lab> addNewLab(@RequestBody Lab newLab) {
         Optional<Lab> labFromDb = repository.findById(newLab.getId());
         if (labFromDb.isPresent()) {
             return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
@@ -47,7 +47,7 @@ public class LabController {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable(value = "id") Long id) {
+    void delete(@PathVariable(value = "id") Long id) {
         try {
             repository.deleteById(id);
         } catch (EmptyResultDataAccessException exc) {
@@ -57,7 +57,7 @@ public class LabController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Lab> updateDeleted(@PathVariable(value = "id") Long id, @RequestBody Lab newLab) {
+    ResponseEntity<Lab> updateDeleted(@PathVariable(value = "id") Long id, @RequestBody Lab newLab) {
         Optional<Lab> labOptional = repository.findById(id);
         if (labOptional.isPresent()) {
             Lab lab = labOptional.get();
