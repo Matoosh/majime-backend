@@ -56,12 +56,15 @@ public class Batch {
         return BatchDTO.builder()
                 .id(id)
                 .internalBatchNo(internalBatchNo)
+                .manufacturerBatchNo(manufacturerBatchNo)
                 .build();
     }
 
     public static Batch buildFrom(BatchDTO batchDTO) {
         return builder()
                 .id(batchDTO.getId())
+                .internalBatchNo(batchDTO.getInternalBatchNo())
+                .manufacturerBatchNo(batchDTO.getManufacturerBatchNo())
                 .deleted("false")
                 .build();
     }

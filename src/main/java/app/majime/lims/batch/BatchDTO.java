@@ -10,5 +10,6 @@ import lombok.Setter;
 public class BatchDTO {
     Long id;
     String internalBatchNo;
+    String manufacturerBatchNo;
     String deleted;
 }

@@ -94,6 +94,7 @@ public class Sample {
                 .batch(batch.toDto())
                 .sampleNo(sampleNo)
                 .status(status)
+                .type(type)
                 .build();
     }
 
@@ -106,6 +107,7 @@ public class Sample {
                 .batch(Batch.buildFrom(sampleDto.getBatch()))
                 .sampleNo(sampleDto.getSampleNo())
                 .status(sampleDto.getStatus())
+                .type(sampleDto.getType())
                 .deleted("false")
                 .build();
     }

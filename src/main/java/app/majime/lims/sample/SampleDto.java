@@ -26,5 +26,7 @@ class SampleDto {
 
     int quantity;
 
+    String type;
+
     SampleStatus status;
 }
