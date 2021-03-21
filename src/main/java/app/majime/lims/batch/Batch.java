@@ -15,7 +15,7 @@ import java.util.Set;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @RequiredArgsConstructor
 @ToString
-
+@Builder
 public class Batch {
 
     @Id
@@ -51,4 +51,18 @@ public class Batch {
 
 //    @OneToMany(mappedBy = "batch")
 //    private Set<Sample> batchSamples;
+
+    public BatchDTO toDto() {
+        return BatchDTO.builder()
+                .id(id)
+                .internalBatchNo(internalBatchNo)
+                .build();
+    }
+
+    public static Batch buildFrom(BatchDTO batchDTO) {
+        return builder()
+                .id(batchDTO.getId())
+                .deleted("false")
+                .build();
+    }
 }

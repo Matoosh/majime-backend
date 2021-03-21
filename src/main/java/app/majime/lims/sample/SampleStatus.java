@@ -1,7 +1,12 @@
 package app.majime.lims.sample;
 
 enum SampleStatus {
-    NEW,
+    CREATED,
+    TAKEN,
+    DELIVERED,
+    TESTING,
+    CHECK,
     APPROVED,
-    DELETED
+    HANDOVER,
+    CANCELED
 }

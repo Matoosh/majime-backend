@@ -22,7 +22,7 @@ class SampleService {
     }
 
     Sample create(Sample sample) {
-        sample.setStatus(SampleStatus.NEW);
+        sample.setStatus(SampleStatus.CREATED);
         return sampleRepository.save(sample);
     }
 
@@ -35,7 +35,7 @@ class SampleService {
             return sampleRepository.save(sample);
         }
 
-        throw new EntityNotFoundException("Not found SampleNew id = " + id);
+        throw new EntityNotFoundException("Not found Sample id = " + id);
     }
 
     boolean isExist(SampleDto sampleDTO) {

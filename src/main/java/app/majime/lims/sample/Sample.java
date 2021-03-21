@@ -4,8 +4,10 @@ import app.majime.lims.batch.Batch;
 import app.majime.lims.sampleLab.SampleLab;
 import app.majime.lims.specification.Specification;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 import static javax.persistence.EnumType.STRING;
@@ -31,6 +33,13 @@ public class Sample {
     private Long id;
 
     @NonNull
+    private String name;
+
+    @Column(updatable = false)
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    @NonNull
     @Column(name = "sample_no", length = 50)
     private String sampleNo;
 
@@ -41,6 +50,7 @@ public class Sample {
     @Enumerated(STRING)
     private SampleStatus status;
 
+    @NonNull
     @ManyToOne
     @JoinColumn(name = "batch_id")
     private Batch batch;
@@ -78,7 +88,10 @@ public class Sample {
     SampleDto toDto() {
         return SampleDto.builder()
                 .id(id)
+                .name(name)
+                .createdAt(createdAt)
                 .quantity(quantity)
+                .batch(batch.toDto())
                 .sampleNo(sampleNo)
                 .status(status)
                 .build();
@@ -87,7 +100,10 @@ public class Sample {
     static Sample buildFrom(SampleDto sampleDto) {
         return builder()
                 .id(sampleDto.getId())
+                .name(sampleDto.getName())
+                .createdAt(sampleDto.getCreatedAt())
                 .quantity(sampleDto.getQuantity())
+                .batch(Batch.buildFrom(sampleDto.getBatch()))
                 .sampleNo(sampleDto.getSampleNo())
                 .status(sampleDto.getStatus())
                 .deleted("false")
