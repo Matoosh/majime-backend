@@ -14,6 +14,7 @@ import java.util.Set;
 @RequiredArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
+@Builder
 public class Specification {
     @Id
     @SequenceGenerator(name="specification_seq", sequenceName="specification_id_seq", allocationSize = 1)
@@ -59,4 +60,24 @@ public class Specification {
     @JoinColumn(name = "user_id")
     private User user;
 
+    SpecificationDto toDto(){
+        return SpecificationDto.builder()
+                .id(id)
+                .specificationNo(specificationNo)
+                .name(name)
+                .status(status)
+                .type(type)
+                .build();
+    }
+
+    static Specification buildFrom(SpecificationDto specificationDto) {
+        return builder()
+                .id(specificationDto.getId())
+                .specificationNo(specificationDto.getSpecificationNo())
+                .name(specificationDto.getName())
+                .status(specificationDto.getStatus())
+                .type(specificationDto.getType())
+                .deleted("false")
+                .build();
+    }
 }
