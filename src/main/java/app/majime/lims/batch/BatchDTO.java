@@ -1,5 +1,6 @@
 package app.majime.lims.batch;
 
+import app.majime.lims.specification.Material;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,4 +13,5 @@ public class BatchDTO {
     String internalBatchNo;
     String manufacturerBatchNo;
     String deleted;
+    Material material;
 }

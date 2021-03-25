@@ -22,6 +22,7 @@ class SampleService {
     }
 
     Sample create(Sample sample) {
+        sample.setDeleted("false");
         sample.setStatus(SampleStatus.CREATED);
         return sampleRepository.save(sample);
     }

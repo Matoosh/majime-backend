@@ -29,4 +29,6 @@ class SampleDto {
     String type;
 
     SampleStatus status;
+
+    String deleted;
 }

@@ -46,7 +46,6 @@ public class Sample {
     @NonNull
     private int quantity;
 
-    @NonNull
     @Enumerated(STRING)
     private SampleStatus status;
 
@@ -66,7 +65,6 @@ public class Sample {
     @OneToMany(fetch = LAZY,mappedBy = "sample")
     private Set<SampleStatusHistory> sampleStatusHistory;
 
-    @NonNull
     private String deleted;
 
     private String createdBy;
@@ -95,6 +93,7 @@ public class Sample {
                 .sampleNo(sampleNo)
                 .status(status)
                 .type(type)
+                .deleted(deleted)
                 .build();
     }
 
@@ -108,7 +107,6 @@ public class Sample {
                 .sampleNo(sampleDto.getSampleNo())
                 .status(sampleDto.getStatus())
                 .type(sampleDto.getType())
-                .deleted("false")
                 .build();
     }
 }

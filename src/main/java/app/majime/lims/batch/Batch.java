@@ -1,6 +1,7 @@
 package app.majime.lims.batch;
 
 import app.majime.lims.certificate.Certificate;
+import app.majime.lims.specification.Material;
 import app.majime.lims.user.User;
 import lombok.*;
 
@@ -49,6 +50,10 @@ public class Batch {
     @OneToMany(mappedBy = "batch")
     private Set<Certificate> batchCertificates;
 
+    @ManyToOne()
+    @JoinColumn(name = "material_id")
+    private Material material;
+
 //    @OneToMany(mappedBy = "batch")
 //    private Set<Sample> batchSamples;
 
@@ -57,6 +62,7 @@ public class Batch {
                 .id(id)
                 .internalBatchNo(internalBatchNo)
                 .manufacturerBatchNo(manufacturerBatchNo)
+                .material(material)
                 .build();
     }
 
@@ -65,6 +71,7 @@ public class Batch {
                 .id(batchDTO.getId())
                 .internalBatchNo(batchDTO.getInternalBatchNo())
                 .manufacturerBatchNo(batchDTO.getManufacturerBatchNo())
+                .material(batchDTO.getMaterial())
                 .deleted("false")
                 .build();
     }

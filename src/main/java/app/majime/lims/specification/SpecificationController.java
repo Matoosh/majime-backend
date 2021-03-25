@@ -14,21 +14,29 @@ import java.util.Optional;
 @RequestMapping(RestConstants.APPLICATION_NAME + RestConstants.API_VERSION_1 + RestConstants.RESOURCE_SPECIFICATION)
 class SpecificationController {
 
-    private SpecificationRepository repository;
+    private SpecificationRepository specificationRepository;
+    @Autowired
+    private MaterialRepository materialRepository;
 
     @Autowired
-    SpecificationController(SpecificationRepository repository) {
-        this.repository = repository;
+    SpecificationController(SpecificationRepository repository,MaterialRepository materialRepository) {
+        this.specificationRepository = repository;
+        this.materialRepository = materialRepository;
     }
 
     @GetMapping()
     Iterable<Specification> getAll() {
-        return repository.findAll();
+        return specificationRepository.findAll();
+    }
+
+    @GetMapping("/materials")
+    Iterable<Material> getAllMaterials() {
+        return materialRepository.findAll();
     }
 
     @GetMapping("/{id}")
     ResponseEntity<Specification> getById(@PathVariable(value = "id") Long id) {
-        Optional<Specification> specFromDb = repository.findById(id);
+        Optional<Specification> specFromDb = specificationRepository.findById(id);
         return specFromDb.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 }
