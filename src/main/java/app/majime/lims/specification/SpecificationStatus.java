@@ -1,7 +1,8 @@
 package app.majime.lims.specification;
 
 enum SpecificationStatus {
-    NEW,
-    APPROVED,
-    DELETED
+    CREATED,
+    COMPLETED,
+    ACTIVE,
+    CANCELED
 }

@@ -15,8 +15,8 @@ import java.util.Set;
 @RequiredArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
-
-class Material {
+@Builder
+public class Material {
 
     @Id
     @SequenceGenerator(name="material_seq", sequenceName="material_id_seq", allocationSize = 1)
