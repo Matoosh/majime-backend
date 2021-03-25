@@ -2,9 +2,11 @@ package app.majime.lims.specification;
 
 import app.majime.lims.RestConstants;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
@@ -21,10 +23,11 @@ class SpecificationController {
     private final SpecificationService specificationService;
 
     @GetMapping
-    List<SpecificationDto> getAll() {
-        return specificationService.findAll().stream()
-                .map(Specification::toDto)
-                .collect(toList());
+    List<Specification> getAll() {
+        return specificationService.findAll();
+//        return specificationService.findAll().stream()
+//                .map(Specification::toDto)
+//                .collect(toList());
     }
 
     @GetMapping("/{id}")
@@ -45,10 +48,11 @@ class SpecificationController {
         return ok(specificationService.create(Specification.buildFrom(specificationDto)).toDto());
     }
 
-    @DeleteMapping("/{id}")
-    void delete(@PathVariable(value = "id") Long id) {
-        specificationService.deleteById(id);
-    }
+    // @TODO should post "deleted" to 'true'
+//    @DeleteMapping("/{id}")
+//    ResponseEntity<SpecificationDto> delete(@PathVariable(value = "id") Long id, @RequestBody SpecificationDto specificationDto) {
+//
+//    }
 
     @PutMapping("/{id}")
     ResponseEntity<SpecificationDto> updateSpecification(@PathVariable(value = "id") Long id, @RequestBody SpecificationDto specificationDto) {
