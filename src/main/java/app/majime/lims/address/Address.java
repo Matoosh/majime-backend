@@ -12,7 +12,7 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @RequiredArgsConstructor
 @ToString
-
+@Builder
 public class Address {
 
     @Id
@@ -51,5 +51,33 @@ public class Address {
 
     private String reason;
 
+    AddressDto toDto(){
+        return AddressDto.builder()
+                .id(id)
+                .apartmentNumber(apartmentNumber)
+                .city(city)
+                .district(district)
+                .houseNumber(houseNumber)
+                .postCode(postCode)
+                .street(street)
+                .postOffice(postOffice)
+                .countryCode(countryCode)
+                .build();
+    }
+
+    static Address buildFrom(AddressDto addressDto) {
+        return builder()
+                .id(addressDto.getId())
+                .apartmentNumber(addressDto.getApartmentNumber())
+                .city(addressDto.getCity())
+                .district(addressDto.getDistrict())
+                .houseNumber(addressDto.getHouseNumber())
+                .postCode(addressDto.getPostCode())
+                .street(addressDto.getStreet())
+                .postOffice(addressDto.getPostOffice())
+                .countryCode(addressDto.getCountryCode())
+                .deleted("false")
+                .build();
+    }
 
 }

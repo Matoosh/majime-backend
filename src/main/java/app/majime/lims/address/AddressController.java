@@ -1,74 +1,56 @@
 package app.majime.lims.address;
 
 import app.majime.lims.RestConstants;
-import org.springframework.beans.factory.annotation.Autowired;
+import app.majime.lims.lab.Lab;
+import lombok.RequiredArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.persistence.EntityNotFoundException;
+import java.util.List;
 import java.util.Optional;
+
+import static java.util.stream.Collectors.toList;
+import static org.springframework.http.ResponseEntity.*;
 
 @RestController
 @RequestMapping(RestConstants.APPLICATION_NAME + RestConstants.API_VERSION_1 + RestConstants.RESOURCE_ADDRESS)
-
-
+@RequiredArgsConstructor
 class AddressController {
 
-    private AddressRepository repository;
-
-    @Autowired
-    public AddressController(AddressRepository addressRepository) {
-        this.repository = addressRepository;
-    }
+    private final AddressService service;
 
     @GetMapping()
-    Iterable<Address> getAll() {
-        return repository.findAll();
+    List<AddressDto> getAll() {
+        return service.findAll().stream().map(Address::toDto).collect(toList());
     }
 
     @GetMapping("/{id}")
     ResponseEntity<Address> getById(@PathVariable(value = "id") Long id) {
-        Optional<Address> address = repository.findById(id);
-        if (address.isPresent()) {
-            return ResponseEntity.ok(address.get());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        Optional<Address> address = service.findById(id);
+        if (!address.isPresent()) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(address.get());
     }
 
     @PostMapping()
-    ResponseEntity<Address> addNewAddress(@RequestBody Address newAddress) {
-        Optional<Address> addressFromDb = repository.findById(newAddress.getId());
-        if (addressFromDb.isPresent()) {
-            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
-        }
-        Address savedAddress = repository.save(newAddress);
-        return ResponseEntity.ok(savedAddress);
+    ResponseEntity<AddressDto> addNewAddress(@RequestBody AddressDto dto) {
+        if (service.isExist(dto)) return status(HttpStatus.UNPROCESSABLE_ENTITY).build();
+        return ok(service.create(Address.buildFrom(dto)).toDto());
     }
 
     @DeleteMapping("/{id}")
-    void delete(@PathVariable(value = "id") Long id) {
-        try {
-            repository.deleteById(id);
-        } catch (EmptyResultDataAccessException exc) {
-            throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, "Address Not Found", exc);
-        }
-    }
+    void delete(@PathVariable(value = "id") Long id) {service.deleteById(id);};
 
     @PutMapping("/{id}")
-    ResponseEntity<Address> updateDeleted(@PathVariable(value = "id") Long id, @RequestBody Address newAddress) {
-        Optional<Address> addressOptional = repository.findById(id);
-        if (addressOptional.isPresent()) {
-            Address address = addressOptional.get();
-            address.setDeleted(newAddress.getDeleted());
-            repository.save(address);
-            return ResponseEntity.ok(address);
-        } else {
-            return ResponseEntity.notFound().build();
+    ResponseEntity<AddressDto> updateAddress(@PathVariable(value = "id") Long id, @RequestBody AddressDto addressDto) {
+        try {
+            AddressDto dto = service.updateAddress(id, addressDto).toDto();
+            return ok(dto);
+        } catch (EntityNotFoundException enfe) {
+            return notFound().build();
         }
     }
-
 }
