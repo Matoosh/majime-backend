@@ -51,8 +51,8 @@ class LabController {
     @PutMapping("/{id}")
     ResponseEntity<LabDto> updateLab(@PathVariable(value = "id") Long id, @RequestBody LabDto labDto) {
         try{
-            LabDto lab = labService.updateLab(id, labDto).toDto();
-            return ok(lab);
+            LabDto dto = labService.updateLab(id, labDto).toDto();
+            return ok(dto);
         } catch (EntityNotFoundException enfe) {
             return notFound().build();
         }

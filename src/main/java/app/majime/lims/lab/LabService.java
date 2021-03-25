@@ -48,5 +48,17 @@ class LabService {
         return labRepository.findById(labDto.getId()).isPresent();
     }
 
-    void deleteById(Long id) {labRepository.deleteById(id);}
+    //void deleteById(Long id) {labRepository.deleteById(id);}
+
+    void deleteById(Long id) throws EntityNotFoundException {
+        Optional<Lab> labOptional = labRepository.findById(id);
+
+        if (labOptional.isPresent()){
+            Lab lab = labOptional.get();
+            lab.setDeleted("true");
+            labRepository.save(lab);
+        }
+        else throw new EntityNotFoundException("Not found Lab id = " + id);
+    }
+
 }
