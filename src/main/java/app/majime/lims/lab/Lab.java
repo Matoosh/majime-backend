@@ -12,10 +12,10 @@ import java.util.Set;
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @RequiredArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
-
+@Builder
 public class Lab {
 
     @Id
@@ -39,4 +39,19 @@ public class Lab {
 
     @OneToMany(mappedBy = "lab")
     private Set<User> LabUser;
+
+    LabDto toDto(){
+        return LabDto.builder()
+                .id(id)
+                .name(name)
+                .build();
+    }
+
+    static Lab buildFrom(LabDto labDto) {
+        return builder()
+                .id(labDto.getId())
+                .name(labDto.getName())
+                .deleted("false")
+                .build();
+    }
 }
