@@ -8,6 +8,8 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Set;
 
+import static javax.persistence.GenerationType.SEQUENCE;
+
 @Entity
 @Table(name = "batch")
 @Getter
@@ -21,7 +23,7 @@ public class Batch {
 
     @Id
     @SequenceGenerator(name="batch_seq", sequenceName="batch_id_seq", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "batch_seq")
+    @GeneratedValue(strategy = SEQUENCE, generator = "batch_seq")
     private Long id;
 
     private String internalBatchNo;
@@ -57,21 +59,21 @@ public class Batch {
 //    @OneToMany(mappedBy = "batch")
 //    private Set<Sample> batchSamples;
 
-    public BatchDTO toDto() {
-        return BatchDTO.builder()
+    public BatchDto toDto() {
+        return BatchDto.builder()
                 .id(id)
                 .internalBatchNo(internalBatchNo)
                 .manufacturerBatchNo(manufacturerBatchNo)
-                .material(material)
+                .material(material.toDto())
                 .build();
     }
 
-    public static Batch buildFrom(BatchDTO batchDTO) {
+    public static Batch buildFrom(BatchDto batchDTO) {
         return builder()
                 .id(batchDTO.getId())
                 .internalBatchNo(batchDTO.getInternalBatchNo())
                 .manufacturerBatchNo(batchDTO.getManufacturerBatchNo())
-                .material(batchDTO.getMaterial())
+                .material(Material.buildFrom(batchDTO.getMaterial()))
                 .deleted("false")
                 .build();
     }

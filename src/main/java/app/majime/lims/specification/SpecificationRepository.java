@@ -6,4 +6,5 @@ import java.util.Optional;
 
 interface SpecificationRepository extends JpaRepository<Specification, Long> {
     Optional<Specification> findById(Long id);
+    Optional<Specification> findAllByMaterial_Id(Long id);
 }

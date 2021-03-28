@@ -2,11 +2,9 @@ package app.majime.lims.specification;
 
 import app.majime.lims.RestConstants;
 import lombok.RequiredArgsConstructor;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
@@ -30,6 +28,14 @@ class SpecificationController {
 //                .collect(toList());
     }
 
+    @GetMapping("/material")
+    List<Material> getAllMaterials() {
+        return specificationService.findAllMaterials();
+//        return specificationService.findAll().stream()
+//                .map(Specification::toDto)
+//                .collect(toList());
+    }
+
     @GetMapping("/{id}")
     ResponseEntity<SpecificationDto> getById(@PathVariable(value = "id") Long id) {
         Optional<Specification> specificationOptional = specificationService.findById(id);
@@ -40,12 +46,31 @@ class SpecificationController {
         }
     }
 
+    @GetMapping("/material/{id}")
+    List<SpecificationDto> getByMaterialId(@PathVariable(value = "id") Long id) {
+        Optional<Material> materialOptional = specificationService.findMaterialById(id);
+        if (materialOptional.isPresent()) {
+            List<Specification> specificationList = specificationService.findByMaterialId(id);
+            return specificationList.stream().map(Specification::toDto).collect(toList());
+        } else {
+            return null;
+        }
+    }
+
     @PostMapping()
     ResponseEntity<SpecificationDto> addNewSpecification(@RequestBody SpecificationDto specificationDto) {
         if (specificationService.isExist(specificationDto)) {
             return status(HttpStatus.UNPROCESSABLE_ENTITY).build();
         }
         return ok(specificationService.create(Specification.buildFrom(specificationDto)).toDto());
+    }
+
+    @PostMapping("/material")
+    ResponseEntity<Material> addNewMaterial(@RequestBody Material material) {
+//        if (specificationService.isExist(specificationDto)) {
+//            return status(HttpStatus.UNPROCESSABLE_ENTITY).build();
+//        }
+        return ok(specificationService.createMaterial(material));
     }
 
     // @TODO should post "deleted" to 'true'
