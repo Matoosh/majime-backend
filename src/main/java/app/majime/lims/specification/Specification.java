@@ -55,7 +55,6 @@ public class Specification {
     @JoinColumn(name = "accepted_by")
     private User acceptedBy;
 
-    @NonNull
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -67,6 +66,7 @@ public class Specification {
                 .name(name)
                 .status(status)
                 .type(type)
+//                .material(material.toDto())
                 .build();
     }
 
@@ -77,6 +77,7 @@ public class Specification {
                 .name(specificationDto.getName())
                 .status(specificationDto.getStatus())
                 .type(specificationDto.getType())
+//                .material(Material.buildFrom(specificationDto.getMaterial()))
                 .deleted("false")
                 .build();
     }

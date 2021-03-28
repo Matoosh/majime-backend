@@ -7,6 +7,8 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Set;
 
+import static javax.persistence.GenerationType.SEQUENCE;
+
 @Entity
 @Table(name = "material")
 @Getter
@@ -20,10 +22,9 @@ public class Material {
 
     @Id
     @SequenceGenerator(name="material_seq", sequenceName="material_id_seq", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "material_seq")
+    @GeneratedValue(strategy = SEQUENCE, generator = "material_seq")
     private Long id;
 
-    @NonNull
     private String name;
 
     @NonNull
@@ -34,11 +35,27 @@ public class Material {
     private String reason;
 
     @OneToMany(mappedBy = "material")
-    private Set<Specification> materialSpecifications;
+    @JsonIgnoreProperties("material")
+    private Set<Specification> specifications;
 
-    @NonNull
     @ManyToOne
     @JoinColumn(name = "user_id")
     @JsonIgnoreProperties("users")
     private User user;
+
+    public MaterialDto toDto(){
+        return MaterialDto.builder()
+                .id(id)
+                .name(name)
+                .deleted(deleted)
+                .build();
+    }
+
+    public static Material buildFrom(MaterialDto materialDto) {
+        return builder()
+                .id(materialDto.getId())
+                .name(materialDto.getName())
+                .deleted("false")
+                .build();
+    }
 }

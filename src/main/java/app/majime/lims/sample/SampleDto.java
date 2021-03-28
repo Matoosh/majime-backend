@@ -1,6 +1,6 @@
 package app.majime.lims.sample;
 
-import app.majime.lims.batch.BatchDTO;
+import app.majime.lims.batch.BatchDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NonNull;
@@ -20,7 +20,7 @@ class SampleDto {
     LocalDateTime createdAt;
 
     @NonNull
-    BatchDTO batch;
+    BatchDto batch;
 
     String sampleNo;
 

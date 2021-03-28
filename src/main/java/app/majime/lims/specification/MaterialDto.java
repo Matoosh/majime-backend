@@ -7,13 +7,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-class SpecificationDto {
-
+public class MaterialDto {
     Long id;
-    String specificationNo;
     String name;
-    SpecificationStatus status;
-    String type;
-//    MaterialDto material;
-
+    String deleted;
 }

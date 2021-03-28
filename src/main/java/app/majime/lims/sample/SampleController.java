@@ -43,7 +43,6 @@ class SampleController {
         if (sampleService.isExist(sampleDto)) {
             return status(HttpStatus.UNPROCESSABLE_ENTITY).build();
         }
-
         return ok(sampleService.create(Sample.buildFrom(sampleDto)).toDto());
     }
 
