@@ -66,11 +66,11 @@ class SpecificationController {
     }
 
     @PostMapping("/material")
-    ResponseEntity<Material> addNewMaterial(@RequestBody Material material) {
+    ResponseEntity<MaterialDto> addNewMaterial(@RequestBody MaterialDto materialDto) {
 //        if (specificationService.isExist(specificationDto)) {
 //            return status(HttpStatus.UNPROCESSABLE_ENTITY).build();
 //        }
-        return ok(specificationService.createMaterial(material));
+        return ok(specificationService.createMaterial(Material.buildFrom(materialDto)).toDto());
     }
 
     // @TODO should post "deleted" to 'true'

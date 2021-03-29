@@ -14,6 +14,7 @@ class SpecificationDto {
     String name;
     SpecificationStatus status;
     String type;
-//    MaterialDto material;
+    //TODO pomyslec czy potrzebne
+    MaterialDto material;
 
 }
