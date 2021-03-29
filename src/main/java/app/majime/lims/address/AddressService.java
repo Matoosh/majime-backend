@@ -22,11 +22,18 @@ class AddressService {
     Address updateAddress(Long id, AddressDto addressDto) throws EntityNotFoundException {
         Optional<Address> addressOptional = addressRepository.findById(id);
 
-        if (!addressOptional.isPresent()) throw new EntityNotFoundException("Nod found Address id = " +id);
+        if (!addressOptional.isPresent()) throw new EntityNotFoundException("Not found Address id = " +id);
 
         Address address = addressOptional.get();
-        //address.setApartmentNumber(addressDto.getApartmentNumber());
-        address.buildFrom(addressDto);
+        address.setApartmentNumber(addressDto.getApartmentNumber());
+        address.setCity(addressDto.getCity());
+        address.setDistrict(addressDto.getDistrict());
+        address.setHouseNumber(addressDto.getHouseNumber());
+        address.setPostCode(addressDto.getPostCode());
+        address.setStreet(addressDto.getStreet());
+        address.setPostOffice(addressDto.getPostOffice());
+        address.setCountryCode(addressDto.getCountryCode());
+        //address.buildFrom(addressDto);
         return addressRepository.save(address);
     }
 

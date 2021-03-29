@@ -35,6 +35,7 @@ public class Lab {
 
     @OneToOne
     @JoinColumn(name = "address_id")
+    //@Embedded
     private Address address;
 
     @OneToMany(mappedBy = "lab")
@@ -44,6 +45,7 @@ public class Lab {
         return LabDto.builder()
                 .id(id)
                 .name(name)
+                .address(address.toDto())
                 .build();
     }
 
@@ -52,6 +54,7 @@ public class Lab {
                 .id(labDto.getId())
                 .name(labDto.getName())
                 .deleted("false")
+                .address(Address.buildFrom(labDto.getAddress()))
                 .build();
     }
 }

@@ -13,6 +13,7 @@ import javax.persistence.*;
 @RequiredArgsConstructor
 @ToString
 @Builder
+//@Embeddable
 public class Address {
 
     @Id
@@ -51,7 +52,7 @@ public class Address {
 
     private String reason;
 
-    AddressDto toDto(){
+    public AddressDto toDto(){
         return AddressDto.builder()
                 .id(id)
                 .apartmentNumber(apartmentNumber)
@@ -65,7 +66,7 @@ public class Address {
                 .build();
     }
 
-    static Address buildFrom(AddressDto addressDto) {
+    public static Address buildFrom(AddressDto addressDto) {
         return builder()
                 .id(addressDto.getId())
                 .apartmentNumber(addressDto.getApartmentNumber())
