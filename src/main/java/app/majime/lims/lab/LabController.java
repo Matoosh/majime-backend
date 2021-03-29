@@ -1,11 +1,13 @@
 package app.majime.lims.lab;
 
 import app.majime.lims.RestConstants;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.Embeddable;
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;

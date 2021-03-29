@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-class AddressDto {
+public class AddressDto {
 
     Long id;
     String apartmentNumber;
