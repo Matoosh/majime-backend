@@ -59,9 +59,9 @@ class SpecificationController {
 
     @PostMapping()
     ResponseEntity<SpecificationDto> addNewSpecification(@RequestBody SpecificationDto specificationDto) {
-        if (specificationService.isExist(specificationDto)) {
-            return status(HttpStatus.UNPROCESSABLE_ENTITY).build();
-        }
+//        if (specificationService.isExist(specificationDto)) {
+//            return status(HttpStatus.UNPROCESSABLE_ENTITY).build();
+//        }
         return ok(specificationService.create(Specification.buildFrom(specificationDto)).toDto());
     }
 
