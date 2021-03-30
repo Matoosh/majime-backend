@@ -21,11 +21,11 @@ class SpecificationController {
     private final SpecificationService specificationService;
 
     @GetMapping
-    List<Specification> getAll() {
-        return specificationService.findAll();
-//        return specificationService.findAll().stream()
-//                .map(Specification::toDto)
-//                .collect(toList());
+    List<SpecificationDto> getAll() {
+       // return specificationService.findAll();
+        return specificationService.findAll().stream()
+                .map(Specification::toDto)
+                .collect(toList());
     }
 
     @GetMapping("/material")
@@ -74,15 +74,15 @@ class SpecificationController {
     }
 
     // @TODO should post "deleted" to 'true'
-//    @DeleteMapping("/{id}")
-//    ResponseEntity<SpecificationDto> delete(@PathVariable(value = "id") Long id, @RequestBody SpecificationDto specificationDto) {
-//
-//    }
+    @DeleteMapping("/{id}")
+    void delete(@PathVariable(value = "id") Long id, @RequestBody SpecificationDto specificationDto) {
+        specificationService.deleteById(id);
+    }
 
-    @PutMapping("/{id}")
-    ResponseEntity<SpecificationDto> updateSpecification(@PathVariable(value = "id") Long id, @RequestBody SpecificationDto specificationDto) {
+    @PutMapping("/{id}/{status}")
+    ResponseEntity<SpecificationDto> updateSpecificationStatus(@PathVariable(value = "id") Long id, @PathVariable(value = "status") SpecificationStatus statusCode) {
         try{
-            SpecificationDto specification = specificationService.updateSpecification(id, specificationDto).toDto();
+            SpecificationDto specification = specificationService.updateSpecificationStatus(id, statusCode).toDto();
             return ok(specification);
         } catch (EntityNotFoundException enfe) {
             return notFound().build();

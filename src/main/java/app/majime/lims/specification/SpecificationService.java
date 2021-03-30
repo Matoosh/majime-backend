@@ -33,10 +33,13 @@ class SpecificationService {
     }
 
     List<Specification> findByMaterialId(Long id) {
-        return specificationRepository.findAll().stream().filter(spec -> (spec.getMaterial().getId() == id)).collect(toList());
+        return specificationRepository.findAll()
+                .stream().filter(spec -> (spec.getMaterial().getId() == id)).collect(toList());
     }
 
     Specification create(Specification specification){
+        specification.setDeleted("false");
+        specification.setStatus(SpecificationStatus.CREATED);
         return specificationRepository.save(specification);
     }
 
@@ -55,15 +58,14 @@ class SpecificationService {
         throw new EntityNotFoundException("Not found Lab id = " + id);
     }
 
-    Specification updateSpecification(Long id, SpecificationDto newSpecification) throws EntityNotFoundException {
+    Specification updateSpecificationStatus(Long id, SpecificationStatus newStatus) throws EntityNotFoundException {
         Optional<Specification> specificationOptional = specificationRepository.findById(id);
 
         if (specificationOptional.isPresent()){
-            Specification oldSpecification = specificationOptional.get();
-            oldSpecification.setName(newSpecification.getName());
-            return specificationRepository.save(oldSpecification);
+            Specification specification = specificationOptional.get();
+            specification.setStatus(newStatus);
+            return specificationRepository.save(specification);
         }
-
         throw new EntityNotFoundException("Not found specification id = " + id);
     }
 

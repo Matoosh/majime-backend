@@ -25,7 +25,7 @@ public class Specification {
     @Column(unique = true, length = 50)
     private String specificationNo;
 
-    @NonNull
+    //@NonNull
     @Column(length = 1)
     private String confirmed;
 
@@ -35,7 +35,7 @@ public class Specification {
     @NonNull
     private String type;
 
-    @NonNull
+    //@NonNull
     private String deleted;
 
     private String createdBy;
@@ -66,7 +66,7 @@ public class Specification {
                 .name(name)
                 .status(status)
                 .type(type)
-                .material(material.toDto())
+                //.material(material.toDto())
                 .build();
     }
 
@@ -77,8 +77,8 @@ public class Specification {
                 .name(specificationDto.getName())
                 .status(specificationDto.getStatus())
                 .type(specificationDto.getType())
-                .material(Material.buildFrom(specificationDto.getMaterial()))
-                .deleted("false")
+                //.material(Material.buildFrom(specificationDto.getMaterial()))
+                //.deleted("false")
                 .build();
     }
 }
