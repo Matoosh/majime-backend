@@ -68,7 +68,7 @@ public class Specification {
                 .name(name)
                 .status(status)
                 .type(type)
-                //.material(material.toDto())
+                .material(material.toDto())
                 .build();
     }
 
@@ -79,7 +79,7 @@ public class Specification {
                 .name(specificationDto.getName())
                 .status(specificationDto.getStatus())
                 .type(specificationDto.getType())
-                //.material(Material.buildFrom(specificationDto.getMaterial()))
+                .material(Material.buildFrom(specificationDto.getMaterial()))
                 //.deleted("false")
                 .build();
     }

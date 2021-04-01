@@ -15,6 +15,6 @@ public class SpecificationDto {
     SpecificationStatus status;
     String type;
     // TODO pomyslec czy potrzebne - tak, rozmawiałem z Wojtkiem /msk
-    // MaterialDto material;
+    MaterialDto material;
 
 }
