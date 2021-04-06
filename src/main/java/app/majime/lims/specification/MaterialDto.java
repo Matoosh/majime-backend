@@ -1,5 +1,6 @@
 package app.majime.lims.specification;
 
+import app.majime.lims.utils.StatusDeleted;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,5 +11,5 @@ import lombok.Setter;
 public class MaterialDto {
     Long id;
     String name;
-    String deleted;
+    StatusDeleted deleted;
 }
