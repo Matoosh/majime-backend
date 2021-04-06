@@ -2,7 +2,6 @@ package app.majime.lims.specification;
 
 import app.majime.lims.RestConstants;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,7 +10,8 @@ import java.util.List;
 import java.util.Optional;
 
 import static java.util.stream.Collectors.toList;
-import static org.springframework.http.ResponseEntity.*;
+import static org.springframework.http.ResponseEntity.notFound;
+import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
 @RequiredArgsConstructor
@@ -21,11 +21,11 @@ class SpecificationController {
     private final SpecificationService specificationService;
 
     @GetMapping
-    List<Specification> getAll() {
-        return specificationService.findAll();
-//        return specificationService.findAll().stream()
-//                .map(Specification::toDto)
-//                .collect(toList());
+    List<SpecificationDto> getAll() {
+       // return specificationService.findAll();
+        return specificationService.findAll().stream()
+                .map(Specification::toDto)
+                .collect(toList());
     }
 
     @GetMapping("/material")
@@ -59,9 +59,9 @@ class SpecificationController {
 
     @PostMapping()
     ResponseEntity<SpecificationDto> addNewSpecification(@RequestBody SpecificationDto specificationDto) {
-        if (specificationService.isExist(specificationDto)) {
-            return status(HttpStatus.UNPROCESSABLE_ENTITY).build();
-        }
+//        if (specificationService.isExist(specificationDto)) {
+//            return status(HttpStatus.UNPROCESSABLE_ENTITY).build();
+//        }
         return ok(specificationService.create(Specification.buildFrom(specificationDto)).toDto());
     }
 
@@ -74,15 +74,15 @@ class SpecificationController {
     }
 
     // @TODO should post "deleted" to 'true'
-//    @DeleteMapping("/{id}")
-//    ResponseEntity<SpecificationDto> delete(@PathVariable(value = "id") Long id, @RequestBody SpecificationDto specificationDto) {
-//
-//    }
+    @DeleteMapping("/{id}")
+    void delete(@PathVariable(value = "id") Long id, @RequestBody SpecificationDto specificationDto) {
+        specificationService.deleteById(id);
+    }
 
-    @PutMapping("/{id}")
-    ResponseEntity<SpecificationDto> updateSpecification(@PathVariable(value = "id") Long id, @RequestBody SpecificationDto specificationDto) {
+    @PutMapping("/{id}/{status}")
+    ResponseEntity<SpecificationDto> updateSpecificationStatus(@PathVariable(value = "id") Long id, @PathVariable(value = "status") SpecificationStatus statusCode) {
         try{
-            SpecificationDto specification = specificationService.updateSpecification(id, specificationDto).toDto();
+            SpecificationDto specification = specificationService.updateSpecificationStatus(id, statusCode).toDto();
             return ok(specification);
         } catch (EntityNotFoundException enfe) {
             return notFound().build();

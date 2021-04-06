@@ -6,6 +6,8 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Set;
 
+import static javax.persistence.GenerationType.SEQUENCE;
+
 @Entity
 @Table(name = "specification")
 @Getter
@@ -18,14 +20,14 @@ import java.util.Set;
 public class Specification {
     @Id
     @SequenceGenerator(name="specification_seq", sequenceName="specification_id_seq", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "specification_seq")
+    @GeneratedValue(strategy = SEQUENCE, generator = "specification_seq")
     private Long id;
 
     @NonNull
     @Column(unique = true, length = 50)
     private String specificationNo;
 
-    @NonNull
+    //@NonNull
     @Column(length = 1)
     private String confirmed;
 
@@ -35,7 +37,7 @@ public class Specification {
     @NonNull
     private String type;
 
-    @NonNull
+    //@NonNull
     private String deleted;
 
     private String createdBy;
@@ -59,7 +61,7 @@ public class Specification {
     @JoinColumn(name = "user_id")
     private User user;
 
-    SpecificationDto toDto(){
+    public SpecificationDto toDto(){
         return SpecificationDto.builder()
                 .id(id)
                 .specificationNo(specificationNo)
@@ -70,7 +72,7 @@ public class Specification {
                 .build();
     }
 
-    static Specification buildFrom(SpecificationDto specificationDto) {
+    public static Specification buildFrom(SpecificationDto specificationDto) {
         return builder()
                 .id(specificationDto.getId())
                 .specificationNo(specificationDto.getSpecificationNo())
@@ -78,7 +80,7 @@ public class Specification {
                 .status(specificationDto.getStatus())
                 .type(specificationDto.getType())
                 .material(Material.buildFrom(specificationDto.getMaterial()))
-                .deleted("false")
+                //.deleted("false")
                 .build();
     }
 }

@@ -7,14 +7,15 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-class SpecificationDto {
+public class SpecificationDto {
 
     Long id;
     String specificationNo;
     String name;
     SpecificationStatus status;
     String type;
-    //TODO pomyslec czy potrzebne
     MaterialDto material;
+    // @TODO to be discussed, how to implement it on FE
+    //String deleted
 
 }
