@@ -14,7 +14,8 @@ public class SpecificationDto {
     String name;
     SpecificationStatus status;
     String type;
-    // TODO pomyslec czy potrzebne - tak, rozmawiałem z Wojtkiem /msk
     MaterialDto material;
+    // @TODO to be discussed, how to implement it on FE
+    //String deleted
 
 }
