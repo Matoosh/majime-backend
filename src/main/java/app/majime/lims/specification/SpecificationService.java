@@ -102,15 +102,18 @@ class SpecificationService {
         throw new EntityNotFoundException("Not found specification id = " + id);
     }
 
-    Specification updateSpecification(Long id, Specification specification) throws EntityNotFoundException {
+    Specification updateSpecification(Long id, SpecificationDto specificationDto) throws EntityNotFoundException {
         Optional<Specification> specificationOptional = specificationRepository.findById(id);
 
-        if (specificationOptional.isPresent()){
-            Specification specificationDb = specificationOptional.get();
-            specificationDb.setName(specification.getName());
-            return specificationRepository.save(specificationDb);
+        if (!specificationOptional.isPresent()){
+//            Specification specificationDb = specificationOptional.get();
+//            specificationDb.setName(specificationDto.getName());
+//            return specificationRepository.save(specificationDb);
+            throw new EntityNotFoundException("Not found specification id = " + id);
         }
-        throw new EntityNotFoundException("Not found specification id = " + id);
+        Specification specification = specificationOptional.get();
+        specification = specification.buildFrom(specificationDto);
+        return specificationRepository.save(specification);
     }
 
 

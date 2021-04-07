@@ -91,7 +91,7 @@ class SpecificationController {
     @PutMapping("/{id}")
     ResponseEntity<SpecificationDto> updateSpecification(@PathVariable(value = "id") Long id, @RequestBody SpecificationDto specificationDto) {
         try{
-            SpecificationDto specification = specificationService.updateSpecification(id, Specification.buildFrom(specificationDto)).toDto();
+            SpecificationDto specification = specificationService.updateSpecification(id, specificationDto).toDto();
             return ok(specification);
         } catch (EntityNotFoundException enfe) {
             return notFound().build();
