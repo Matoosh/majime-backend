@@ -39,7 +39,7 @@ class SpecificationService {
     }
 
     Specification create(Specification specification){
-        specification.setDeleted("false");
+        specification.setDeleted(StatusDeleted.FALSE);
         specification.setStatus(SpecificationStatus.CREATED);
         return specificationRepository.save(specification);
     }
@@ -55,8 +55,7 @@ class SpecificationService {
             Specification specification = specificationOptional.get();
             return specificationRepository.save(specification);
         }
-
-        throw new EntityNotFoundException("Not found Lab id = " + id);
+        throw new EntityNotFoundException("Not found material id = " + id);
     }
 
     Specification updateSpecificationStatus(Long id, SpecificationStatus newStatus) throws EntityNotFoundException {
@@ -91,6 +90,29 @@ class SpecificationService {
         }
         throw new EntityNotFoundException("Not found material id = " + id);
     }
+
+    Specification deleteSpecification(Long id) throws EntityNotFoundException {
+        Optional<Specification> specificationOptional = specificationRepository.findById(id);
+
+        if (specificationOptional.isPresent()){
+            Specification specificationDb = specificationOptional.get();
+            specificationDb.setDeleted(StatusDeleted.TRUE);
+            return specificationRepository.save(specificationDb);
+        }
+        throw new EntityNotFoundException("Not found specification id = " + id);
+    }
+
+    Specification updateSpecification(Long id, Specification specification) throws EntityNotFoundException {
+        Optional<Specification> specificationOptional = specificationRepository.findById(id);
+
+        if (specificationOptional.isPresent()){
+            Specification specificationDb = specificationOptional.get();
+            specificationDb.setName(specification.getName());
+            return specificationRepository.save(specificationDb);
+        }
+        throw new EntityNotFoundException("Not found specification id = " + id);
+    }
+
 
     boolean isExist(SpecificationDto specificationDto){
         return specificationRepository.findById(specificationDto.getId()).isPresent();

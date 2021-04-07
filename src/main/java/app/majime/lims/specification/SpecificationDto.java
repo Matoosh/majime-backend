@@ -1,5 +1,6 @@
 package app.majime.lims.specification;
 
+import app.majime.lims.utils.StatusDeleted;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,7 +16,6 @@ public class SpecificationDto {
     SpecificationStatus status;
     String type;
     MaterialDto material;
-    // @TODO to be discussed, how to implement it on FE
-    //String deleted
+    StatusDeleted deleted;
 
 }
