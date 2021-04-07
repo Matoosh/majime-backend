@@ -33,7 +33,8 @@ public class Lab {
 
     private String reason;
 
-    @OneToOne
+    //@OneToOne
+    @OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "address_id")
     //@Embedded
     private Address address;

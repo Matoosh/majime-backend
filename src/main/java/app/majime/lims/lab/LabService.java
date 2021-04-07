@@ -38,10 +38,21 @@ class LabService {
         if (!labOptional.isPresent()) throw new EntityNotFoundException("Not found Lab id = " + id);
 
         Lab lab = labOptional.get();
+
+        /*
         lab.setName(dto.getName());
+        //lab.getAddress().setId(dto.getAddress().getId());
         lab.getAddress().setCity(dto.getAddress().getCity());
-        //lab.setAddress(dto.getAddress().);
-        //lab.buildFrom(dto);
+        lab.getAddress().setApartmentNumber(dto.getAddress().getApartmentNumber());
+        lab.getAddress().setDistrict(dto.getAddress().getDistrict());
+        lab.getAddress().setHouseNumber(dto.getAddress().getHouseNumber());
+        lab.getAddress().setPostCode(dto.getAddress().getPostCode());
+        lab.getAddress().setStreet(dto.getAddress().getStreet());
+        lab.getAddress().setPostOffice(dto.getAddress().getPostOffice());
+        lab.getAddress().setCountryCode(dto.getAddress().getCountryCode());
+        */
+
+        lab = lab.buildFrom(dto);
         return labRepository.save(lab);
     }
 
@@ -61,5 +72,4 @@ class LabService {
         }
         else throw new EntityNotFoundException("Not found Lab id = " + id);
     }
-
 }
