@@ -88,4 +88,25 @@ class SpecificationController {
             return notFound().build();
         }
     }
+
+    @PutMapping("/material/{id}")
+    ResponseEntity<MaterialDto> updateMaterial(@PathVariable(value = "id") Long id, @RequestBody MaterialDto materialDto) {
+        try{
+            MaterialDto material = specificationService.updateMaterial(id,Material.buildFrom(materialDto)).toDto();
+            return ok(material);
+        } catch (EntityNotFoundException enfe) {
+            return notFound().build();
+        }
+    }
+
+    @DeleteMapping("/material/{id}")
+    ResponseEntity<MaterialDto> deleteMaterial(@PathVariable(value = "id") Long id) {
+        try{
+            MaterialDto material = specificationService.deleteMaterial(id).toDto();;
+            return ok(material);
+        } catch (EntityNotFoundException enfe) {
+            return notFound().build();
+        }
+
+    }
 }

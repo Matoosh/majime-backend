@@ -1,12 +1,14 @@
 package app.majime.lims.specification;
 
 import app.majime.lims.user.User;
+import app.majime.lims.utils.StatusDeleted;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
 
+import static javax.persistence.EnumType.STRING;
 import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity
@@ -28,7 +30,8 @@ public class Material {
     private String name;
 
     @NonNull
-    private String deleted;
+    @Enumerated(STRING)
+    private StatusDeleted deleted;
 
     private String createdBy;
 
@@ -55,7 +58,7 @@ public class Material {
         return builder()
                 .id(materialDto.getId())
                 .name(materialDto.getName())
-                .deleted("false")
+                .deleted(StatusDeleted.FALSE)
                 .build();
     }
 }

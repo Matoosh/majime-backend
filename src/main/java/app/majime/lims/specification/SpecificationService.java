@@ -1,5 +1,6 @@
 package app.majime.lims.specification;
 
+import app.majime.lims.utils.StatusDeleted;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -67,6 +68,28 @@ class SpecificationService {
             return specificationRepository.save(specification);
         }
         throw new EntityNotFoundException("Not found specification id = " + id);
+    }
+
+    Material updateMaterial(Long id, Material material) throws EntityNotFoundException {
+        Optional<Material> materialOptional = materialRepository.findById(id);
+
+        if (materialOptional.isPresent()){
+            Material materialDb = materialOptional.get();
+            materialDb.setName(material.getName());
+            return materialRepository.save(materialDb);
+        }
+        throw new EntityNotFoundException("Not found material id = " + id);
+    }
+
+    Material deleteMaterial(Long id) throws EntityNotFoundException {
+        Optional<Material> materialOptional = materialRepository.findById(id);
+
+        if (materialOptional.isPresent()){
+            Material materialDb = materialOptional.get();
+            materialDb.setDeleted(StatusDeleted.TRUE);
+            return materialRepository.save(materialDb);
+        }
+        throw new EntityNotFoundException("Not found material id = " + id);
     }
 
     boolean isExist(SpecificationDto specificationDto){
