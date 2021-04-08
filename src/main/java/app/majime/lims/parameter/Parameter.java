@@ -42,9 +42,11 @@ public class Parameter {
 
     private String accuracy;
 
-    @ManyToOne
-    @JoinColumn(name = "unit_id")
-    private Unit unit;
+    private String unit;
+
+//    @ManyToOne
+//    @JoinColumn(name = "unit_id")
+//    private Unit unit;
 
     @ManyToOne
     @JoinColumn(name = "specification_id")
@@ -59,6 +61,7 @@ public class Parameter {
                 .accuracy(accuracy)
                 .deleted(deleted)
                 .specification(specification.toDto())
+                .unit(unit)
                 .build();
     }
 
@@ -71,6 +74,7 @@ public class Parameter {
                 .accuracy(parameterDto.getAccuracy())
                 .deleted(StatusDeleted.FALSE)
                 .specification(Specification.buildFrom(parameterDto.getSpecification() ))
+                .unit(parameterDto.getUnit())
                 .build();
     }
 }

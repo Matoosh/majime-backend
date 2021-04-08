@@ -16,6 +16,7 @@ public class ParameterDto {
     String type;
     String border;
     String accuracy;
+    String unit;
     StatusDeleted deleted;
     SpecificationDto specification;
 
