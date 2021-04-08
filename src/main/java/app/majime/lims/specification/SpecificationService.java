@@ -106,9 +106,6 @@ class SpecificationService {
         Optional<Specification> specificationOptional = specificationRepository.findById(id);
 
         if (!specificationOptional.isPresent()){
-//            Specification specificationDb = specificationOptional.get();
-//            specificationDb.setName(specificationDto.getName());
-//            return specificationRepository.save(specificationDb);
             throw new EntityNotFoundException("Not found specification id = " + id);
         }
         Specification specification = specificationOptional.get();
