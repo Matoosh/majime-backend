@@ -60,16 +60,5 @@ class LabController {
             return notFound().build();
         }
     }
-
-    /*
-    @PutMapping("/{id}")
-    ResponseEntity<LabDto> updateLab(@PathVariable(value = "id") Long id) {
-        try{
-            LabDto labDto = labService.updateStatus(id).toDto();
-            return ok(labDto);
-        } catch (EntityNotFoundException enfe) {
-            return notFound().build();
-        }
-    }
-    */
+    
 }
