@@ -2,6 +2,7 @@ package app.majime.lims.specification;
 
 import app.majime.lims.user.User;
 import app.majime.lims.utils.StatusDeleted;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;

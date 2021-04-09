@@ -1,7 +1,6 @@
 package app.majime.lims.parameter;
 
 import app.majime.lims.RestConstants;
-import app.majime.lims.specification.MaterialDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,10 +19,6 @@ import static org.springframework.http.ResponseEntity.ok;
 class ParameterController {
 
     private final ParameterService parameterService;
-
-//    @Autowired
-//    ParameterController(ParameterRepository parametersRepository){
-//        this.repository = parametersRepository;}
 
     @GetMapping()
     List<ParameterDto> getAll() {
@@ -49,7 +44,7 @@ class ParameterController {
 //            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
 //        }
 //        Parameter savedParameter = repository.save(newParameter);
-        return ResponseEntity.ok(parameterService.create(Parameter.buildFrom(newParameter)).toDto());
+        return ok(parameterService.create(Parameter.buildFrom(newParameter)).toDto());
     }
 
     @DeleteMapping("/{id}")
