@@ -1,5 +1,6 @@
-package app.majime.lims.specification;
+package app.majime.lims.parameter;
 
+import app.majime.lims.specification.SpecificationDto;
 import app.majime.lims.utils.StatusDeleted;
 import lombok.Builder;
 import lombok.Getter;
@@ -8,14 +9,15 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class SpecificationDto {
+public class ParameterDto {
 
     Long id;
-    String specificationNo;
     String name;
-    SpecificationStatus status;
     String type;
-    MaterialDto material;
+    String border;
+    String accuracy;
+    String unit;
     StatusDeleted deleted;
+    SpecificationDto specification;
 
 }

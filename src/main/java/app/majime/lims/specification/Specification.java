@@ -1,13 +1,14 @@
 package app.majime.lims.specification;
 
 import app.majime.lims.user.User;
+import app.majime.lims.utils.StatusDeleted;
 import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
 
 import static javax.persistence.GenerationType.SEQUENCE;
-
+import static javax.persistence.EnumType.STRING;
 @Entity
 @Table(name = "specification")
 @Getter
@@ -37,8 +38,9 @@ public class Specification {
     @NonNull
     private String type;
 
-    //@NonNull
-    private String deleted;
+    @NonNull
+    @Enumerated(STRING)
+    private StatusDeleted deleted;
 
     private String createdBy;
 
@@ -69,6 +71,7 @@ public class Specification {
                 .status(status)
                 .type(type)
                 .material(material.toDto())
+                .deleted(deleted)
                 .build();
     }
 
@@ -80,7 +83,7 @@ public class Specification {
                 .status(specificationDto.getStatus())
                 .type(specificationDto.getType())
                 .material(Material.buildFrom(specificationDto.getMaterial()))
-                //.deleted("false")
+                .deleted(StatusDeleted.FALSE)
                 .build();
     }
 }
