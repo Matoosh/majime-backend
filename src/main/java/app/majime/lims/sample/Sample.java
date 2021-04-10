@@ -94,6 +94,7 @@ public class Sample {
                 .status(status)
                 .type(type)
                 .deleted(deleted)
+                .specification(specification.toDto())
                 .build();
     }
 
@@ -107,6 +108,7 @@ public class Sample {
                 .sampleNo(sampleDto.getSampleNo())
                 .status(sampleDto.getStatus())
                 .type(sampleDto.getType())
+                .specification(Specification.buildFrom(sampleDto.getSpecification()))
                 .build();
     }
 }
