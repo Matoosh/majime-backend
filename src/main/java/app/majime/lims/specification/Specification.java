@@ -31,10 +31,10 @@ public class Specification {
     @Column(length = 1)
     private String confirmed;
 
-    @NonNull
+//    @NonNull
     private String name;
 
-    @NonNull
+//    @NonNull
     private String type;
 
     //@NonNull
