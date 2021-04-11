@@ -14,7 +14,7 @@ import java.util.Set;
 @RequiredArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
-class Supplier {
+public class Supplier2 {
 
     @Id
     @SequenceGenerator(name="supplier_seq", sequenceName="supplier_id_seq", allocationSize = 1)
