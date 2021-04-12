@@ -1,5 +1,6 @@
 package app.majime.lims.specification;
 
+import app.majime.lims.parameter.Parameter;
 import app.majime.lims.user.User;
 import app.majime.lims.utils.StatusDeleted;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -55,6 +56,10 @@ public class Specification {
     @ManyToOne
     @JoinColumn(name = "material_id")
     private Material material;
+
+//    @OneToMany(mappedBy = "parameter")
+//    @JsonIgnoreProperties("parameter")
+//    private Set<Parameter> parameters;
 
     @ManyToOne
     @JoinColumn(name = "accepted_by")

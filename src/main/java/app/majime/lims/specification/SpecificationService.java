@@ -58,12 +58,12 @@ class SpecificationService {
         throw new EntityNotFoundException("Not found material id = " + id);
     }
 
-    Specification updateSpecificationStatus(Long id, SpecificationStatus newStatus) throws EntityNotFoundException {
+    Specification updateSpecificationStatus(Long id) throws EntityNotFoundException {
         Optional<Specification> specificationOptional = specificationRepository.findById(id);
 
         if (specificationOptional.isPresent()){
             Specification specification = specificationOptional.get();
-            specification.setStatus(newStatus);
+            specification.setStatus(SpecificationStatus.EDITED);
             return specificationRepository.save(specification);
         }
         throw new EntityNotFoundException("Not found specification id = " + id);

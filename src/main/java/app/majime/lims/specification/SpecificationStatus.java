@@ -4,5 +4,6 @@ enum SpecificationStatus {
     CREATED,
     COMPLETED,
     ACTIVE,
-    CANCELED
+    CANCELED,
+    EDITED
 }
