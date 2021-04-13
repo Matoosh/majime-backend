@@ -1,7 +1,6 @@
 package app.majime.lims.parameter;
 
 import app.majime.lims.specification.Specification;
-import app.majime.lims.specification.SpecificationDto;
 import app.majime.lims.utils.StatusDeleted;
 import lombok.*;
 
@@ -48,7 +47,7 @@ public class Parameter {
 //    @JoinColumn(name = "unit_id")
 //    private Unit unit;
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "specification_id")
     private Specification specification;
 

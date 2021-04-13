@@ -76,7 +76,7 @@ class SpecificationController {
 //    void deleteSpecification(@PathVariable(value = "id") Long id, @RequestBody SpecificationDto specificationDto) {
 //        specificationService.deleteById(id);
 //    }
-    // @TODO should post "deleted" to 'true'
+    // @TODO should PUT "deleted" to 'true'
     @DeleteMapping("/{id}")
     ResponseEntity<SpecificationDto> deleteSpecification(@PathVariable(value = "id") Long id) {
         try{
@@ -101,7 +101,7 @@ class SpecificationController {
     @PutMapping("/{id}/{status}")
     ResponseEntity<SpecificationDto> updateSpecificationStatus(@PathVariable(value = "id") Long id, @PathVariable(value = "status") SpecificationStatus statusCode) {
         try{
-            SpecificationDto specification = specificationService.updateSpecificationStatus(id, statusCode).toDto();
+            SpecificationDto specification = specificationService.updateSpecificationStatus(id).toDto();
             return ok(specification);
         } catch (EntityNotFoundException enfe) {
             return notFound().build();
