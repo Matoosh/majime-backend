@@ -1,5 +1,6 @@
 package app.majime.lims.lab;
 
+import app.majime.lims.utils.StatusDeleted;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -32,16 +33,14 @@ class LabService {
         throw new EntityNotFoundException("Not found Lab id = " + id);
     }
 
-    Lab updateLab(Long id, LabDto newLab) throws EntityNotFoundException {
+    Lab updateLab(Long id, LabDto dto) throws EntityNotFoundException {
         Optional<Lab> labOptional = labRepository.findById(id);
 
-        if (labOptional.isPresent()){
-            Lab oldLab = labOptional.get();
-            oldLab.setName(newLab.getName());
-            return labRepository.save(oldLab);
-        }
+        if (!labOptional.isPresent()) throw new EntityNotFoundException("Not found Lab id = " + id);
 
-        throw new EntityNotFoundException("Not found Lab id = " + id);
+        Lab lab = labOptional.get();
+        lab = lab.buildFrom(dto);
+        return labRepository.save(lab);
     }
 
     boolean isExist(LabDto labDto){
@@ -49,16 +48,14 @@ class LabService {
     }
 
     //void deleteById(Long id) {labRepository.deleteById(id);}
-
     void deleteById(Long id) throws EntityNotFoundException {
         Optional<Lab> labOptional = labRepository.findById(id);
 
         if (labOptional.isPresent()){
             Lab lab = labOptional.get();
-            lab.setDeleted("true");
+            lab.setDeleted(StatusDeleted.TRUE);
             labRepository.save(lab);
         }
         else throw new EntityNotFoundException("Not found Lab id = " + id);
     }
-
 }

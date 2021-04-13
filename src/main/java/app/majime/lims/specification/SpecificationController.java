@@ -2,7 +2,6 @@ package app.majime.lims.specification;
 
 import app.majime.lims.RestConstants;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,7 +10,8 @@ import java.util.List;
 import java.util.Optional;
 
 import static java.util.stream.Collectors.toList;
-import static org.springframework.http.ResponseEntity.*;
+import static org.springframework.http.ResponseEntity.notFound;
+import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
 @RequiredArgsConstructor
@@ -21,19 +21,18 @@ class SpecificationController {
     private final SpecificationService specificationService;
 
     @GetMapping
-    List<Specification> getAll() {
-        return specificationService.findAll();
-//        return specificationService.findAll().stream()
-//                .map(Specification::toDto)
-//                .collect(toList());
+    List<SpecificationDto> getAll() {
+       // return specificationService.findAll();
+        return specificationService.findAll().stream()
+                .map(Specification::toDto)
+                .collect(toList());
     }
 
     @GetMapping("/material")
-    List<Material> getAllMaterials() {
-        return specificationService.findAllMaterials();
-//        return specificationService.findAll().stream()
-//                .map(Specification::toDto)
-//                .collect(toList());
+    List<MaterialDto> getAllMaterials() {
+        return specificationService.findAllMaterials().stream()
+                .map(Material::toDto)
+                .collect(toList());
     }
 
     @GetMapping("/{id}")
@@ -59,25 +58,34 @@ class SpecificationController {
 
     @PostMapping()
     ResponseEntity<SpecificationDto> addNewSpecification(@RequestBody SpecificationDto specificationDto) {
-        if (specificationService.isExist(specificationDto)) {
-            return status(HttpStatus.UNPROCESSABLE_ENTITY).build();
-        }
+//        if (specificationService.isExist(specificationDto)) {
+//            return status(HttpStatus.UNPROCESSABLE_ENTITY).build();
+//        }
         return ok(specificationService.create(Specification.buildFrom(specificationDto)).toDto());
     }
 
     @PostMapping("/material")
-    ResponseEntity<Material> addNewMaterial(@RequestBody Material material) {
+    ResponseEntity<MaterialDto> addNewMaterial(@RequestBody MaterialDto materialDto) {
 //        if (specificationService.isExist(specificationDto)) {
 //            return status(HttpStatus.UNPROCESSABLE_ENTITY).build();
 //        }
-        return ok(specificationService.createMaterial(material));
+        return ok(specificationService.createMaterial(Material.buildFrom(materialDto)).toDto());
     }
 
-    // @TODO should post "deleted" to 'true'
-//    @DeleteMapping("/{id}")
-//    ResponseEntity<SpecificationDto> delete(@PathVariable(value = "id") Long id, @RequestBody SpecificationDto specificationDto) {
-//
+
+//    void deleteSpecification(@PathVariable(value = "id") Long id, @RequestBody SpecificationDto specificationDto) {
+//        specificationService.deleteById(id);
 //    }
+    // @TODO should post "deleted" to 'true'
+    @DeleteMapping("/{id}")
+    ResponseEntity<SpecificationDto> deleteSpecification(@PathVariable(value = "id") Long id) {
+        try{
+            SpecificationDto specification = specificationService.deleteSpecification(id).toDto();;
+            return ok(specification);
+        } catch (EntityNotFoundException enfe) {
+            return notFound().build();
+        }
+    }
 
     @PutMapping("/{id}")
     ResponseEntity<SpecificationDto> updateSpecification(@PathVariable(value = "id") Long id, @RequestBody SpecificationDto specificationDto) {
@@ -87,5 +95,37 @@ class SpecificationController {
         } catch (EntityNotFoundException enfe) {
             return notFound().build();
         }
+    }
+
+
+    @PutMapping("/{id}/{status}")
+    ResponseEntity<SpecificationDto> updateSpecificationStatus(@PathVariable(value = "id") Long id, @PathVariable(value = "status") SpecificationStatus statusCode) {
+        try{
+            SpecificationDto specification = specificationService.updateSpecificationStatus(id, statusCode).toDto();
+            return ok(specification);
+        } catch (EntityNotFoundException enfe) {
+            return notFound().build();
+        }
+    }
+
+    @PutMapping("/material/{id}")
+    ResponseEntity<MaterialDto> updateMaterial(@PathVariable(value = "id") Long id, @RequestBody MaterialDto materialDto) {
+        try{
+            MaterialDto material = specificationService.updateMaterial(id,Material.buildFrom(materialDto)).toDto();
+            return ok(material);
+        } catch (EntityNotFoundException enfe) {
+            return notFound().build();
+        }
+    }
+
+    @DeleteMapping("/material/{id}")
+    ResponseEntity<MaterialDto> deleteMaterial(@PathVariable(value = "id") Long id) {
+        try{
+            MaterialDto material = specificationService.deleteMaterial(id).toDto();;
+            return ok(material);
+        } catch (EntityNotFoundException enfe) {
+            return notFound().build();
+        }
+
     }
 }

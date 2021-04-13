@@ -1,11 +1,13 @@
 package app.majime.lims.lab;
 
 import app.majime.lims.RestConstants;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.Embeddable;
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
@@ -39,9 +41,10 @@ class LabController {
 
     @PostMapping()
     ResponseEntity<LabDto> addNewLab(@RequestBody LabDto labDto) {
-        if (labService.isExist(labDto)) {
-            return status(HttpStatus.UNPROCESSABLE_ENTITY).build();
-        }
+// Wyłączono weryfikację, bo front wymagał id, natomiast id jest nadawane automatycznie
+//        if (labService.isExist(labDto)) {
+//            return status(HttpStatus.UNPROCESSABLE_ENTITY).build();
+//        }
         return ok(labService.create(Lab.buildFrom(labDto)).toDto());
     }
 
@@ -57,16 +60,5 @@ class LabController {
             return notFound().build();
         }
     }
-
-    /*
-    @PutMapping("/{id}")
-    ResponseEntity<LabDto> updateLab(@PathVariable(value = "id") Long id) {
-        try{
-            LabDto labDto = labService.updateStatus(id).toDto();
-            return ok(labDto);
-        } catch (EntityNotFoundException enfe) {
-            return notFound().build();
-        }
-    }
-    */
+    
 }

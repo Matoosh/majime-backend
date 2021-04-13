@@ -1,61 +1,68 @@
 package app.majime.lims.parameter;
 
 import app.majime.lims.RestConstants;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.http.HttpStatus;
+import app.majime.lims.specification.MaterialDto;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
+import javax.persistence.EntityNotFoundException;
+import java.util.List;
 import java.util.Optional;
 
+import static java.util.stream.Collectors.toList;
+import static org.springframework.http.ResponseEntity.notFound;
+import static org.springframework.http.ResponseEntity.ok;
+
 @RestController
+@RequiredArgsConstructor
 @RequestMapping(RestConstants.APPLICATION_NAME + RestConstants.API_VERSION_1 + RestConstants.RESOURCE_PARAMETER)
 class ParameterController {
 
-    private ParameterRepository repository;
+    private final ParameterService parameterService;
 
-    @Autowired
-    ParameterController(ParameterRepository parametersRepository){
-        this.repository = parametersRepository;}
+//    @Autowired
+//    ParameterController(ParameterRepository parametersRepository){
+//        this.repository = parametersRepository;}
 
     @GetMapping()
-    Iterable<Parameter> getAll() {
-        return repository.findAll();
+    List<ParameterDto> getAll() {
+        return parameterService.findAll().stream()
+                .map(Parameter::toDto)
+                .collect(toList());
     }
 
     @GetMapping("/{id}")
-    ResponseEntity<Parameter> getById(@PathVariable(value = "id") Long id){
-        Optional<Parameter> parameter = repository.findById(id);
-        if(parameter.isPresent()){
-            return ResponseEntity.ok(parameter.get());
+    ResponseEntity<ParameterDto> getById(@PathVariable(value = "id") Long id){
+        Optional<Parameter> parameterOptional = parameterService.findById(id);
+        if(parameterOptional.isPresent()){
+            return ResponseEntity.ok(parameterOptional.get().toDto());
         }else{
             return ResponseEntity.notFound().build();
         }
     }
 
     @PostMapping()
-    ResponseEntity<Parameter> addNewParameter(@RequestBody Parameter newParameter){
-        Optional<Parameter> parameterFromDb = repository.findByName(newParameter.getName());
-        if(parameterFromDb.isPresent()) {
-            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
-        }
-        Parameter savedParameter = repository.save(newParameter);
-        return ResponseEntity.ok(savedParameter);
+    ResponseEntity<ParameterDto> addNewParameter(@RequestBody ParameterDto newParameter){
+//        Optional<Parameter> parameterFromDb = repository.findByName(newParameter.getName());
+//        if(parameterFromDb.isPresent()) {
+//            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
+//        }
+//        Parameter savedParameter = repository.save(newParameter);
+        return ResponseEntity.ok(parameterService.create(Parameter.buildFrom(newParameter)).toDto());
     }
 
     @DeleteMapping("/{id}")
-    void delete(@PathVariable(value = "id") Long id){
-        try {
-            repository.deleteById(id);
+    ResponseEntity<ParameterDto> deleteParameter(@PathVariable(value = "id") Long id) {
+        try{
+            ParameterDto parameter = parameterService.deleteParameter(id).toDto();;
+            return ok(parameter);
+        } catch (EntityNotFoundException enfe) {
+            return notFound().build();
         }
-        catch (EmptyResultDataAccessException exc) {
-            throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, "Parameter Not Found", exc);
-        }
-    }
 
+    }
+/*
     @PutMapping("/border/{id}")
     ResponseEntity<Parameter> updateStatus(@PathVariable(value = "id") Long id,@RequestBody Parameter newParameter){
         Optional<Parameter> parameterOptional = repository.findById(id);
@@ -81,4 +88,6 @@ class ParameterController {
             return ResponseEntity.notFound().build();
         }
     }
+
+ */
 }

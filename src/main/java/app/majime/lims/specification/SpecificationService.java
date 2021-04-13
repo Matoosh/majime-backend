@@ -1,5 +1,6 @@
 package app.majime.lims.specification;
 
+import app.majime.lims.utils.StatusDeleted;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -33,10 +34,13 @@ class SpecificationService {
     }
 
     List<Specification> findByMaterialId(Long id) {
-        return specificationRepository.findAll().stream().filter(spec -> (spec.getMaterial().getId() == id)).collect(toList());
+        return specificationRepository.findAll()
+                .stream().filter(spec -> (spec.getMaterial().getId() == id)).collect(toList());
     }
 
     Specification create(Specification specification){
+        specification.setDeleted(StatusDeleted.FALSE);
+        specification.setStatus(SpecificationStatus.CREATED);
         return specificationRepository.save(specification);
     }
 
@@ -51,21 +55,64 @@ class SpecificationService {
             Specification specification = specificationOptional.get();
             return specificationRepository.save(specification);
         }
-
-        throw new EntityNotFoundException("Not found Lab id = " + id);
+        throw new EntityNotFoundException("Not found material id = " + id);
     }
 
-    Specification updateSpecification(Long id, SpecificationDto newSpecification) throws EntityNotFoundException {
+    Specification updateSpecificationStatus(Long id, SpecificationStatus newStatus) throws EntityNotFoundException {
         Optional<Specification> specificationOptional = specificationRepository.findById(id);
 
         if (specificationOptional.isPresent()){
-            Specification oldSpecification = specificationOptional.get();
-            oldSpecification.setName(newSpecification.getName());
-            return specificationRepository.save(oldSpecification);
+            Specification specification = specificationOptional.get();
+            specification.setStatus(newStatus);
+            return specificationRepository.save(specification);
         }
-
         throw new EntityNotFoundException("Not found specification id = " + id);
     }
+
+    Material updateMaterial(Long id, Material material) throws EntityNotFoundException {
+        Optional<Material> materialOptional = materialRepository.findById(id);
+
+        if (materialOptional.isPresent()){
+            Material materialDb = materialOptional.get();
+            materialDb.setName(material.getName());
+            return materialRepository.save(materialDb);
+        }
+        throw new EntityNotFoundException("Not found material id = " + id);
+    }
+
+    Material deleteMaterial(Long id) throws EntityNotFoundException {
+        Optional<Material> materialOptional = materialRepository.findById(id);
+
+        if (materialOptional.isPresent()){
+            Material materialDb = materialOptional.get();
+            materialDb.setDeleted(StatusDeleted.TRUE);
+            return materialRepository.save(materialDb);
+        }
+        throw new EntityNotFoundException("Not found material id = " + id);
+    }
+
+    Specification deleteSpecification(Long id) throws EntityNotFoundException {
+        Optional<Specification> specificationOptional = specificationRepository.findById(id);
+
+        if (specificationOptional.isPresent()){
+            Specification specificationDb = specificationOptional.get();
+            specificationDb.setDeleted(StatusDeleted.TRUE);
+            return specificationRepository.save(specificationDb);
+        }
+        throw new EntityNotFoundException("Not found specification id = " + id);
+    }
+
+    Specification updateSpecification(Long id, SpecificationDto specificationDto) throws EntityNotFoundException {
+        Optional<Specification> specificationOptional = specificationRepository.findById(id);
+
+        if (!specificationOptional.isPresent()){
+            throw new EntityNotFoundException("Not found specification id = " + id);
+        }
+        Specification specification = specificationOptional.get();
+        specification = specification.buildFrom(specificationDto);
+        return specificationRepository.save(specification);
+    }
+
 
     boolean isExist(SpecificationDto specificationDto){
         return specificationRepository.findById(specificationDto.getId()).isPresent();

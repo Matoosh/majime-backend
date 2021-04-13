@@ -2,6 +2,7 @@ package app.majime.lims.lab;
 
 import app.majime.lims.address.Address;
 import app.majime.lims.user.User;
+import app.majime.lims.utils.StatusDeleted;
 import lombok.*;
 
 import javax.persistence.*;
@@ -27,13 +28,13 @@ public class Lab {
     private String name;
 
     @NonNull
-    private String deleted;
+    private StatusDeleted deleted;
 
     private String createdBy;
 
     private String reason;
 
-    @OneToOne
+    @OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "address_id")
     private Address address;
 
@@ -44,6 +45,8 @@ public class Lab {
         return LabDto.builder()
                 .id(id)
                 .name(name)
+                .deleted(deleted)
+                .address(address.toDto())
                 .build();
     }
 
@@ -51,7 +54,8 @@ public class Lab {
         return builder()
                 .id(labDto.getId())
                 .name(labDto.getName())
-                .deleted("false")
+                .deleted(labDto.getDeleted())
+                .address(Address.buildFrom(labDto.getAddress()))
                 .build();
     }
 }

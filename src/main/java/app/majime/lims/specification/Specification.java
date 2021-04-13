@@ -1,11 +1,14 @@
 package app.majime.lims.specification;
 
 import app.majime.lims.user.User;
+import app.majime.lims.utils.StatusDeleted;
 import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
 
+import static javax.persistence.GenerationType.SEQUENCE;
+import static javax.persistence.EnumType.STRING;
 @Entity
 @Table(name = "specification")
 @Getter
@@ -18,25 +21,26 @@ import java.util.Set;
 public class Specification {
     @Id
     @SequenceGenerator(name="specification_seq", sequenceName="specification_id_seq", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "specification_seq")
+    @GeneratedValue(strategy = SEQUENCE, generator = "specification_seq")
     private Long id;
 
     @NonNull
     @Column(unique = true, length = 50)
     private String specificationNo;
 
-    @NonNull
+    //@NonNull
     @Column(length = 1)
     private String confirmed;
 
-    @NonNull
+//    @NonNull
     private String name;
 
-    @NonNull
+//    @NonNull
     private String type;
 
     @NonNull
-    private String deleted;
+    @Enumerated(STRING)
+    private StatusDeleted deleted;
 
     private String createdBy;
 
@@ -59,26 +63,27 @@ public class Specification {
     @JoinColumn(name = "user_id")
     private User user;
 
-    SpecificationDto toDto(){
+    public SpecificationDto toDto(){
         return SpecificationDto.builder()
                 .id(id)
                 .specificationNo(specificationNo)
                 .name(name)
                 .status(status)
                 .type(type)
-//                .material(material.toDto())
+                .material(material.toDto())
+                .deleted(deleted)
                 .build();
     }
 
-    static Specification buildFrom(SpecificationDto specificationDto) {
+    public static Specification buildFrom(SpecificationDto specificationDto) {
         return builder()
                 .id(specificationDto.getId())
                 .specificationNo(specificationDto.getSpecificationNo())
                 .name(specificationDto.getName())
                 .status(specificationDto.getStatus())
                 .type(specificationDto.getType())
-//                .material(Material.buildFrom(specificationDto.getMaterial()))
-                .deleted("false")
+                .material(Material.buildFrom(specificationDto.getMaterial()))
+                .deleted(StatusDeleted.FALSE)
                 .build();
     }
 }
