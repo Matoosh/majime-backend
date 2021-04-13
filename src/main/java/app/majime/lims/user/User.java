@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -18,6 +19,7 @@ import java.util.Set;
 @RequiredArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
+@Builder
 public class User {
 
     @Id
@@ -32,7 +34,7 @@ public class User {
     private String lastName;
 
     @NonNull
-    private String login;
+    private String username;
 
     @NonNull
     private String password;
@@ -46,6 +48,7 @@ public class User {
     private String deleted;
 
     private String createdBy;
+//    created_by
 
     private String reason;
 
@@ -53,10 +56,10 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
-
+//
     @OneToMany(mappedBy = "user")
     private Set<Certificate> certificates;
-
+//
     @OneToMany(mappedBy = "user")
     private Set<Batch> batches;
 
@@ -65,14 +68,19 @@ public class User {
     @JsonIgnoreProperties("users")
     private Lab lab;
 
-//    @OneToMany(mappedBy = "user")
-//    private Set<SampleStatusHistory> sampleStatusHistories;
-//
-//    //Unidirectional
-//    @OneToMany(mappedBy = "user")
-//    private Set<SpecificationStatusHistory> specificationStatusHistories;
-
     @OneToMany(mappedBy = "user")
     private Set<Specification> specifications;
 
+    static User buildFrom(UserDto user) {
+        return User.builder()
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .username(user.getUsername())
+                .password(user.getPassword())
+                .email(user.getEmail())
+                .phone(user.getPhone())
+                .deleted(user.getDeleted())
+                .role(user.getRole())
+                .build();
+    }
 }
