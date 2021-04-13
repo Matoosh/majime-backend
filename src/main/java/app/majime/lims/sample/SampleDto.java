@@ -1,6 +1,7 @@
 package app.majime.lims.sample;
 
 import app.majime.lims.batch.BatchDto;
+import app.majime.lims.specification.SpecificationDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NonNull;
@@ -31,4 +32,6 @@ class SampleDto {
     SampleStatus status;
 
     String deleted;
+
+    SpecificationDto specification;
 }

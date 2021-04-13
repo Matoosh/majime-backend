@@ -1,9 +1,9 @@
 package app.majime.lims.user;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-interface UserRepository extends CrudRepository<User,Long> {
-    Optional<User> findByEmail(String email);
+public interface UserRepository extends JpaRepository<User,Long> {
+    Optional<User> findByUsername(String username);
 }

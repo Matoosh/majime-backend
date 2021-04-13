@@ -36,6 +36,12 @@ class BatchController {
 //        }
 //    }
 
+    @GetMapping("/material/{id}")
+    List<BatchDto> getByMaterialId(@PathVariable(value = "id") Long id) {
+        List<Batch> batchList = batchService.findByMaterialId(id);
+        return batchList.stream().map(Batch::toDto).collect(toList());
+    }
+
     @PostMapping
     ResponseEntity<BatchDto> addNewBatch(@RequestBody BatchDto batchDto) {
         if (batchService.isExist(batchDto)) {

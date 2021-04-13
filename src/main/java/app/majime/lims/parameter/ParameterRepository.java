@@ -5,5 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 interface ParameterRepository extends JpaRepository<Parameter,Long> {
-    Optional<Parameter> findById(Long id);
+    Optional<Parameter> findByName(String name);
+    Optional<Parameter> findById(String id);
 }

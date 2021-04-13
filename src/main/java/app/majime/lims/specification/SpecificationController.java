@@ -29,11 +29,10 @@ class SpecificationController {
     }
 
     @GetMapping("/material")
-    List<Material> getAllMaterials() {
-        return specificationService.findAllMaterials();
-//        return specificationService.findAll().stream()
-//                .map(Specification::toDto)
-//                .collect(toList());
+    List<MaterialDto> getAllMaterials() {
+        return specificationService.findAllMaterials().stream()
+                .map(Material::toDto)
+                .collect(toList());
     }
 
     @GetMapping("/{id}")

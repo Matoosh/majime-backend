@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static java.util.stream.Collectors.toList;
+
 @Service
 @RequiredArgsConstructor
 class BatchService {
@@ -19,13 +21,19 @@ class BatchService {
 //        return batchRepository.findById(id);
 //    }
 
-    Batch create(Batch sample) {
-        sample.setDeleted("false");
-        return batchRepository.save(sample);
+    Batch create(Batch batch) {
+        batch.setDeleted("false");
+        return batchRepository.save(batch);
+    }
+
+    List<Batch> findByMaterialId(Long id) {
+        return batchRepository.findAll()
+                .stream().filter(batch -> (batch.getMaterial().getId() == id)).collect(toList());
     }
 
     boolean isExist(BatchDto sampleDTO) {
         return batchRepository.findByManufacturerBatchNo(sampleDTO.getManufacturerBatchNo()).isPresent();
     }
+
 
 }

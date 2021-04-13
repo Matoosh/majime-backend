@@ -1,81 +1,38 @@
 package app.majime.lims.user;
 
 import app.majime.lims.RestConstants;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Optional;
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @RestController
 @RequestMapping(RestConstants.APPLICATION_NAME + RestConstants.API_VERSION_1 + RestConstants.RESOURCE_USER)
 class UserController {
 
-    private UserRepository repository;
+    private final UserService userService;
 
-    @Autowired
-    UserController(UserRepository userRepository){this.repository = userRepository;}
+    UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping()
-    Iterable<User> getAll() {return repository.findAll();}
-
-    @GetMapping("/{id}")
-    ResponseEntity<User> getById(@PathVariable(value = "id") Long id){
-        Optional<User> user = repository.findById(id);
-        if(user.isPresent()){
-            return ResponseEntity.ok(user.get());
-        }else{
-            return ResponseEntity.notFound().build();
-        }
+    List<User> getAll() {
+        return userService.findAll();
     }
 
-    @PostMapping()
-    ResponseEntity<User> addNewUser(@RequestBody User newUser){
-        Optional<User> userFromDb = repository.findByEmail(newUser.getEmail());
-        if(userFromDb.isPresent()) {
-            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
-        }
-        User savedUser = repository.save(newUser);
-        return ResponseEntity.ok(savedUser);
+    @PostMapping("/signin")
+    public String login(@RequestBody UserLoginRequest userLoginRequest) {
+        return userService.signIn(userLoginRequest);
     }
 
-    @DeleteMapping("/{id}")
-    void delete(@PathVariable(value = "id") Long id){
-        try {
-            repository.deleteById(id);
-        }
-        catch (EmptyResultDataAccessException exc) {
-            throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, "User Not Found", exc);
-        }
+    @PostMapping("/signup")
+    public String register(@RequestBody UserDto user) {
+        return userService.signUp(User.buildFrom(user));
     }
 
-    @PutMapping("/{id}")
-    ResponseEntity<User> updateUser(@PathVariable(value = "id") Long id,@RequestBody User newUser){
-        Optional<User> userOptional = repository.findById(id);
-        if(userOptional.isPresent()){
-            User user = userOptional.get();
-            repository.save(user);
-            return ResponseEntity.ok(user);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    @GetMapping("/refresh")
+    public String refresh(HttpServletRequest req) {
+        return userService.refresh(req.getRemoteUser());
     }
-
-//    @PutMapping("/{id}/sample/{sampleId}")
-//    ResponseEntity<User> addSampleToUser(@PathVariable(value = "id") Long id,@PathVariable(value = "id") Long sampleId){
-//        Optional<User> userOptional = repository.findById(id);
-//        Optional<Sample> sample = sampleRepository.findById(sampleId);
-//        if(userOptional.isPresent()){
-//            User user = userOptional.get();
-//            user.addSample(sample.get());
-//            repository.save(user);
-//            return ResponseEntity.ok(user);
-//        } else {
-//            return ResponseEntity.notFound().build();
-//        }
-//    }
 }
