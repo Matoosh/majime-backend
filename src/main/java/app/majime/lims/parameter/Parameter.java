@@ -25,13 +25,13 @@ public class Parameter {
     @GeneratedValue(strategy = SEQUENCE, generator = "parameter_seq")
     private Long id;
 
+    @NonNull
     private String name;
 
     private String type;
 
     private String border;
 
-    @NonNull
     @Enumerated(STRING)
     private StatusDeleted deleted;
 

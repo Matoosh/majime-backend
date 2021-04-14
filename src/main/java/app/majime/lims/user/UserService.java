@@ -28,11 +28,11 @@ public class UserService {
     }
 
     String signIn(UserLoginRequest request) {
-        Optional<User> user = userRepository.findByUsername(request.getUsername());
+        Optional<User> user = userRepository.findByEmail(request.getEmail());
         if(user.isEmpty()) throw new CustomException("User doesn't exist!", HttpStatus.NOT_FOUND);
         try {
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
-            return jwtTokenProvider.generateToken(request.getUsername(), user.get().getRole());
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
+            return jwtTokenProvider.generateToken(request.getEmail(), user.get().getRole());
         } catch (AuthenticationException e) {
             throw new CustomException("Invalid username/password supplied", HttpStatus.UNPROCESSABLE_ENTITY);
         }
@@ -44,7 +44,7 @@ public class UserService {
         if (userFromDatabase.isEmpty()) {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             userRepository.save(user);
-            return jwtTokenProvider.generateToken(user.getUsername(), user.getRole());
+            return jwtTokenProvider.generateToken(user.getEmail(), user.getRole());
         } else {
             throw new CustomException("Username is already in use", HttpStatus.UNPROCESSABLE_ENTITY);
         }
