@@ -22,8 +22,8 @@ class UserController {
     }
 
     @PostMapping("/signin")
-    public String login(@RequestBody UserLoginRequest userLoginRequest) {
-        return userService.signIn(userLoginRequest);
+    public UserAuthResponse login(@RequestBody UserLoginRequest userLoginRequest) {
+        return new UserAuthResponse(userService.signIn(userLoginRequest));
     }
 
     @PostMapping("/signup")
