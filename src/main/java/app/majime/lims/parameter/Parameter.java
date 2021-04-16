@@ -47,7 +47,7 @@ public class Parameter {
 //    @JoinColumn(name = "unit_id")
 //    private Unit unit;
 
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "specification_id")
     private Specification specification;
 
