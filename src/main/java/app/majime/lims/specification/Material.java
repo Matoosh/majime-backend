@@ -27,9 +27,9 @@ public class Material {
     @GeneratedValue(strategy = SEQUENCE, generator = "material_seq")
     private Long id;
 
+    @NonNull
     private String name;
 
-    @NonNull
     @Enumerated(STRING)
     private StatusDeleted deleted;
 
