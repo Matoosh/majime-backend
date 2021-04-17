@@ -1,5 +1,6 @@
 package app.majime.lims.sample;
 
+import app.majime.lims.utils.StatusDeleted;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,8 +23,19 @@ class SampleService {
     }
 
     Sample create(Sample sample) {
-        sample.setDeleted("false");
+        sample.setDeleted(StatusDeleted.FALSE);
         sample.setStatus(SampleStatus.CREATED);
+        return sampleRepository.save(sample);
+    }
+
+    Sample updateSample(Long id, SampleDto dto) throws EntityNotFoundException {
+        Optional<Sample> sampleOptional = sampleRepository.findById(id);
+
+        if (!sampleOptional.isPresent()) throw new EntityNotFoundException("Not found Sample id = " + id);
+
+        Sample sample = sampleOptional.get();
+        sample = sample.buildFrom(dto);
+        sample.setDeleted(StatusDeleted.FALSE);
         return sampleRepository.save(sample);
     }
 
@@ -37,6 +49,17 @@ class SampleService {
         }
 
         throw new EntityNotFoundException("Not found Sample id = " + id);
+    }
+
+    Sample deleteSample(Long id) throws EntityNotFoundException {
+        Optional<Sample> sampleOptional = sampleRepository.findById(id);
+
+        if (sampleOptional.isPresent()){
+            Sample sampleDb = sampleOptional.get();
+            sampleDb.setDeleted(StatusDeleted.TRUE);
+            return sampleRepository.save(sampleDb);
+        }
+        throw new EntityNotFoundException("Not found material id = " + id);
     }
 
     boolean isExist(SampleDto sampleDTO) {

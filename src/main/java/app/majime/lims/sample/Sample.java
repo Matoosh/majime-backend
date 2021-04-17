@@ -3,6 +3,7 @@ package app.majime.lims.sample;
 import app.majime.lims.batch.Batch;
 import app.majime.lims.sampleLab.SampleLab;
 import app.majime.lims.specification.Specification;
+import app.majime.lims.utils.StatusDeleted;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -65,7 +66,8 @@ public class Sample {
     @OneToMany(fetch = LAZY,mappedBy = "sample")
     private Set<SampleStatusHistory> sampleStatusHistory;
 
-    private String deleted;
+    @Enumerated(STRING)
+    private StatusDeleted deleted;
 
     private String createdBy;
 
