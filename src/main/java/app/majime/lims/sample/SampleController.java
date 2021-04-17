@@ -47,8 +47,24 @@ class SampleController {
     }
 
     @DeleteMapping("/{id}")
-    void delete(@PathVariable(value = "id") Long id) {
-        sampleService.deleteById(id);
+    ResponseEntity<SampleDto> deleteMaterial(@PathVariable(value = "id") Long id) {
+        try{
+            SampleDto sample = sampleService.deleteSample(id).toDto();;
+            return ok(sample);
+        } catch (EntityNotFoundException enfe) {
+            return notFound().build();
+        }
+
+    }
+
+    @PutMapping("/{id}")
+    ResponseEntity<SampleDto> updateSample(@PathVariable(value = "id") Long id, @RequestBody SampleDto sampleDto) {
+        try {
+            SampleDto dto = sampleService.updateSample(id, sampleDto).toDto();
+            return ok(dto);
+        } catch (EntityNotFoundException enfe) {
+            return notFound().build();
+        }
     }
 
     @PutMapping("/{id}/{status}")
