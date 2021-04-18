@@ -39,7 +39,7 @@ public class Manufacturer {
     //@OneToMany(mappedBy = "supplier")
     //private Set<User> SupplierUser;
 
-    ManufacturerDto toDto(){
+    public ManufacturerDto toDto(){
         return ManufacturerDto.builder()
                 .id(id)
                 .name(name)
@@ -48,7 +48,7 @@ public class Manufacturer {
                 .build();
     }
 
-    static Manufacturer buildFrom(ManufacturerDto dto) {
+    public static Manufacturer buildFrom(ManufacturerDto dto) {
         return builder()
                 .id(dto.getId())
                 .name(dto.getName())

@@ -3,6 +3,7 @@ package app.majime.lims.sample;
 import app.majime.lims.batch.BatchDto;
 import app.majime.lims.specification.SpecificationDto;
 import app.majime.lims.utils.StatusDeleted;
+import app.majime.lims.utils.Type;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NonNull;
@@ -28,7 +29,7 @@ class SampleDto {
 
     int quantity;
 
-    String type;
+    Type type;
 
     SampleStatus status;
 

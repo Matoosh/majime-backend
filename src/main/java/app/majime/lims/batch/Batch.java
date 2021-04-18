@@ -67,6 +67,8 @@ public class Batch {
                 .internalBatchNo(internalBatchNo)
                 .manufacturerBatchNo(manufacturerBatchNo)
                 .material(material.toDto())
+                .manufacturer(manufacturer.toDto())
+                .supplier(supplier.toDto())
                 .build();
     }
 
@@ -76,6 +78,8 @@ public class Batch {
                 .internalBatchNo(batchDTO.getInternalBatchNo())
                 .manufacturerBatchNo(batchDTO.getManufacturerBatchNo())
                 .material(Material.buildFrom(batchDTO.getMaterial()))
+                .manufacturer(Manufacturer.buildFrom(batchDTO.getManufacturer()))
+                .supplier(Supplier.buildFrom(batchDTO.getSupplier()))
                 .deleted("false")
                 .build();
     }
