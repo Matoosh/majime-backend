@@ -1,12 +1,10 @@
 package app.majime.lims.supplier;
 
 import app.majime.lims.address.Address;
-import app.majime.lims.user.User;
 import app.majime.lims.utils.StatusDeleted;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Table(name = "supplier")
@@ -41,7 +39,7 @@ public class Supplier {
     //@OneToMany(mappedBy = "supplier")
     //private Set<User> SupplierUser;
 
-    SupplierDto toDto(){
+    public SupplierDto toDto(){
         return SupplierDto.builder()
                 .id(id)
                 .name(name)
@@ -50,7 +48,7 @@ public class Supplier {
                 .build();
     }
 
-    static Supplier buildFrom(SupplierDto dto) {
+    public static Supplier buildFrom(SupplierDto dto) {
         return builder()
                 .id(dto.getId())
                 .name(dto.getName())
