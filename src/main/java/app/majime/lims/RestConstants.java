@@ -19,4 +19,5 @@ public class RestConstants {
     public static final String RESOURCE_ADDRESS = "/address";
     public static final String RESOURCE_LAB = "/lab";
     public static final String RESOURCE_SPECIFICATION = "/specification";
+    public static final String RESOURCE_SAMPLECHART = "/samplechart";
 }

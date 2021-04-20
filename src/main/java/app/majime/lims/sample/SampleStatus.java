@@ -1,6 +1,6 @@
 package app.majime.lims.sample;
 
-enum SampleStatus {
+public enum SampleStatus {
     CREATED,
     TAKEN,
     DELIVERED,
