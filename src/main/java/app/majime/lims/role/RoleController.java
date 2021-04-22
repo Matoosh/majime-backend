@@ -10,7 +10,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping(RestConstants.APPLICATION_NAME + RestConstants.API_VERSION_1 + RestConstants.RESOURCE_ROLE)
-@PreAuthorize("hasAuthority('ADMIN_READ') || hasAuthority('ADMIN_WRITE')")
 class RoleController {
     private final RoleService roleService;
 
@@ -19,6 +18,7 @@ class RoleController {
     }
 
     @GetMapping()
+    @PreAuthorize("hasAuthority('ADMIN_READ') || hasAuthority('ADMIN_WRITE')")
     List<Role> getAllRoles() {
         return roleService.getAllRoles();
     }

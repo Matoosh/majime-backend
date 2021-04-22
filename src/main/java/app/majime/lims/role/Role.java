@@ -1,12 +1,9 @@
-package app.majime.lims.user;
-
-import org.springframework.security.core.GrantedAuthority;
-
+package app.majime.lims.role;
 
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.Collection;
 
 @Entity
 @Table(name = "role")
@@ -16,7 +13,7 @@ import java.util.Set;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @RequiredArgsConstructor
 @ToString
-public class Role implements GrantedAuthority {
+public class Role {
 
     @Id
     @SequenceGenerator(name="role_seq", sequenceName="role_id_seq", allocationSize = 1)
@@ -26,17 +23,6 @@ public class Role implements GrantedAuthority {
     @NonNull
     private String name;
 
-    @Override
-    public String getAuthority() {
-        return name;
-    }
-//
-//    @NonNull
-//    private String code;
-//
-//    @NonNull
-//    private String description;
-//
 //    @NonNull
 //    private String deleted;
 //
@@ -44,7 +30,18 @@ public class Role implements GrantedAuthority {
 //
 //    private String reason;
 //
-//    @OneToMany(mappedBy = "role")
-//    private Set<RolePermission> rolePermissions;
+
+//    @ManyToMany(mappedBy = "roles")
+//    private Collection<User> users;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "role_permission",
+            joinColumns = @JoinColumn(
+                    name = "role_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "permission_id", referencedColumnName = "id"))
+    private Collection<Permission> permissions;
+
 
 }

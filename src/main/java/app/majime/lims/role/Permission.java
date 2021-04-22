@@ -1,9 +1,8 @@
-package app.majime.lims.user;
+package app.majime.lims.role;
 
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Table(name = "permission")
@@ -13,6 +12,7 @@ import java.util.Set;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @RequiredArgsConstructor
 @ToString
+public
 class Permission {
 
     @Id
@@ -29,14 +29,8 @@ class Permission {
     @NonNull
     private String description;
 
-    @NonNull
-    private String deleted;
-
-    private String createdBy;
-
-    private String reason;
-
-    @OneToMany(mappedBy = "permission")
-    private Set<RolePermission> rolePermissions;
+//    @ManyToMany(mappedBy = "permissions")
+//    @JsonIgnoreProperties
+//    private Set<Role> roles;
 
 }
