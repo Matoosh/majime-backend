@@ -42,7 +42,7 @@ public class Certificate {
 
     @NonNull
     @ManyToOne
-    @JoinColumn(name = "acceptedBy")
+    @JoinColumn(name = "accepted_by")
     private User user;
 
 }
