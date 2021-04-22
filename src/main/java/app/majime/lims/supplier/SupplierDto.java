@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-class SupplierDto {
+public class SupplierDto {
 
     Long id;
     String name;
