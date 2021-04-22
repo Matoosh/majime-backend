@@ -2,6 +2,8 @@ package app.majime.lims.user;
 
 import app.majime.lims.exception.CustomException;
 import app.majime.lims.security.JwtTokenProvider;
+import app.majime.lims.user.dto.UserAccess;
+import app.majime.lims.user.dto.UserWrite;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -13,26 +15,28 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserService {
+class UserService {
 
     private final UserRepository userRepository;
+//    private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtTokenProvider;
     private final AuthenticationManager authenticationManager;
 
     UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtTokenProvider jwtTokenProvider, AuthenticationManager authenticationManager) {
         this.userRepository = userRepository;
+//        this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtTokenProvider = jwtTokenProvider;
         this.authenticationManager = authenticationManager;
     }
 
-    String signIn(UserLoginRequest request) {
+    String signIn(UserAccess request) {
         Optional<User> user = userRepository.findByEmail(request.getEmail());
         if(user.isEmpty()) throw new CustomException("User doesn't exist!", HttpStatus.NOT_FOUND);
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
-            return jwtTokenProvider.generateToken(request.getEmail(), user.get().getRole());
+            return jwtTokenProvider.generateToken(request.getEmail(), user.get().getRoles());
         } catch (AuthenticationException e) {
             throw new CustomException("Invalid username/password supplied", HttpStatus.UNPROCESSABLE_ENTITY);
         }
@@ -40,11 +44,12 @@ public class UserService {
 
 
     String signUp(User user) {
-        Optional<User> userFromDatabase = userRepository.findByUsername(user.getUsername());
+        Optional<User> userFromDatabase = userRepository.findByEmail(user.getEmail());
         if (userFromDatabase.isEmpty()) {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
+            if(user.getRoles().isEmpty()) System.out.println("dupa");
             userRepository.save(user);
-            return jwtTokenProvider.generateToken(user.getEmail(), user.getRole());
+            return "REGISTERED";
         } else {
             throw new CustomException("Username is already in use", HttpStatus.UNPROCESSABLE_ENTITY);
         }
@@ -55,6 +60,19 @@ public class UserService {
     }
 
     String refresh(String remoteUser) {
-        return jwtTokenProvider.generateToken(remoteUser, userRepository.findByUsername(remoteUser).get().getRole());
+        return jwtTokenProvider.generateToken(remoteUser, userRepository.findByEmail(remoteUser).get().getRoles());
     }
+
+
+    String editUser(Long id, UserWrite user) {
+        Optional<User> userFromDb = userRepository.findById(id);
+        if(userFromDb.isEmpty()) throw new CustomException("Not found User in db", HttpStatus.UNPROCESSABLE_ENTITY);
+        if(!userFromDb.get().getEmail().equals(user.getEmail())) throw new CustomException("Email change is disabled", HttpStatus.UNPROCESSABLE_ENTITY);
+        User updatedUser = User.buildFrom(user);
+        updatedUser.setId(id);
+        userRepository.save(updatedUser);
+        return "OK";
+    }
+
+
 }

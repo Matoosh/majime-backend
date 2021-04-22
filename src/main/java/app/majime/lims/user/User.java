@@ -3,12 +3,14 @@ package app.majime.lims.user;
 import app.majime.lims.batch.Batch;
 import app.majime.lims.certificate.Certificate;
 import app.majime.lims.lab.Lab;
-import app.majime.lims.specification.Specification;
+import app.majime.lims.role.Role;
+import app.majime.lims.user.dto.UserRead;
+import app.majime.lims.user.dto.UserWrite;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Collection;
 import java.util.Set;
 
 @Entity
@@ -34,9 +36,6 @@ public class User {
     private String lastName;
 
     @NonNull
-    private String username;
-
-    @NonNull
     private String password;
 
     @NonNull
@@ -48,39 +47,56 @@ public class User {
     private String deleted;
 
     private String createdBy;
-//    created_by
 
     private String reason;
 
-    @NonNull
-    @ManyToOne
-    @JoinColumn(name = "role_id")
-    private Role role;
-//
+//    @NonNull
+//    @ManyToOne
+//    @JoinColumn(name = "role_id")
+//    private Role role;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_role",
+            joinColumns = @JoinColumn(
+                    name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "role_id", referencedColumnName = "id"))
+    private Collection<Role> roles;
+
     @OneToMany(mappedBy = "user")
     private Set<Certificate> certificates;
-//
+
     @OneToMany(mappedBy = "user")
     private Set<Batch> batches;
 
     @ManyToOne
     @JoinColumn(name = "lab_id")
-    @JsonIgnoreProperties("users")
+    @JsonIgnoreProperties("labUsers")
     private Lab lab;
 
-    @OneToMany(mappedBy = "user")
-    private Set<Specification> specifications;
-
-    static User buildFrom(UserDto user) {
+    static User buildFrom(UserWrite user) {
         return User.builder()
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
-                .username(user.getUsername())
                 .password(user.getPassword())
                 .email(user.getEmail())
                 .phone(user.getPhone())
                 .deleted(user.getDeleted())
-                .role(user.getRole())
+                .roles(user.getRoles())
+                .lab(Lab.buildFrom(user.getLab()))
                 .build();
     }
+
+    static UserRead toUserRead(User user) {
+        return UserRead.builder()
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .email(user.getEmail())
+                .phone(user.getPhone())
+                .deleted(user.getDeleted())
+                .roles(user.getRoles())
+                .build();
+    }
+
 }
