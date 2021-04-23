@@ -1,9 +1,9 @@
-package app.majime.lims.user;
+package app.majime.lims.user.dto;
 
 import lombok.Getter;
 
 @Getter
-class UserLoginRequest {
+public class UserAccess {
     private String email;
     private String password;
 }
