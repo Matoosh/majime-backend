@@ -2,7 +2,8 @@ package app.majime.lims.sample;
 
 public enum SampleStatus {
     CREATED,
-    TAKEN,
+    //TAKEN,
+    SAMPLED,
     DELIVERED,
     TESTING,
     CHECK,

@@ -27,7 +27,7 @@ public class LimsApplication {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedHeaders("Authorization")
+                        //.allowedHeaders("Authorization")
                         .allowedMethods("*");
             }
         };

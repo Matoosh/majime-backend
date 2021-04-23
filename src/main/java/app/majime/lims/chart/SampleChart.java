@@ -5,6 +5,8 @@ import lombok.*;
 
 import javax.persistence.*;
 
+import static javax.persistence.EnumType.STRING;
+
 @Entity
 @Getter
 @Setter
@@ -12,11 +14,15 @@ import javax.persistence.*;
 @RequiredArgsConstructor
 @ToString
 @Builder
-public class SampleChart {
+class SampleChart {
     @Id
     Long id;
+
     String type;
+
+    @Enumerated(STRING)
     SampleStatus status;
+
     Long count;
 
     SampleChartDto toDto(){
