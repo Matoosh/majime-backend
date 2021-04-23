@@ -19,7 +19,6 @@ public class LimsApplication {
         SpringApplication.run(LimsApplication.class, args);
     }
 
-    @Bean
     public ModelMapper modelMapper() {
         return new ModelMapper();
     }
