@@ -1,12 +1,12 @@
-package app.majime.lims.user;
+package app.majime.lims.user.dto;
 
 import lombok.Getter;
 
 @Getter
-class UserAuthResponse {
+public class UserAuth {
     private final String token;
 
-    UserAuthResponse(String token) {
+    public UserAuth(String token) {
         this.token = token;
     }
 }

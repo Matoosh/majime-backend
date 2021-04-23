@@ -8,6 +8,8 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Set;
 
+import static javax.persistence.EnumType.STRING;
+
 @Entity
 @Table(name = "lab")
 @Getter
@@ -28,6 +30,7 @@ public class Lab {
     private String name;
 
     @NonNull
+    @Enumerated(STRING)
     private StatusDeleted deleted;
 
     private String createdBy;
@@ -39,7 +42,7 @@ public class Lab {
     private Address address;
 
     @OneToMany(mappedBy = "lab")
-    private Set<User> LabUser;
+    private Set<User> labUsers;
 
     LabDto toDto(){
         return LabDto.builder()
@@ -50,7 +53,7 @@ public class Lab {
                 .build();
     }
 
-    static Lab buildFrom(LabDto labDto) {
+    public static Lab buildFrom(LabDto labDto) {
         return builder()
                 .id(labDto.getId())
                 .name(labDto.getName())
