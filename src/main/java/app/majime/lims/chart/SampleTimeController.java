@@ -11,14 +11,22 @@ import static java.util.stream.Collectors.toList;
 @RestController
 @RequestMapping(RestConstants.APPLICATION_NAME + RestConstants.API_VERSION_1 + RestConstants.RESOURCE_SAMPLECHART)
 @RequiredArgsConstructor
-class SampleChartController {
+class SampleTimeController {
 
-    private final SampleChartService service;
+    private final SampleTimeService service;
 
-    @GetMapping("/count")
-    List<SampleChartDto> getSampleChart() {
-        return service.getSampleChart().stream()
-                .map(SampleChart::toDto)
+    @GetMapping("/time")
+    List<SampleTimeDto> getSampleTime() {
+    //List<String> getSampleTime() {
+        return service.getSampleWynik().stream()
+                //.map()
+                .map(SampleTime::toDto)
                 .collect(toList());
+        /*
+        return service.getSampleTime().stream()
+                .map(SampleTime::toDto)
+                .collect(toList());
+
+         */
     }
 }
