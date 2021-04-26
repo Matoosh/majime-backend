@@ -25,8 +25,8 @@ class SpecificationService {
         return materialRepository.findAll();
     }
 
-    Optional<Specification> findById(Long id) {
-        return specificationRepository.findById(id);
+    Specification findById(Long id) {
+        return specificationRepository.findById(id).get();
     }
 
     Optional<Material> findMaterialById(Long id) {

@@ -32,7 +32,7 @@ public class Manufacturer {
 
     private String reason;
 
-    @OneToOne(cascade=CascadeType.ALL)
+    @OneToOne//(cascade=CascadeType.ALL)
     @JoinColumn(name = "address_id")
     private Address address;
 
