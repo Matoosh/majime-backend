@@ -37,7 +37,7 @@ class SpecificationController {
 
     @GetMapping("/{id}")
     ResponseEntity<SpecificationDto> getById(@PathVariable(value = "id") Long id) {
-        Optional<Specification> specificationOptional = specificationService.findById(id);
+        Optional<Specification> specificationOptional = Optional.ofNullable(specificationService.findById(id));
         if (specificationOptional.isPresent()) {
             return ok(specificationOptional.get().toDto());
         } else {

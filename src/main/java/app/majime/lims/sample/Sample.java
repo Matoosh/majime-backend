@@ -87,7 +87,7 @@ public class Sample {
 //        sampleLab.setSample(this);
     }
 
-    SampleDto toDto() {
+    public SampleDto toDto() {
         return SampleDto.builder()
                 .id(id)
                 .name(name)
@@ -102,7 +102,7 @@ public class Sample {
                 .build();
     }
 
-    static Sample buildFrom(SampleDto sampleDto) {
+    public static Sample buildFrom(SampleDto sampleDto) {
         return builder()
                 .id(sampleDto.getId())
                 .name(sampleDto.getName())

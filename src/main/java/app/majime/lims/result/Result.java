@@ -3,6 +3,7 @@ package app.majime.lims.result;
 import app.majime.lims.parameter.Parameter;
 import app.majime.lims.sample.Sample;
 import app.majime.lims.user.User;
+import app.majime.lims.utils.StatusDeleted;
 import lombok.*;
 
 import javax.persistence.*;
@@ -15,6 +16,7 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @RequiredArgsConstructor
 @ToString
+@Builder
 public class Result {
 
     @Id
@@ -25,7 +27,7 @@ public class Result {
     private String value;
 
     @NonNull
-    private String deleted;
+    private StatusDeleted deleted;
 
     private String createdBy;
 
@@ -45,4 +47,25 @@ public class Result {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    ResultDto toDto(){
+        return ResultDto.builder()
+                .id(id)
+                .value(value)
+                .sample(sample.toDto())
+                .deleted(deleted)
+                .status(status)
+                .build();
+    }
+
+    public static Result buildFrom(ResultDto resultDto){
+        return builder()
+                .id(resultDto.getId())
+                .value(resultDto.getValue())
+                .sample(Sample.buildFrom(resultDto.getSample()))
+                .deleted(StatusDeleted.FALSE)
+                .status(ResultStatus.NEW)
+                .build();
+    }
+
 }
