@@ -1,3 +1,4 @@
+/*
 --OGÓLNE
 --Wszystkie tabele powinny mieć deleted (rozmawialiśmy, że robimu char // zmieniamy na String (ms))
 --Jeśli chcemy do logu wpisywać przyczynę i autora zmiany, to powinniśmy dodać do każdej tabel dodać pola "user" i "reason" i wypełniać je wartościami
@@ -208,3 +209,6 @@ INSERT INTO "unit" ("id", "name", "value", "user_id", "created_by", "reason", "d
 (4, 'gram w tabletce', 'g/tabl.', 0,'user', null, 'false');
 
 SELECT enableTriggers(TABLE_NAME) FROM information_schema.tables WHERE table_schema = 'public';
+*/
+
+SELECT * FROM lab;

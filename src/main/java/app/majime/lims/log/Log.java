@@ -26,7 +26,7 @@ import javax.persistence.Table;
         @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 })
 
-class SampleLog {
+class Log {
 
     @Id
     Long id;
@@ -49,8 +49,8 @@ class SampleLog {
     String dml_created_by;
     String dml_reason;
 
-    SampleLogDto toDto(){
-        return SampleLogDto.builder()
+    LogDto toDto(){
+        return LogDto.builder()
                 .element(element)
                 .old_row_data(old_row_data)
                 .new_row_data(new_row_data)
@@ -60,7 +60,7 @@ class SampleLog {
                 .build();
     }
 
-    static  SampleLog buildFrom(SampleLogDto dto){
+    static  Log buildFrom(LogDto dto){
         return builder()
                 .element(dto.element)
                 .old_row_data(dto.old_row_data)

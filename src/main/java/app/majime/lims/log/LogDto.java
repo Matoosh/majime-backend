@@ -6,7 +6,7 @@ import lombok.*;
 @Getter
 @Setter
 @Builder
-class SampleLogDto {
+class LogDto {
 
     Long element;
     JsonNode old_row_data;
