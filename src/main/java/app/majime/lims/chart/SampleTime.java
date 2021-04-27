@@ -5,6 +5,8 @@ import lombok.*;
 
 import javax.persistence.*;
 
+import static javax.persistence.EnumType.STRING;
+
 @Entity
 @Getter
 @Setter
@@ -15,30 +17,25 @@ import javax.persistence.*;
 class SampleTime {
     @Id
     Long id;
-    String tekst;
 
-    /*
     String type;
+
+    @Enumerated(STRING)
     SampleStatus status;
+
     Integer year;
     Integer week;
     Integer count;
-    Integer avg;
-    */
-
+    Float avg;
 
     SampleTimeDto toDto(){
         return SampleTimeDto.builder()
-                .tekst(tekst)
-                /*
                 .type(type)
                 .status(status)
                 .year(year)
                 .week(week)
                 .count(count)
                 .avg(avg)
-
-                 */
                 .build();
     }
 }

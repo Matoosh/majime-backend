@@ -9,13 +9,10 @@ import lombok.Setter;
 @Setter
 @Builder
 class SampleTimeDto {
-    String tekst;
-    /*
     String type;
     SampleStatus status;
     Integer year;
     Integer week;
     Integer count;
-    Integer avg;
-     */
+    Float avg;
 }

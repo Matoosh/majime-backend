@@ -17,16 +17,8 @@ class SampleTimeController {
 
     @GetMapping("/time")
     List<SampleTimeDto> getSampleTime() {
-    //List<String> getSampleTime() {
-        return service.getSampleWynik().stream()
-                //.map()
-                .map(SampleTime::toDto)
-                .collect(toList());
-        /*
         return service.getSampleTime().stream()
                 .map(SampleTime::toDto)
                 .collect(toList());
-
-         */
     }
 }
