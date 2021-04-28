@@ -53,6 +53,7 @@ public class Result {
                 .id(id)
                 .value(value)
                 .sample(sample.toDto())
+                .parameter(parameter.toDto())
                 .deleted(deleted)
                 .status(status)
                 .build();
@@ -63,6 +64,7 @@ public class Result {
                 .id(resultDto.getId())
                 .value(resultDto.getValue())
                 .sample(Sample.buildFrom(resultDto.getSample()))
+                .parameter(Parameter.buildFrom(resultDto.getParameter()))
                 .deleted(StatusDeleted.FALSE)
                 .status(ResultStatus.NEW)
                 .build();

@@ -1,19 +1,14 @@
 package app.majime.lims.result;
 
 import app.majime.lims.RestConstants;
-import app.majime.lims.sample.SampleDto;
-import app.majime.lims.specification.Specification;
-import app.majime.lims.specification.SpecificationDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 import static org.springframework.http.ResponseEntity.notFound;
@@ -64,7 +59,6 @@ class ResultController {
         } catch (EntityNotFoundException enfe) {
             return notFound().build();
         }
-
     }
 
     @PutMapping("/{id}")
@@ -76,4 +70,14 @@ class ResultController {
             return notFound().build();
         }
     }
+
+    @GetMapping("/result/{id}")
+    List<ResultDto> getResultBySampleId(@PathVariable(value = "id") Long id) {
+        List <Result> resultList = resultService.findBySampleId(id);
+        return resultList
+                .stream()
+                .map(Result::toDto)
+                .collect(Collectors.toList());
+    }
+
 }
