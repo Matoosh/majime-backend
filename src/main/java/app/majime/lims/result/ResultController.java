@@ -66,7 +66,7 @@ class ResultController {
         }
     }
 
-    @GetMapping("/result/{id}")
+    @GetMapping("/result/sample/{id}")
     List<ResultDto> getResultBySampleId(@PathVariable(value = "id") Long id) {
         List <Result> resultList = resultService.findBySampleId(id);
         return resultList
