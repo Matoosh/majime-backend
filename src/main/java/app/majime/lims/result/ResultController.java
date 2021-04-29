@@ -75,4 +75,13 @@ class ResultController {
                 .collect(Collectors.toList());
     }
 
+    @PutMapping("/{id}/{status}")
+    ResponseEntity<ResultDto> updateResultStatus(@PathVariable(value = "id") Long id, @RequestBody ResultStatus status) {
+        try{
+            ResultDto result = resultService.updateStatus(id, status).toDto();
+            return ok(result);
+        } catch (EntityNotFoundException enfe) {
+            return notFound().build();
+        }
+    }
 }

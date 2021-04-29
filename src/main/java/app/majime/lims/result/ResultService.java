@@ -37,6 +37,7 @@ class ResultService {
         }
         Result result = resultOptional.get();
         result = result.buildFrom(resultDto);
+        result.setDeleted(StatusDeleted.FALSE);
         return resultRepository.save(result);
     }
 
@@ -66,6 +67,16 @@ class ResultService {
         return resultRepository.findAll()
                 .stream().filter(result -> (result.getSample().getId() == id))
                 .collect(Collectors.toList());
+    }
+
+    Result updateStatus (Long id, ResultStatus status) throws EntityNotFoundException{
+        Optional<Result> resultOptional = resultRepository.findById(id);
+        if(resultOptional.isPresent()){
+            Result result = resultOptional.get();
+            result.setStatus(status);
+            return  resultRepository.save(result);
+        }
+        throw new EntityNotFoundException("Result not found: " + id);
     }
 
 }
