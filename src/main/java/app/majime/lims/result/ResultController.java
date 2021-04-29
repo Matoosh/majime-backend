@@ -19,11 +19,13 @@ import static org.springframework.http.ResponseEntity.ok;
 @RequestMapping(RestConstants.APPLICATION_NAME + RestConstants.API_VERSION_1 + RestConstants.RESOURCE_RESULT)
 class ResultController {
 
-    private ResultService resultService;
+    private final ResultService resultService;
 
     @GetMapping()
     List<ResultDto> getAll() {
-        return resultService.findAll().stream()
+        return resultService
+                .findAll()
+                .stream()
                 .map(Result::toDto)
                 .collect(toList());
     }
@@ -42,14 +44,7 @@ class ResultController {
     ResponseEntity<ResultDto> addNewResult(@RequestBody ResultDto resultDto) {
         return ok(resultService.create(Result.buildFrom(resultDto)).toDto());
     }
-//    ResponseEntity<Result> addNewResult(@RequestBody ResultDto newResultDto){
-//        Optional<Result> resultFromDb = repository.findById(newResult.getId());
-//        if(resultFromDb.isPresent()) {
-//            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
-//        }
-//        Result savedResult = repository.save(newResult);
-//        return ok(savedResult);
-//    }
+
 
     @DeleteMapping("/{id}")
     ResponseEntity<ResultDto> deleteResult(@PathVariable(value = "id") Long id) {

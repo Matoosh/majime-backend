@@ -8,6 +8,8 @@ import lombok.*;
 
 import javax.persistence.*;
 
+import static javax.persistence.EnumType.STRING;
+
 @Entity
 @Table(name = "result")
 @Getter
@@ -27,6 +29,7 @@ public class Result {
     private String value;
 
     @NonNull
+    @Enumerated(STRING)
     private StatusDeleted deleted;
 
     private String createdBy;
@@ -34,6 +37,7 @@ public class Result {
     private String reason;
 
     // STATUS:
+    @Enumerated(STRING)
     private ResultStatus status;
 
     @ManyToOne
