@@ -1,6 +1,8 @@
 package app.majime.lims.parameter;
 
 import app.majime.lims.RestConstants;
+import app.majime.lims.result.Result;
+import app.majime.lims.result.ResultDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 import static org.springframework.http.ResponseEntity.notFound;
@@ -56,6 +59,15 @@ class ParameterController {
             return notFound().build();
         }
 
+    }
+
+    @GetMapping("/spec/{id}")
+    List<ParameterDto> getParameterBySpecificationId(@PathVariable(value = "id") Long id) {
+        List <Parameter> parametersList = parameterService.findBySpecificationId(id);
+        return parametersList
+                .stream()
+                .map(Parameter::toDto)
+                .collect(Collectors.toList());
     }
 /*
     @PutMapping("/border/{id}")
