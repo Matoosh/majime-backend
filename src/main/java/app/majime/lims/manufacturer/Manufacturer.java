@@ -25,14 +25,13 @@ public class Manufacturer {
     @NonNull
     private String name;
 
-    @NonNull
     private StatusDeleted deleted;
 
     private String createdBy;
 
     private String reason;
 
-    @OneToOne//(cascade=CascadeType.ALL)
+    @OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "address_id")
     private Address address;
 
