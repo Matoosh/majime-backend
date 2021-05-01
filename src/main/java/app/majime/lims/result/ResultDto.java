@@ -2,6 +2,7 @@ package app.majime.lims.result;
 
 import app.majime.lims.parameter.ParameterDto;
 import app.majime.lims.sample.SampleDto;
+import app.majime.lims.user.User;
 import app.majime.lims.utils.StatusDeleted;
 import lombok.Builder;
 import lombok.Getter;
@@ -18,5 +19,6 @@ public class ResultDto {
     ResultStatus status;
     SampleDto sample;
     ParameterDto parameter;
+    User user;
 
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -36,15 +37,16 @@ class ResultService {
         }
         Result result = resultOptional.get();
         result = result.buildFrom(resultDto);
+        result.setDeleted(StatusDeleted.FALSE);
         return resultRepository.save(result);
     }
 
-    Result updateStatus(Long id, ResultStatus newStatus) throws EntityNotFoundException {
+    Result approveResultStatus(Long id) throws EntityNotFoundException {
         Optional<Result> resultOptional = resultRepository.findById(id);
 
         if (resultOptional.isPresent()) {
             Result result = resultOptional.get();
-            result.setStatus(newStatus);
+            result.setStatus(ResultStatus.APPROVED);
             return resultRepository.save(result);
         }
         throw new EntityNotFoundException("Not found Result id = " + id);
@@ -59,6 +61,22 @@ class ResultService {
             return resultRepository.save(resultDb);
         }
         throw new EntityNotFoundException("Not found Result id = " + id);
+    }
+
+    List<Result> findBySampleId(Long id){
+        return resultRepository.findAll()
+                .stream().filter(result -> (result.getSample().getId() == id))
+                .collect(Collectors.toList());
+    }
+
+    Result updateStatus (Long id, ResultStatus status) throws EntityNotFoundException{
+        Optional<Result> resultOptional = resultRepository.findById(id);
+        if(resultOptional.isPresent()){
+            Result result = resultOptional.get();
+            result.setStatus(status);
+            return  resultRepository.save(result);
+        }
+        throw new EntityNotFoundException("Result not found: " + id);
     }
 
 }
