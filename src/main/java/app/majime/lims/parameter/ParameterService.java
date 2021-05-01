@@ -1,5 +1,6 @@
 package app.majime.lims.parameter;
 
+import app.majime.lims.result.Result;
 import app.majime.lims.utils.StatusDeleted;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -47,5 +49,11 @@ class ParameterService {
         Parameter parameter = parameterOptional.get();
         parameter = parameter.buildFrom(parameterDto);
         return parameterRepository.save(parameter);
+    }
+
+    List<Parameter> findBySpecificationId(Long id){
+        return parameterRepository.findAll()
+                .stream().filter(result -> (result.getSpecification().getId() == id))
+                .collect(Collectors.toList());
     }
 }
