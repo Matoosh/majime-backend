@@ -38,6 +38,9 @@ public class Specification {
 //    @NonNull
     private String type;
 
+    @NonNull
+    private String unit;
+
 //    @NonNull
     @Enumerated(STRING)
     private StatusDeleted deleted;
@@ -46,6 +49,7 @@ public class Specification {
 
     private String reason;
 
+    @Enumerated(STRING)
     private SpecificationStatus status;
  
     @OneToMany(mappedBy = "specification")
@@ -74,6 +78,7 @@ public class Specification {
                 .name(name)
                 .status(status)
                 .type(type)
+                .unit(unit)
                 .material(material.toDto())
                 .deleted(deleted)
                 .build();
@@ -86,6 +91,7 @@ public class Specification {
                 .name(specificationDto.getName())
                 .status(specificationDto.getStatus())
                 .type(specificationDto.getType())
+                .unit(specificationDto.getUnit())
                 .material(Material.buildFrom(specificationDto.getMaterial()))
                 .deleted(StatusDeleted.FALSE)
                 .build();
