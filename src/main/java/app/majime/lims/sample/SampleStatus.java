@@ -6,6 +6,7 @@ public enum SampleStatus {
     //SAMPLED,
     DELIVERED,
     TESTING,
+    OOS,
     CHECK,
     APPROVED,
     HANDOVER,
