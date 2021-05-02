@@ -76,7 +76,7 @@ class ResultController {
     }
 
     @PutMapping("/{id}/{status}")
-    ResponseEntity<ResultDto> updateResultStatus(@PathVariable(value = "id") Long id, @RequestBody ResultStatus status) {
+    ResponseEntity<ResultDto> updateResultStatus(@PathVariable(value = "id") Long id, @PathVariable ResultStatus status) {
         try{
             ResultDto result = resultService.updateStatus(id, status).toDto();
             return ok(result);

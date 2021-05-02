@@ -1,9 +1,9 @@
 package app.majime.lims.utils;
 
 public enum Type {
-    MATERIAL,
+    MATERIAŁ,
     OPAKOWANIE,
-    PRODUKT_POSREDNI,
+    PRODUKT_POŚREDNI,
     PRODUKT_LUZEM,
     PRODUKT_GOTOWY
 }
