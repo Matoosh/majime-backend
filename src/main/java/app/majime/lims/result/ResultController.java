@@ -84,4 +84,14 @@ class ResultController {
             return notFound().build();
         }
     }
+
+    @PutMapping("/approve/{id}")
+    ResponseEntity<ResultDto> approveResult(@PathVariable(value = "id") Long id, @RequestBody ResultStatus status) {
+        try{
+            ResultDto result = resultService.updateStatus(id, ResultStatus.APPROVED).toDto();
+            return ok(result);
+        } catch (EntityNotFoundException enfe) {
+            return notFound().build();
+        }
+    }
 }
