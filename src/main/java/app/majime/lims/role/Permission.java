@@ -29,8 +29,4 @@ class Permission {
     @NonNull
     private String description;
 
-//    @ManyToMany(mappedBy = "permissions")
-//    @JsonIgnoreProperties
-//    private Set<Role> roles;
-
 }
