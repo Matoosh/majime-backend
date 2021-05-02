@@ -37,14 +37,14 @@ public class Lab {
 
     private String reason;
 
-    @OneToOne//(cascade=CascadeType.ALL)
+    @OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "address_id")
     private Address address;
 
     @OneToMany(mappedBy = "lab")
     private Set<User> labUsers;
 
-    LabDto toDto(){
+    public LabDto toDto(){
         return LabDto.builder()
                 .id(id)
                 .name(name)

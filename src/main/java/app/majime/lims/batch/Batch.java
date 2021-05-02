@@ -5,6 +5,7 @@ import app.majime.lims.manufacturer.Manufacturer;
 import app.majime.lims.specification.Material;
 import app.majime.lims.supplier.Supplier;
 import app.majime.lims.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -41,10 +42,12 @@ public class Batch {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "supplier_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Supplier supplier;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "manufacturer_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Manufacturer manufacturer;
 
     @ManyToOne(fetch = FetchType.LAZY)

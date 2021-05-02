@@ -41,6 +41,7 @@ class SpecificationService {
     Specification create(Specification specification){
         specification.setDeleted(StatusDeleted.FALSE);
         specification.setStatus(SpecificationStatus.CREATED);
+        specification.setConfirmed("F");
         return specificationRepository.save(specification);
     }
 
@@ -105,12 +106,11 @@ class SpecificationService {
     Specification updateSpecification(Long id, SpecificationDto specificationDto) throws EntityNotFoundException {
         Optional<Specification> specificationOptional = specificationRepository.findById(id);
 
-        if (!specificationOptional.isPresent()){
+        if (specificationOptional.isEmpty()){
             throw new EntityNotFoundException("Not found specification id = " + id);
         }
-        Specification specification = specificationOptional.get();
-        specification = specification.buildFrom(specificationDto);
-        return specificationRepository.save(specification);
+
+        return specificationRepository.save(Specification.buildFrom(specificationDto));
     }
 
 

@@ -65,9 +65,11 @@ public class User {
     private Collection<Role> roles;
 
     @OneToMany(mappedBy = "user")
+    @JsonIgnoreProperties("user")
     private Set<Certificate> certificates;
 
     @OneToMany(mappedBy = "user")
+    @JsonIgnoreProperties("user")
     private Set<Batch> batches;
 
     @ManyToOne

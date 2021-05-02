@@ -15,6 +15,7 @@ public class SpecificationDto {
     String name;
     SpecificationStatus status;
     String type;
+    String unit;
     MaterialDto material;
     StatusDeleted deleted;
 
