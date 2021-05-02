@@ -1,7 +1,7 @@
 package app.majime.lims.role;
 
 import app.majime.lims.RestConstants;
-import app.majime.lims.user.dto.UserWrite;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,14 +24,14 @@ class RoleController {
 
     @PostMapping()
     @PreAuthorize("hasAuthority('ADMIN_READ') || hasAuthority('ADMIN_WRITE')")
-    String createRole(@RequestBody Role role) {
-        return roleService.create(role);
+    ResponseEntity<Role> createRole(@RequestBody Role role) {
+        return ResponseEntity.ok(roleService.create(role));
     }
 
-    @PutMapping()
+    @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMIN_READ') || hasAuthority('ADMIN_WRITE')")
-    String updateRole(@RequestBody Role role) {
-        return roleService.update(role);
+    ResponseEntity<Role> updateRole(@PathVariable(value = "id") Long id, @RequestBody Role role) {
+        return ResponseEntity.ok(roleService.update(role));
     }
 
 
