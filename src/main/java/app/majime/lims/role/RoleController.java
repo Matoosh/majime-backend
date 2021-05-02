@@ -1,10 +1,9 @@
 package app.majime.lims.role;
 
 import app.majime.lims.RestConstants;
+import app.majime.lims.user.dto.UserWrite;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,6 +20,18 @@ class RoleController {
     @PreAuthorize("hasAuthority('ADMIN_READ') || hasAuthority('ADMIN_WRITE')")
     List<Role> getAllRoles() {
         return roleService.getAllRoles();
+    }
+
+    @PostMapping()
+    @PreAuthorize("hasAuthority('ADMIN_READ') || hasAuthority('ADMIN_WRITE')")
+    String createRole(@RequestBody Role role) {
+        return roleService.create(role);
+    }
+
+    @PutMapping()
+    @PreAuthorize("hasAuthority('ADMIN_READ') || hasAuthority('ADMIN_WRITE')")
+    String updateRole(@RequestBody Role role) {
+        return roleService.update(role);
     }
 
 
