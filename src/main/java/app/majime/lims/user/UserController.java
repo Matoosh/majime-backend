@@ -3,12 +3,16 @@ package app.majime.lims.user;
 import app.majime.lims.RestConstants;
 import app.majime.lims.user.dto.UserAccess;
 import app.majime.lims.user.dto.UserAuth;
+import app.majime.lims.user.dto.UserChangePasswordRequest;
 import app.majime.lims.user.dto.UserWrite;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+
+import static org.springframework.http.ResponseEntity.ok;
 
 
 @RestController
@@ -40,6 +44,11 @@ class UserController {
     @PostMapping("/signup")
     public String register(@RequestBody UserWrite user) {
         return userService.signUp(User.buildFrom(user));
+    }
+
+    @PutMapping("/change-password")
+    public ResponseEntity<String> resetPassword(HttpServletRequest req, @RequestBody UserChangePasswordRequest userChangePasswordRequest) {
+        return ok(userService.resetPassword(req.getRemoteUser(), userChangePasswordRequest));
     }
 
     @GetMapping("/refresh")

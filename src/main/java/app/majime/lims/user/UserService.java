@@ -3,6 +3,7 @@ package app.majime.lims.user;
 import app.majime.lims.exception.CustomException;
 import app.majime.lims.security.JwtTokenProvider;
 import app.majime.lims.user.dto.UserAccess;
+import app.majime.lims.user.dto.UserChangePasswordRequest;
 import app.majime.lims.user.dto.UserWrite;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -75,4 +76,15 @@ class UserService {
     }
 
 
+    String resetPassword(String remotUser, UserChangePasswordRequest userChangePasswordRequest) {
+        Optional<User> userFromDatabase = userRepository.findByEmail(remotUser);
+        if(userFromDatabase.isEmpty() || !userChangePasswordRequest.getPassword().equals(userChangePasswordRequest.getConfirmPassword())) {
+            throw new CustomException("Something went wrong during changing password.", HttpStatus.UNPROCESSABLE_ENTITY);
+        }
+        User updatedUser = userFromDatabase.get();
+        updatedUser.setPassword(passwordEncoder.encode(userChangePasswordRequest.getPassword()));
+        userRepository.save(updatedUser);
+
+        return "OK";
+    }
 }
