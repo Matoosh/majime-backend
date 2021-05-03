@@ -22,4 +22,5 @@ public class RestConstants {
     public static final String RESOURCE_SPECIFICATION = "/specification";
     public static final String RESOURCE_SAMPLECHART = "/samplechart";
     public static final String RESOURCE_LOG = "/log";
+    public static final String RESOURCE_PERMISSION = "/permission";
 }

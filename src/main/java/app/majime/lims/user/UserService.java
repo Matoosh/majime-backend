@@ -48,7 +48,6 @@ class UserService {
         Optional<User> userFromDatabase = userRepository.findByEmail(user.getEmail());
         if (userFromDatabase.isEmpty()) {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
-            if(user.getRoles().isEmpty()) System.out.println("dupa");
             userRepository.save(user);
             return "REGISTERED";
         } else {

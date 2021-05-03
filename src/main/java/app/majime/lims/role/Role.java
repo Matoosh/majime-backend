@@ -1,9 +1,12 @@
 package app.majime.lims.role;
 
+import app.majime.lims.utils.StatusDeleted;
 import lombok.*;
 
 import javax.persistence.*;
 import java.util.Collection;
+
+import static javax.persistence.EnumType.STRING;
 
 @Entity
 @Table(name = "role")
@@ -23,16 +26,9 @@ public class Role {
     @NonNull
     private String name;
 
-//    @NonNull
-//    private String deleted;
-//
-//    private String createdBy;
-//
-//    private String reason;
-//
-
-//    @ManyToMany(mappedBy = "roles")
-//    private Collection<User> users;
+    @NonNull
+    @Enumerated(STRING)
+    private StatusDeleted deleted;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
