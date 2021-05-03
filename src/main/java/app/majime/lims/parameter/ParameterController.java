@@ -1,8 +1,6 @@
 package app.majime.lims.parameter;
 
 import app.majime.lims.RestConstants;
-import app.majime.lims.result.Result;
-import app.majime.lims.result.ResultDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -69,6 +67,17 @@ class ParameterController {
                 .map(Parameter::toDto)
                 .collect(Collectors.toList());
     }
+
+    @PutMapping("/parameter/{id}")
+    ResponseEntity<ParameterDto> updateParameter(@PathVariable(value = "id") Long id, @RequestBody ParameterDto parameterDto) {
+        try{
+            ParameterDto parameter = parameterService.updateParameter(id, parameterDto).toDto();
+            return ok(parameter);
+        } catch (EntityNotFoundException enfe) {
+            return notFound().build();
+        }
+    }
+
 /*
     @PutMapping("/border/{id}")
     ResponseEntity<Parameter> updateStatus(@PathVariable(value = "id") Long id,@RequestBody Parameter newParameter){

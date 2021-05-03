@@ -43,12 +43,10 @@ class ParameterService {
     Parameter updateParameter(Long id, ParameterDto parameterDto) throws EntityNotFoundException {
         Optional<Parameter> parameterOptional = parameterRepository.findById(id);
 
-        if (!parameterOptional.isPresent()){
-            throw new EntityNotFoundException("Not found specification id = " + id);
+        if (parameterOptional.isEmpty()){
+            throw new EntityNotFoundException("Not found parameter id = " + id);
         }
-        Parameter parameter = parameterOptional.get();
-        parameter = parameter.buildFrom(parameterDto);
-        return parameterRepository.save(parameter);
+       return parameterRepository.save(Parameter.buildFrom(parameterDto));
     }
 
     List<Parameter> findBySpecificationId(Long id){
