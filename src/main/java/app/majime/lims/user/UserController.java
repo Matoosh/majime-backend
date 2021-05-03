@@ -1,10 +1,7 @@
 package app.majime.lims.user;
 
 import app.majime.lims.RestConstants;
-import app.majime.lims.user.dto.UserAccess;
-import app.majime.lims.user.dto.UserAuth;
-import app.majime.lims.user.dto.UserChangePasswordRequest;
-import app.majime.lims.user.dto.UserWrite;
+import app.majime.lims.user.dto.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -32,8 +29,8 @@ class UserController {
 
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMIN_READ') || hasAuthority('ADMIN_WRITE')")
-    public String editUser(@PathVariable(value = "id") Long id, @RequestBody UserWrite user) {
-        return userService.editUser(id, user);
+    public ResponseEntity<UserRead> editUser(@PathVariable(value = "id") Long id, @RequestBody UserWrite user) {
+        return ResponseEntity.ok(User.toUserRead(userService.editUser(id, user)));
     }
 
     @PostMapping("/signin")
@@ -42,8 +39,8 @@ class UserController {
     }
 
     @PostMapping("/signup")
-    public String register(@RequestBody UserWrite user) {
-        return userService.signUp(User.buildFrom(user));
+    public ResponseEntity<UserRead> register(@RequestBody UserWrite user) {
+        return ResponseEntity.ok(User.toUserRead(userService.signUp(User.buildFrom(user))));
     }
 
     @PutMapping("/change-password")
@@ -52,8 +49,8 @@ class UserController {
     }
 
     @GetMapping("/refresh")
-    public String refresh(HttpServletRequest req) {
-        return userService.refresh(req.getRemoteUser());
+    public UserAuth refresh(HttpServletRequest req) {
+        return new UserAuth(userService.refresh(req.getRemoteUser()));
     }
 
 }
