@@ -44,12 +44,11 @@ class UserService {
     }
 
 
-    String signUp(User user) {
+    User signUp(User user) {
         Optional<User> userFromDatabase = userRepository.findByEmail(user.getEmail());
         if (userFromDatabase.isEmpty()) {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
-            userRepository.save(user);
-            return "REGISTERED";
+            return userRepository.save(user);
         } else {
             throw new CustomException("Username is already in use", HttpStatus.UNPROCESSABLE_ENTITY);
         }
@@ -64,14 +63,13 @@ class UserService {
     }
 
 
-    String editUser(Long id, UserWrite user) {
+    User editUser(Long id, UserWrite user) {
         Optional<User> userFromDb = userRepository.findById(id);
         if(userFromDb.isEmpty()) throw new CustomException("Not found User in db", HttpStatus.UNPROCESSABLE_ENTITY);
         if(!userFromDb.get().getEmail().equals(user.getEmail())) throw new CustomException("Email change is disabled", HttpStatus.UNPROCESSABLE_ENTITY);
         User updatedUser = User.buildFrom(user);
         updatedUser.setId(id);
-        userRepository.save(updatedUser);
-        return "OK";
+        return userRepository.save(updatedUser);
     }
 
 
