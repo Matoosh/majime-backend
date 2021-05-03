@@ -1,0 +1,14 @@
+{
+  "firstName": "admin",
+  "lastName": "admin",
+  "password": "test123",
+  "email": "admin@majime.app",
+  "phone": "123",
+  "deleted": "FALSE",
+  "roles": [
+    {
+      "id": 1,
+      "name": "ROLE_ADMIN"
+    }
+  ]
+}
