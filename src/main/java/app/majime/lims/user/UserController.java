@@ -44,8 +44,8 @@ class UserController {
     }
 
     @PutMapping("/change-password")
-    public ResponseEntity<String> resetPassword(HttpServletRequest req, @RequestBody UserChangePasswordRequest userChangePasswordRequest) {
-        return ok(userService.resetPassword(req.getRemoteUser(), userChangePasswordRequest));
+    public ResponseEntity<UserRead> resetPassword(HttpServletRequest req, @RequestBody UserChangePasswordRequest userChangePasswordRequest) {
+        return ResponseEntity.ok(User.toUserRead(userService.resetPassword(req.getRemoteUser(), userChangePasswordRequest)));
     }
 
     @GetMapping("/refresh")

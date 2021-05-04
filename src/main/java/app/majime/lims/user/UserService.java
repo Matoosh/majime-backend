@@ -73,15 +73,13 @@ class UserService {
     }
 
 
-    String resetPassword(String remotUser, UserChangePasswordRequest userChangePasswordRequest) {
+    User resetPassword(String remotUser, UserChangePasswordRequest userChangePasswordRequest) {
         Optional<User> userFromDatabase = userRepository.findByEmail(remotUser);
         if(userFromDatabase.isEmpty() || !userChangePasswordRequest.getPassword().equals(userChangePasswordRequest.getConfirmPassword())) {
             throw new CustomException("Something went wrong during changing password.", HttpStatus.UNPROCESSABLE_ENTITY);
         }
         User updatedUser = userFromDatabase.get();
         updatedUser.setPassword(passwordEncoder.encode(userChangePasswordRequest.getPassword()));
-        userRepository.save(updatedUser);
-
-        return "OK";
+        return userRepository.save(updatedUser);
     }
 }
