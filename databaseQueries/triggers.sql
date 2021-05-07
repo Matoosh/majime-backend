@@ -5,7 +5,8 @@ declare
 triggerName text:=concat(tbl,'_audit_trigger');
 
 begin
-	IF (tbl!='audit_log') THEN
+	--IF (tbl!='audit_log') THEN
+    IF (tbl!='audit_log')AND(tbl!='user_role')AND(tbl!='role_permission') THEN
 		execute format('DROP TRIGGER IF EXISTS %I ON %I', triggerName, tbl);
         execute format('CREATE TRIGGER %I
 			AFTER INSERT OR UPDATE OR DELETE ON %I
