@@ -68,7 +68,7 @@ class ParameterController {
                 .collect(Collectors.toList());
     }
 
-    @PutMapping("/parameter/{id}")
+    @PutMapping("/{id}")
     ResponseEntity<ParameterDto> updateParameter(@PathVariable(value = "id") Long id, @RequestBody ParameterDto parameterDto) {
         try{
             ParameterDto parameter = parameterService.updateParameter(id, parameterDto).toDto();
