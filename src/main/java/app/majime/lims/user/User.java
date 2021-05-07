@@ -86,7 +86,7 @@ public class User {
                 .phone(user.getPhone())
                 .deleted(user.getDeleted())
                 .roles(user.getRoles())
-                //.lab(Lab.buildFrom(user.getLab()))
+                .lab(Lab.buildFrom(user.getLab()))
                 .build();
     }
 
@@ -98,6 +98,7 @@ public class User {
                 .phone(user.getPhone())
                 .deleted(user.getDeleted())
                 .roles(user.getRoles())
+                .lab(user.getLab().toDto())
                 .build();
     }
 

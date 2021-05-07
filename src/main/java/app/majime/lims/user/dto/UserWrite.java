@@ -19,5 +19,5 @@ public class UserWrite {
     private String phone;
     private String deleted;
     private Collection<Role> roles;
-    //private LabDto lab;
+    private LabDto lab;
 }

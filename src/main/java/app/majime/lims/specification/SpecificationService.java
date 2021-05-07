@@ -109,7 +109,6 @@ class SpecificationService {
         if (specificationOptional.isEmpty()){
             throw new EntityNotFoundException("Not found specification id = " + id);
         }
-
         return specificationRepository.save(Specification.buildFrom(specificationDto));
     }
 
