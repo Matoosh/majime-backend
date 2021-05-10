@@ -5,8 +5,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 import static org.springframework.http.ResponseEntity.notFound;
@@ -37,8 +39,29 @@ class OutOfSpecController {
         }
     }
 
+    @GetMapping("/result/{id}")
+    //String getResult(){ return "asd";}
+    List<OutOfSpecDto> getOutOfSpecByResultId(@PathVariable(value = "id") Long id) {
+        List<OutOfSpec> list = outOfSpecService.findByResultId(id);
+        return list
+                .stream()
+                .map(OutOfSpec::toDto)
+                .collect(Collectors.toList());
+    }
+
     @PostMapping()
     ResponseEntity<OutOfSpecDto> addNew(@RequestBody OutOfSpecDto outOfSpecDto) {
         return ok(outOfSpecService.create(OutOfSpec.buildFrom(outOfSpecDto)).toDto());
     }
+
+    @PutMapping("/{id}")
+    ResponseEntity<OutOfSpecDto> updateResult(@PathVariable(value = "id") Long id, @RequestBody OutOfSpecDto outOfSpecDto) {
+        try{
+            OutOfSpecDto result = outOfSpecService.update(id, outOfSpecDto).toDto();
+            return ok(result);
+        } catch (EntityNotFoundException enfe) {
+            return notFound().build();
+        }
+    }
+
 }
