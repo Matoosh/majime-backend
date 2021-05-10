@@ -70,7 +70,7 @@ public class Result {
                 .sample(Sample.buildFrom(resultDto.getSample()))
                 .parameter(Parameter.buildFrom(resultDto.getParameter()))
                 .deleted(StatusDeleted.FALSE)
-                .status(ResultStatus.NEW)
+                .status(resultDto.getStatus())
                 .build();
     }
 
