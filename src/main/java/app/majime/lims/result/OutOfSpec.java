@@ -37,7 +37,7 @@ class OutOfSpec {
     @NonNull
     private String value;
 
-    @NonNull
+    //@NonNull
     private StatusDeleted deleted;
 
     private String createdBy;
