@@ -1,8 +1,6 @@
 package app.majime.lims.result;
 
 import app.majime.lims.utils.StatusDeleted;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -24,7 +22,7 @@ class OutOfSpec {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "out_of_spec_seq")
     private Long id;
 
-    @NonNull
+//    @NonNull
     private String name;
 
     @NonNull
