@@ -1,6 +1,5 @@
 package app.majime.lims.parameter;
 
-import app.majime.lims.result.Result;
 import app.majime.lims.utils.StatusDeleted;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,7 +11,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-class ParameterService {
+public class ParameterService {
 
     private final ParameterRepository parameterRepository;
 
@@ -49,7 +48,7 @@ class ParameterService {
        return parameterRepository.save(Parameter.buildFrom(parameterDto));
     }
 
-    List<Parameter> findBySpecificationId(Long id){
+    public List<Parameter> findBySpecificationId(Long id){
         return parameterRepository.findAll()
                 .stream().filter(result -> (result.getSpecification().getId() == id))
                 .collect(Collectors.toList());

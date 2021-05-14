@@ -1,6 +1,7 @@
 package app.majime.lims.specification;
 
 import app.majime.lims.utils.StatusDeleted;
+import app.majime.lims.utils.Type;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,7 +15,7 @@ public class SpecificationDto {
     String specificationNo;
     String name;
     SpecificationStatus status;
-    String type;
+    Type type;
     String unit;
     MaterialDto material;
     StatusDeleted deleted;

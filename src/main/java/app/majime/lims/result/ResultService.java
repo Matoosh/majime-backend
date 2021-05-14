@@ -1,7 +1,12 @@
 package app.majime.lims.result;
 
+import app.majime.lims.exception.CustomException;
+import app.majime.lims.sample.Sample;
+import app.majime.lims.sample.SampleRepository;
+import app.majime.lims.sample.SampleStatus;
 import app.majime.lims.utils.StatusDeleted;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -14,6 +19,7 @@ import java.util.stream.Collectors;
 class ResultService {
 
     private final ResultRepository resultRepository;
+    private final SampleRepository sampleRepository;
 
     List<Result> findAll() {
         return resultRepository.findAll();
@@ -25,7 +31,17 @@ class ResultService {
 
     Result create(Result result) {
         result.setDeleted(StatusDeleted.FALSE);
-        result.setStatus(ResultStatus.NEW);
+        Sample sample = result.getSample();
+        if (result.getStatus() == ResultStatus.OOS && sample.getStatus() != SampleStatus.OOS) {
+            sample.setDeleted(StatusDeleted.FALSE);
+            sample.setStatus(SampleStatus.OOS);
+            try {
+                sampleRepository.save(sample);
+            } catch (CustomException customException){
+                throw new CustomException("Error with change status in sample", HttpStatus.UNPROCESSABLE_ENTITY);
+            }
+        }
+        checkAllResultsFiled(result);
         return resultRepository.save(result);
     }
 
@@ -37,7 +53,16 @@ class ResultService {
         }
         Result result = resultOptional.get();
         result = result.buildFrom(resultDto);
-        result.setDeleted(StatusDeleted.FALSE);
+        Sample sample = result.getSample();
+        if (result.getStatus() == ResultStatus.OOS && sample.getStatus() != SampleStatus.OOS) {
+            sample.setDeleted(StatusDeleted.FALSE);
+            sample.setStatus(SampleStatus.OOS);
+            try {
+                sampleRepository.save(sample);
+            } catch (CustomException customException){
+                throw new CustomException("Error with change status in sample", HttpStatus.UNPROCESSABLE_ENTITY);
+            }
+        }
         return resultRepository.save(result);
     }
 
@@ -79,4 +104,10 @@ class ResultService {
         throw new EntityNotFoundException("Result not found: " + id);
     }
 
+    private void checkAllResultsFiled(Result result){
+        int numberOfResults = findBySampleId(result.getSample().getId()).size(); // result -> sample -> sampleId = lista resultow
+//        int numberOfParameters = findBySpecificationId(result.getParameter().getSpecification().getId()) // result -> parameter -> spec -> spec id -> filter by sampleId
+//        System.out.println(count);
+    }
+    // sample -> specification ->parameter -> result
 }
