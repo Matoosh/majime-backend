@@ -71,7 +71,7 @@ BEGIN
     RETURN NEW;
 END;
 $body$
-    LANGUAGE plpgsql;
+LANGUAGE plpgsql;
 
---DROP TRIGGER IF EXISTS sample_status_trigger ON sample;
---CREATE TRIGGER sample_status_trigger AFTER INSERT OR UPDATE OR DELETE ON sample FOR EACH ROW EXECUTE FUNCTION sample_status_trigger_func();
+DROP TRIGGER IF EXISTS sample_status_trigger ON sample;
+CREATE TRIGGER sample_status_trigger AFTER INSERT OR UPDATE OR DELETE ON sample FOR EACH ROW EXECUTE FUNCTION sample_status_trigger_func();
