@@ -25,6 +25,7 @@ class OutOfSpecService {
         outOfSpec.setDeleted(StatusDeleted.FALSE);
         Result result = outOfSpec.getResult();
         result.setStatus(ResultStatus.OOSADDED);
+        result.setValue(outOfSpec.getValue());
         try {
             resultRepository.save(result);
         } catch (CustomException customException){
@@ -44,6 +45,13 @@ class OutOfSpecService {
         oOS.setSimple_investigation(outOfSpecDto.getSimple_investigation());
         oOS.setError(outOfSpecDto.getError());
         oOS.setValue(outOfSpecDto.getValue());
+        Result result = oOS.getResult();
+        result.setValue(oOS.getValue());
+        try {
+            resultRepository.save(result);
+        } catch (CustomException customException){
+            throw new CustomException("Error with change status in result", HttpStatus.UNPROCESSABLE_ENTITY);
+        }
         return outOfSpecRepository.save(oOS);
     }
 
