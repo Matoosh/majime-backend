@@ -6,4 +6,5 @@ import java.util.Optional;
 
 interface OutOfSpecRepository extends JpaRepository<OutOfSpec,Long> {
         Optional<OutOfSpec> findById(Long id);
+        Optional<OutOfSpec> findByResultId(Long id);
 }

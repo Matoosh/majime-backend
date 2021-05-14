@@ -19,14 +19,12 @@ import java.util.Optional;
 class UserService {
 
     private final UserRepository userRepository;
-//    private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtTokenProvider;
     private final AuthenticationManager authenticationManager;
 
     UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtTokenProvider jwtTokenProvider, AuthenticationManager authenticationManager) {
         this.userRepository = userRepository;
-//        this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtTokenProvider = jwtTokenProvider;
         this.authenticationManager = authenticationManager;
@@ -73,15 +71,13 @@ class UserService {
     }
 
 
-    String resetPassword(String remotUser, UserChangePasswordRequest userChangePasswordRequest) {
+    User resetPassword(String remotUser, UserChangePasswordRequest userChangePasswordRequest) {
         Optional<User> userFromDatabase = userRepository.findByEmail(remotUser);
         if(userFromDatabase.isEmpty() || !userChangePasswordRequest.getPassword().equals(userChangePasswordRequest.getConfirmPassword())) {
             throw new CustomException("Something went wrong during changing password.", HttpStatus.UNPROCESSABLE_ENTITY);
         }
         User updatedUser = userFromDatabase.get();
         updatedUser.setPassword(passwordEncoder.encode(userChangePasswordRequest.getPassword()));
-        userRepository.save(updatedUser);
-
-        return "OK";
+        return userRepository.save(updatedUser);
     }
 }

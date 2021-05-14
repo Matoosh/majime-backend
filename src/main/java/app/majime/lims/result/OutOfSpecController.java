@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 import static org.springframework.http.ResponseEntity.notFound;
@@ -40,13 +39,12 @@ class OutOfSpecController {
     }
 
     @GetMapping("/result/{id}")
-    //String getResult(){ return "asd";}
-    List<OutOfSpecDto> getOutOfSpecByResultId(@PathVariable(value = "id") Long id) {
-        List<OutOfSpec> list = outOfSpecService.findByResultId(id);
-        return list
-                .stream()
-                .map(OutOfSpec::toDto)
-                .collect(Collectors.toList());
+    ResponseEntity<OutOfSpecDto> getOutOfSpecByResultId(@PathVariable(value = "id") Long id) {
+        try {
+            return ok(outOfSpecService.findByResultId(id).toDto());
+        } catch (EntityNotFoundException enfe) {
+            return notFound().build();
+        }
     }
 
     @PostMapping()
