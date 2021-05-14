@@ -1,8 +1,10 @@
 package app.majime.lims.result;
 
 enum ResultStatus {
-    NEW,
+    NEW, //do usunięcia, zastąpiony przez ENTERED
+    ENTERED,
     OOS,
+    FORCORRECTION,
     APPROVED,
     DELETED
 }

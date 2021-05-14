@@ -16,5 +16,5 @@ end $$;
 
 SELECT createAuditTrigger(TABLE_NAME) FROM information_schema.tables WHERE table_schema = 'public';
 
-DROP TRIGGER IF EXISTS sample_status_trigger ON sample;
-CREATE TRIGGER sample_status_trigger AFTER INSERT OR UPDATE OR DELETE ON sample FOR EACH ROW EXECUTE FUNCTION sample_status_trigger_func();
+--DROP TRIGGER IF EXISTS sample_status_trigger ON sample;
+--CREATE TRIGGER sample_status_trigger AFTER INSERT OR UPDATE OR DELETE ON sample FOR EACH ROW EXECUTE FUNCTION sample_status_trigger_func();
