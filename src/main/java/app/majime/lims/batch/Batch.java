@@ -28,12 +28,12 @@ public class Batch {
     @SequenceGenerator(name="batch_seq", sequenceName="batch_id_seq", allocationSize = 1)
     @GeneratedValue(strategy = SEQUENCE, generator = "batch_seq")
     private Long id;
-
+    @NonNull
     private String internalBatchNo;
 
     private String manufacturerBatchNo;
 
-    @NonNull
+//    @NonNull
     private String deleted;
 
     private String createdBy;
