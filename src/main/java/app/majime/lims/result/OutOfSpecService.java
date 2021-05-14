@@ -40,8 +40,10 @@ class OutOfSpecService {
             throw new EntityNotFoundException("Not found result id = " + id);
         }
         OutOfSpec oOS = oOSOptional.get();
-        oOS = oOS.buildFrom(outOfSpecDto);
-        //oOS.setDeleted(StatusDeleted.FALSE);
+        oOS.setComplete_investigation(outOfSpecDto.getComplete_investigation());
+        oOS.setSimple_investigation(outOfSpecDto.getSimple_investigation());
+        oOS.setError(outOfSpecDto.getError());
+        oOS.setValue(outOfSpecDto.getValue());
         return outOfSpecRepository.save(oOS);
     }
 
