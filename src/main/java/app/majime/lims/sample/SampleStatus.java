@@ -10,6 +10,6 @@ public enum SampleStatus {
     CHECK,
     FORAPPROVAL,
     APPROVED,
-    HANDOVER,
+    PRINTED,
     CANCELED
 }
