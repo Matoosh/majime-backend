@@ -11,8 +11,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public
-class ParameterService {
+public class ParameterService {
 
     private final ParameterRepository parameterRepository;
 

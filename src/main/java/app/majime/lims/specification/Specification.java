@@ -2,6 +2,7 @@ package app.majime.lims.specification;
 
 import app.majime.lims.user.User;
 import app.majime.lims.utils.StatusDeleted;
+import app.majime.lims.utils.Type;
 import lombok.*;
 
 import javax.persistence.*;
@@ -36,7 +37,8 @@ public class Specification {
     private String name;
 
 //    @NonNull
-    private String type;
+    @Enumerated(STRING)
+    private Type type;
 
     @NonNull
     private String unit;
