@@ -31,7 +31,7 @@ class OutOfSpecService {
         } catch (CustomException customException){
             throw new CustomException("Error with change status in result", HttpStatus.UNPROCESSABLE_ENTITY);
         }
-        resultService.checkAllResultsFiled(result);
+        resultService.checkAllResultsFilled(result);
         return outOfSpecRepository.save(outOfSpec);
     }
 
@@ -53,7 +53,7 @@ class OutOfSpecService {
         } catch (CustomException customException){
             throw new CustomException("Error with change status in result", HttpStatus.UNPROCESSABLE_ENTITY);
         }
-        resultService.checkAllResultsFiled(result);
+        resultService.checkAllResultsFilled(result);
         return outOfSpecRepository.save(oOS);
     }
 

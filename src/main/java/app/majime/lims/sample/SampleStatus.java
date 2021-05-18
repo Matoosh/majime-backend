@@ -8,6 +8,7 @@ public enum SampleStatus {
     TESTING,
     OOS,
     CHECK,
+    FORCORRECTION,
     FORAPPROVAL,
     APPROVED,
     PRINTED,
