@@ -43,7 +43,7 @@ class ResultService {
                 throw new CustomException("Error with change status in sample", HttpStatus.UNPROCESSABLE_ENTITY);
             }
         }
-        checkAllResultsFiled(result);
+        checkAllResultsFilled(result);
         return resultRepository.save(result);
     }
 
@@ -65,7 +65,7 @@ class ResultService {
                 throw new CustomException("Error with change status in sample", HttpStatus.UNPROCESSABLE_ENTITY);
             }
         }
-        checkAllResultsFiled(result);
+        checkAllResultsFilled(result);
         return resultRepository.save(result);
     }
 
@@ -102,23 +102,55 @@ class ResultService {
         if(resultOptional.isPresent()){
             Result result = resultOptional.get();
             result.setStatus(status);
-            return  resultRepository.save(result);
+            Sample sample = result.getSample();
+            sample.setDeleted(StatusDeleted.FALSE);
+            if (result.getStatus() == ResultStatus.FORCORRECTION && sample.getStatus() == SampleStatus.CHECK) {
+                sample.setStatus(SampleStatus.FORCORRECTION);
+                try {
+                    sampleRepository.save(sample);
+                } catch (CustomException customException){
+                    throw new CustomException("Error with change status in sample", HttpStatus.UNPROCESSABLE_ENTITY);
+                }
+            } else if (result.getStatus() == ResultStatus.APPROVED && sample.getStatus() == SampleStatus.CHECK) {
+                checkAllResultsApproved(result);
+            }
+            return resultRepository.save(result);
         }
         throw new EntityNotFoundException("Result not found: " + id);
     }
 
-    void checkAllResultsFiled(Result result) throws EntityNotFoundException{
+    void checkAllResultsFilled(Result result) throws EntityNotFoundException{
         int numberOfResults = findBySampleId(result.getSample().getId()).stream()
-                .filter(resultOb -> resultOb.getStatus() == ResultStatus.OOSADDED || resultOb.getStatus() == ResultStatus.ENTERED)
+                .filter(resultOb -> resultOb.getStatus() == ResultStatus.OOSADDED || resultOb.getStatus() == ResultStatus.ENTERED || resultOb.getStatus() == ResultStatus.APPROVED)
                 .collect(Collectors.toList()).size()
-                + ((result.getId() == null && result.getStatus() == ResultStatus.ENTERED) ? 1 : 0);
+                + ((result.getId() == null && result.getStatus() == ResultStatus.ENTERED || result.getStatus() == ResultStatus.ENTERED && result.getSample().getStatus() == SampleStatus.FORCORRECTION) ? 1 : 0);
         int numberOfParameters = parameterService.findBySpecificationId(result.getParameter().getSpecification().getId())
                 .stream().filter(parameter -> (parameter.getSpecification().getId() == result.getSample().getSpecification().getId()))
                 .collect(Collectors.toList()).size();
-        if(numberOfResults == numberOfParameters){
+        if(numberOfResults >= numberOfParameters){
             Sample sample = result.getSample();
             sample.setDeleted(StatusDeleted.FALSE);
             sample.setStatus(SampleStatus.CHECK);
+            try {
+                sampleRepository.save(sample);
+            } catch (CustomException customException){
+                throw new CustomException("Error with change status in sample", HttpStatus.UNPROCESSABLE_ENTITY);
+            }
+        }
+    }
+
+    void checkAllResultsApproved(Result result) throws EntityNotFoundException{
+        int numberOfResults = findBySampleId(result.getSample().getId()).stream()
+                .filter(resultOb -> resultOb.getStatus() == ResultStatus.APPROVED)
+                .collect(Collectors.toList()).size()
+                + ((result.getId() == null && result.getStatus() == ResultStatus.ENTERED || result.getStatus() == ResultStatus.ENTERED && result.getSample().getStatus() == SampleStatus.FORCORRECTION) ? 1 : 0);
+        int numberOfParameters = parameterService.findBySpecificationId(result.getParameter().getSpecification().getId())
+                .stream().filter(parameter -> (parameter.getSpecification().getId() == result.getSample().getSpecification().getId()))
+                .collect(Collectors.toList()).size();
+        if(numberOfResults >= numberOfParameters){
+            Sample sample = result.getSample();
+            sample.setDeleted(StatusDeleted.FALSE);
+            sample.setStatus(SampleStatus.FORAPPROVAL);
             try {
                 sampleRepository.save(sample);
             } catch (CustomException customException){
