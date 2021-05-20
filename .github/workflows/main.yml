@@ -29,8 +29,9 @@ jobs:
           APP_PROPERTIES: ${{ secrets.APP_PROPERTIES }}
           APP_SECURITY: ${{ secrets.APP_SECURITY }}
         run: |
-          mkdir ./src/main/resources && echo "$APP_PROPERTIES" >> ./src/main/resources/application.properties
-          mkdir ./src/main/resources && echo "$APP_SECURITY" >> ./src/main/resources/security.properties
+          mkdir ./src/main/resources
+          echo "$APP_PROPERTIES" >> ./src/main/resources/application.properties
+          echo "$APP_SECURITY" >> ./src/main/resources/security.properties
 
       # Runs a single command using the runners shell
       - name: Build jar
