@@ -27,7 +27,7 @@ jobs:
       - name: Create application.properties
         env:
           APP_PROPERTIES: ${{ secrets.APP_PROPERTIES }}
-        run: echo "$APP_PROPERTIES" >> application.properties
+        run: mkdir ./src/main/resources && echo "$APP_PROPERTIES" >> ./src/main/resources/application.properties
 
 #      # Runs a single command using the runners shell
 #      - name: Build jar
