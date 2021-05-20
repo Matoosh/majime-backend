@@ -22,21 +22,25 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-        -
+        
       # Runs a single command using the runners shell
       - name: Create application.properties
         env:
           APP_PROPERTIES: ${{ secrets.APP_PROPERTIES }}
-        run: echo "$APP_PROPERTIES"
+          APP_SECURITY: ${{ secrets.APP_SECURITY }}
+        run: |
+          mkdir ./src/main/resources
+          echo "$APP_PROPERTIES" >> ./src/main/resources/application.properties
+          echo "$APP_SECURITY" >> ./src/main/resources/security.properties
 
-#      # Runs a single command using the runners shell
-#      - name: Build jar
-#        run: mvn package
-#
-#      # Runs a single command using the runners shell
-#      - name: Kill backend
-#        run: ps aux | grep -i java | awk 'NR==1{print $2}' | xargs kill -9
-#
-#      # Runs a set of commands using the runners shell
-#      - name: Run backend with logger
-#        run: nohup java -jar lims-0.0.1-SNAPSHOT.jar > log.log 2>&1 &
+      # Runs a single command using the runners shell
+      - name: Build jar
+        run: mvn package
+
+      # Runs a single command using the runners shell
+      - name: Kill backend
+        run: ps aux | grep -i java | awk 'NR==1{print $2}' | xargs kill -9
+
+      # Runs a set of commands using the runners shell
+      - name: Run backend with logger
+        run: cd target && nohup java -jar lims-0.0.1-SNAPSHOT.jar > log.log 2>&1 &
