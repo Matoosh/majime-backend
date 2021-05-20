@@ -43,4 +43,4 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: Run backend with logger
-        run: nohup ./target/java -jar lims-0.0.1-SNAPSHOT.jar > log.log 2>&1 &
+        run: cd target && nohup java -jar lims-0.0.1-SNAPSHOT.jar > log.log 2>&1 &
