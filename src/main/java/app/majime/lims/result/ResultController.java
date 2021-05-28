@@ -23,6 +23,7 @@ class ResultController {
     private final ResultService resultService;
 
     @GetMapping()
+    @PreAuthorize("hasAuthority('ENTER_RESULTS') || hasAuthority('OOS') || hasAuthority('CHECKING_RESULTS') || hasAuthority('CERTIFICATE_APPROVAL') || hasAuthority('CERTIFICATE_PRINTS')")
     List<ResultDto> getAll() {
         return resultService
                 .findAll()
@@ -32,6 +33,7 @@ class ResultController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ENTER_RESULTS') || hasAuthority('OOS') || hasAuthority('CHECKING_RESULTS') || hasAuthority('CERTIFICATE_APPROVAL') || hasAuthority('CERTIFICATE_PRINTS')")
     ResponseEntity<ResultDto> getById(@PathVariable(value = "id") Long id){
         Optional<Result> resultOptional = resultService.findById(id);
         if(resultOptional.isPresent()){
@@ -49,9 +51,10 @@ class ResultController {
 
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ENTER_RESULTS')")
     ResponseEntity<ResultDto> deleteResult(@PathVariable(value = "id") Long id) {
         try{
-            ResultDto result = resultService.deleteResult(id).toDto();;
+            ResultDto result = resultService.deleteResult(id).toDto();
             return ok(result);
         } catch (EntityNotFoundException enfe) {
             return notFound().build();
@@ -59,6 +62,7 @@ class ResultController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('ENTER_RESULTS')")
     ResponseEntity<ResultDto> updateResult(@PathVariable(value = "id") Long id, @RequestBody ResultDto resultDto) {
         try{
             ResultDto result = resultService.updateResult(id, resultDto).toDto();
@@ -83,16 +87,6 @@ class ResultController {
     ResponseEntity<ResultDto> updateResultStatus(@PathVariable(value = "id") Long id, @PathVariable ResultStatus status) {
         try{
             ResultDto result = resultService.updateStatus(id, status).toDto();
-            return ok(result);
-        } catch (EntityNotFoundException enfe) {
-            return notFound().build();
-        }
-    }
-
-    @PutMapping("/approve/{id}")
-    ResponseEntity<ResultDto> approveResult(@PathVariable(value = "id") Long id, @RequestBody ResultStatus status) {
-        try{
-            ResultDto result = resultService.updateStatus(id, ResultStatus.APPROVED).toDto();
             return ok(result);
         } catch (EntityNotFoundException enfe) {
             return notFound().build();
