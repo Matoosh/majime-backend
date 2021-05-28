@@ -17,19 +17,19 @@ class RoleController {
     }
 
     @GetMapping()
-    @PreAuthorize("hasAuthority('ADMIN_READ') || hasAuthority('ADMIN_WRITE')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     List<Role> getAllRoles() {
         return roleService.getAllRoles();
     }
 
     @PostMapping()
-    @PreAuthorize("hasAuthority('ADMIN_READ') || hasAuthority('ADMIN_WRITE')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     ResponseEntity<Role> createRole(@RequestBody Role role) {
         return ResponseEntity.ok(roleService.create(role));
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN_READ') || hasAuthority('ADMIN_WRITE')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     ResponseEntity<Role> updateRole(@PathVariable(value = "id") Long id, @RequestBody Role role) {
         return ResponseEntity.ok(roleService.update(role));
     }

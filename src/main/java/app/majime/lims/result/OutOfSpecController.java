@@ -3,6 +3,7 @@ package app.majime.lims.result;
 import app.majime.lims.RestConstants;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
@@ -48,6 +49,7 @@ class OutOfSpecController {
     }
 
     @PostMapping()
+    @PreAuthorize("hasAuthority('OOS')")
     ResponseEntity<OutOfSpecDto> addNew(@RequestBody OutOfSpecDto outOfSpecDto) {
         return ok(outOfSpecService.create(OutOfSpec.buildFrom(outOfSpecDto)).toDto());
     }

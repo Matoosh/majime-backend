@@ -3,6 +3,7 @@ package app.majime.lims.parameter;
 import app.majime.lims.RestConstants;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
@@ -55,6 +56,7 @@ class ParameterController {
     }
 
     @GetMapping("/spec/{id}")
+    @PreAuthorize("hasAuthority('ENTER_RESULTS')")
     List<ParameterDto> getParameterBySpecificationId(@PathVariable(value = "id") Long id) {
         List <Parameter> parametersList = parameterService.findBySpecificationId(id);
         return parametersList

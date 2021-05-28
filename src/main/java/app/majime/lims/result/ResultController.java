@@ -3,6 +3,7 @@ package app.majime.lims.result;
 import app.majime.lims.RestConstants;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
@@ -41,6 +42,7 @@ class ResultController {
     }
 
     @PostMapping()
+    @PreAuthorize("hasAuthority('ENTER_RESULTS')")
     ResponseEntity<ResultDto> addNewResult(@RequestBody ResultDto resultDto) {
         return ok(resultService.create(Result.buildFrom(resultDto)).toDto());
     }
@@ -67,6 +69,7 @@ class ResultController {
     }
 
     @GetMapping("/sample/{id}")
+    @PreAuthorize("hasAuthority('ENTER_RESULTS') || hasAuthority('OOS') || hasAuthority('CHECKING_RESULTS') || hasAuthority('CERTIFICATE_APPROVAL') || hasAuthority('CERTIFICATE_PRINTS')")
     List<ResultDto> getResultBySampleId(@PathVariable(value = "id") Long id) {
         List <Result> resultList = resultService.findBySampleId(id);
         return resultList
@@ -76,6 +79,7 @@ class ResultController {
     }
 
     @PutMapping("/{id}/{status}")
+    @PreAuthorize("hasAuthority('CHECKING_RESULTS')")
     ResponseEntity<ResultDto> updateResultStatus(@PathVariable(value = "id") Long id, @PathVariable ResultStatus status) {
         try{
             ResultDto result = resultService.updateStatus(id, status).toDto();

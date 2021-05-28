@@ -4,6 +4,7 @@ import app.majime.lims.RestConstants;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
@@ -21,6 +22,7 @@ class SampleController {
     private final SampleService sampleService;
 
     @GetMapping
+    @PreAuthorize("hasAuthority('USER') || hasAuthority('SAMPLE') || hasAuthority('BATCH_COLLETION')")
     List<SampleDto> getAll() {
         return sampleService.findAll().stream()
                 .map(Sample::toDto)
@@ -28,6 +30,7 @@ class SampleController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('USER') || hasAuthority('SAMPLE') || hasAuthority('BATCH_COLLETION')")
     ResponseEntity<SampleDto> getById(@PathVariable(value = "id") Long id) {
         Optional<Sample> sampleOptional = sampleService.findById(id);
 
@@ -39,6 +42,7 @@ class SampleController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('SAMPLE')")
     ResponseEntity<SampleDto> addNewSample(@RequestBody SampleDto sampleDto) {
         if (sampleService.isExist(sampleDto)) {
             return status(HttpStatus.UNPROCESSABLE_ENTITY).build();
@@ -47,6 +51,7 @@ class SampleController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('SAMPLE')")
     ResponseEntity<SampleDto> deleteMaterial(@PathVariable(value = "id") Long id) {
         try{
             SampleDto sample = sampleService.deleteSample(id).toDto();;
@@ -58,6 +63,7 @@ class SampleController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('USER') || hasAuthority('SAMPLE') || hasAuthority('BATCH_COLLETION')")
     ResponseEntity<SampleDto> updateSample(@PathVariable(value = "id") Long id, @RequestBody SampleDto sampleDto) {
         try {
             SampleDto dto = sampleService.updateSample(id, sampleDto).toDto();
@@ -68,6 +74,7 @@ class SampleController {
     }
 
     @PutMapping("/{id}/{status}")
+    @PreAuthorize("hasAuthority('USER') || hasAuthority('SAMPLE') || hasAuthority('BATCH_COLLETION')")
     ResponseEntity<SampleDto> updateStatus(@PathVariable(value = "id") Long id, @PathVariable(value = "status") SampleStatus statusCode) {
         try {
             SampleDto sampleDTO = sampleService.updateStatus(id, statusCode).toDto();

@@ -2,6 +2,7 @@ package app.majime.lims.log;
 
 import app.majime.lims.RestConstants;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,6 +20,7 @@ class LogController {
     List<LogDto> getAll() {return service.findAll().stream().map(Log::toDto).collect(toList());}
 
     @GetMapping("/{tab_name}/{element}")
+    @PreAuthorize("hasAuthority('CERTIFICATE_APPROVAL')")
     List<LogDto> findByTabNameAndElement(@PathVariable(value = "tab_name") String tab_name, @PathVariable(value = "element") Long element) {
         return service.findByTabNameAndElement(tab_name, element).stream()
                 .map(Log::toDto)
