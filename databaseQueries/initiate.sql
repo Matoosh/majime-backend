@@ -1,7 +1,7 @@
 -- uruchamianie innych skryptów
 -- \i other_script.sql
 
-\i mockData.sql;
+--\i mockData.sql;
 
 /*
 1. auditLog.sql
