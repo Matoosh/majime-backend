@@ -41,10 +41,6 @@ class LabController {
 
     @PostMapping()
     ResponseEntity<LabDto> addNewLab(@RequestBody LabDto labDto) {
-// Wyłączono weryfikację, bo front wymagał id, natomiast id jest nadawane automatycznie
-//        if (labService.isExist(labDto)) {
-//            return status(HttpStatus.UNPROCESSABLE_ENTITY).build();
-//        }
         return ok(labService.create(Lab.buildFrom(labDto)).toDto());
     }
 

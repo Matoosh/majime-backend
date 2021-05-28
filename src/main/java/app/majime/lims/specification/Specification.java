@@ -29,21 +29,17 @@ public class Specification {
     @Column(unique = true, length = 50)
     private String specificationNo;
 
-    //@NonNull
     @Column(length = 1)
     private String confirmed;
 
-//    @NonNull
     private String name;
 
-//    @NonNull
     @Enumerated(STRING)
     private Type type;
 
     @NonNull
     private String unit;
 
-//    @NonNull
     @Enumerated(STRING)
     private StatusDeleted deleted;
 
@@ -60,10 +56,6 @@ public class Specification {
     @ManyToOne
     @JoinColumn(name = "material_id")
     private Material material;
-
-//    @OneToMany(mappedBy = "parameter")
-//    @JsonIgnoreProperties("parameter")
-//    private Set<Parameter> parameters;
 
     @ManyToOne
     @JoinColumn(name = "accepted_by")

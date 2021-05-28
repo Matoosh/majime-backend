@@ -14,7 +14,6 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
 @Builder
-//@JsonIgnoreProperties(value = {"result"})
 class OutOfSpec {
 
     @Id
@@ -22,7 +21,6 @@ class OutOfSpec {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "out_of_spec_seq")
     private Long id;
 
-//    @NonNull
     private String name;
 
     @NonNull
@@ -35,14 +33,12 @@ class OutOfSpec {
     @NonNull
     private String value;
 
-    //@NonNull
     private StatusDeleted deleted;
 
     private String createdBy;
 
     private String reason;
 
-    //@JsonIgnoreProperties(value = {"result_id"})
     @OneToOne
     @JoinColumn(name = "result_id")
     private Result result;

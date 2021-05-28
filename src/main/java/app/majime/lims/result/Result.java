@@ -36,7 +36,6 @@ public class Result {
 
     private String reason;
 
-    // STATUS:
     @Enumerated(STRING)
     private ResultStatus status;
 

@@ -39,10 +39,6 @@ class SupplierController {
 
     @PostMapping()
     ResponseEntity<SupplierDto> addNewSupplier(@RequestBody SupplierDto dto) {
-// Wyłączono weryfikację, bo front wymagał id, natomiast id jest nadawane automatycznie
-//        if (supplierService.isExist(supplierDto)) {
-//            return status(HttpStatus.UNPROCESSABLE_ENTITY).build();
-//        }
         return ok(supplierService.create(Supplier.buildFrom(dto)).toDto());
     }
 

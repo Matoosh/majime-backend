@@ -35,9 +35,6 @@ public class Manufacturer {
     @JoinColumn(name = "address_id")
     private Address address;
 
-    //@OneToMany(mappedBy = "supplier")
-    //private Set<User> SupplierUser;
-
     public ManufacturerDto toDto(){
         return ManufacturerDto.builder()
                 .id(id)

@@ -17,10 +17,6 @@ class BatchService {
         return batchRepository.findAll();
     }
 
-//    Optional<Batch> findById(Long id) {
-//        return batchRepository.findById(id);
-//    }
-
     Batch create(Batch batch) {
         batch.setDeleted("false");
         return batchRepository.save(batch);

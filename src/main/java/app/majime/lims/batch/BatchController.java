@@ -26,16 +26,6 @@ class BatchController {
                 .collect(toList());
     }
 
-//    @GetMapping("/{id}")
-//    ResponseEntity<Batch> getById(@PathVariable(value = "id") Long id) {
-//        Optional<Batch> batch = repository.findById(id);
-//        if (batch.isPresent()) {
-//            return ResponseEntity.ok(batch.get());
-//        } else {
-//            return ResponseEntity.notFound().build();
-//        }
-//    }
-
     @GetMapping("/material/{id}")
     List<BatchDto> getByMaterialId(@PathVariable(value = "id") Long id) {
         List<Batch> batchList = batchService.findByMaterialId(id);

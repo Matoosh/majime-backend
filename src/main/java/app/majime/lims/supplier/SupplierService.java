@@ -47,7 +47,6 @@ class SupplierService {
         return repository.findById(supplierDto.getId()).isPresent();
     }
 
-    //void deleteById(Long id) {supplierRepository.deleteById(id);}
     void deleteById(Long id) throws EntityNotFoundException {
         Optional<Supplier> supplierOptional = repository.findById(id);
 

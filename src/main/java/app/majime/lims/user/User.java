@@ -50,11 +50,6 @@ public class User {
 
     private String reason;
 
-//    @NonNull
-//    @ManyToOne
-//    @JoinColumn(name = "role_id")
-//    private Role role;
-
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_role",

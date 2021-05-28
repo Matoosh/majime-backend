@@ -39,10 +39,6 @@ class ManufacturerController {
 
     @PostMapping()
     ResponseEntity<ManufacturerDto> addNewManufacturer(@RequestBody ManufacturerDto dto) {
-// Wyłączono weryfikację, bo front wymagał id, natomiast id jest nadawane automatycznie
-//        if (manufacturerService.isExist(manufacturerDto)) {
-//            return status(HttpStatus.UNPROCESSABLE_ENTITY).build();
-//        }
         return ok(manufacturerService.create(Manufacturer.buildFrom(dto)).toDto());
     }
 

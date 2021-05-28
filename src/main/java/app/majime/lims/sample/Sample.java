@@ -79,12 +79,10 @@ public class Sample {
 
     void addSampleLab(SampleLab sampleLab) {
         sampleLabs.add(sampleLab);
-//        sampleLab.setSample(this);
     }
 
     void removeSampleLab(SampleLab sampleLab) {
         sampleLabs.add(sampleLab);
-//        sampleLab.setSample(this);
     }
 
     public SampleDto toDto() {

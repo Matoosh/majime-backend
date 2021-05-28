@@ -47,7 +47,6 @@ class ManufacturerService {
         return repository.findById(manufacturerDto.getId()).isPresent();
     }
 
-    //void deleteById(Long id) {manufacturerRepository.deleteById(id);}
     void deleteById(Long id) throws EntityNotFoundException {
         Optional<Manufacturer> manufacturerOptional = repository.findById(id);
 

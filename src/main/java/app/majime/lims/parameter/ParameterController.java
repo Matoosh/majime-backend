@@ -40,11 +40,6 @@ class ParameterController {
 
     @PostMapping()
     ResponseEntity<ParameterDto> addNewParameter(@RequestBody ParameterDto newParameter){
-//        Optional<Parameter> parameterFromDb = repository.findByName(newParameter.getName());
-//        if(parameterFromDb.isPresent()) {
-//            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
-//        }
-//        Parameter savedParameter = repository.save(newParameter);
         return ok(parameterService.create(Parameter.buildFrom(newParameter)).toDto());
     }
 

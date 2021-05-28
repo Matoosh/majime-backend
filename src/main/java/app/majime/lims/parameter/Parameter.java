@@ -43,10 +43,6 @@ public class Parameter {
 
     private String unit;
 
-//    @ManyToOne
-//    @JoinColumn(name = "unit_id")
-//    private Unit unit;
-
     @ManyToOne()
     @JoinColumn(name = "specification_id")
     private Specification specification;

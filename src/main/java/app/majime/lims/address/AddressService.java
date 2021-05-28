@@ -33,7 +33,6 @@ class AddressService {
         address.setStreet(addressDto.getStreet());
         address.setPostOffice(addressDto.getPostOffice());
         address.setCountryCode(addressDto.getCountryCode());
-        //address.buildFrom(addressDto);
         return addressRepository.save(address);
     }
 

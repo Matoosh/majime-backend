@@ -22,7 +22,6 @@ class SpecificationController {
 
     @GetMapping
     List<SpecificationDto> getAll() {
-       // return specificationService.findAll();
         return specificationService.findAll().stream()
                 .map(Specification::toDto)
                 .collect(toList());
@@ -58,24 +57,15 @@ class SpecificationController {
 
     @PostMapping()
     ResponseEntity<SpecificationDto> addNewSpecification(@RequestBody SpecificationDto specificationDto) {
-//        if (specificationService.isExist(specificationDto)) {
-//            return status(HttpStatus.UNPROCESSABLE_ENTITY).build();
-//        }
         return ok(specificationService.create(Specification.buildFrom(specificationDto)).toDto());
     }
 
     @PostMapping("/material")
     ResponseEntity<MaterialDto> addNewMaterial(@RequestBody MaterialDto materialDto) {
-//        if (specificationService.isExist(specificationDto)) {
-//            return status(HttpStatus.UNPROCESSABLE_ENTITY).build();
-//        }
         return ok(specificationService.createMaterial(Material.buildFrom(materialDto)).toDto());
     }
 
 
-//    void deleteSpecification(@PathVariable(value = "id") Long id, @RequestBody SpecificationDto specificationDto) {
-//        specificationService.deleteById(id);
-//    }
     // @TODO should PUT "deleted" to 'true'
     @DeleteMapping("/{id}")
     ResponseEntity<SpecificationDto> deleteSpecification(@PathVariable(value = "id") Long id) {
