@@ -18,7 +18,7 @@ class PermissionController {
     }
 
     @GetMapping()
-    @PreAuthorize("hasAuthority('ADMIN_READ') || hasAuthority('ADMIN_WRITE')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     List<Permission> getAllPermissions() {
         return permissionService.getAllPermissions();
     }

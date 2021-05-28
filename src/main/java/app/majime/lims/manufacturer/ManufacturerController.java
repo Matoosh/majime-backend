@@ -3,6 +3,7 @@ package app.majime.lims.manufacturer;
 import app.majime.lims.RestConstants;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
@@ -21,6 +22,7 @@ class ManufacturerController {
     private final ManufacturerService manufacturerService;
 
     @GetMapping
+    @PreAuthorize("hasAuthority('MANUFACTURER') || hasAuthority('SAMPLE')")
     List<ManufacturerDto> getAll() {
         return manufacturerService.findAll().stream()
                 .map(Manufacturer::toDto)
@@ -28,6 +30,7 @@ class ManufacturerController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('MANUFACTURER') || hasAuthority('SAMPLE')")
     ResponseEntity<ManufacturerDto> getById(@PathVariable(value = "id") Long id) {
         Optional<Manufacturer> manufacturerOptional = manufacturerService.findById(id);
         if (manufacturerOptional.isPresent()) {
@@ -38,19 +41,18 @@ class ManufacturerController {
     }
 
     @PostMapping()
+    @PreAuthorize("hasAuthority('MANUFACTURER')")
     ResponseEntity<ManufacturerDto> addNewManufacturer(@RequestBody ManufacturerDto dto) {
-// Wyłączono weryfikację, bo front wymagał id, natomiast id jest nadawane automatycznie
-//        if (manufacturerService.isExist(manufacturerDto)) {
-//            return status(HttpStatus.UNPROCESSABLE_ENTITY).build();
-//        }
         return ok(manufacturerService.create(Manufacturer.buildFrom(dto)).toDto());
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('MANUFACTURER')")
     void delete(@PathVariable(value = "id") Long id) {
         manufacturerService.deleteById(id);}
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('MANUFACTURER')")
     ResponseEntity<ManufacturerDto> updateManufacturer(@PathVariable(value = "id") Long id, @RequestBody ManufacturerDto manufacturerDto) {
         try{
             ManufacturerDto dto = manufacturerService.updateManufacturer(id, manufacturerDto).toDto();

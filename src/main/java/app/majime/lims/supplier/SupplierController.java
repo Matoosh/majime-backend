@@ -3,6 +3,7 @@ package app.majime.lims.supplier;
 import app.majime.lims.RestConstants;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
@@ -21,6 +22,7 @@ class SupplierController {
     private final SupplierService supplierService;
 
     @GetMapping
+    @PreAuthorize("hasAuthority('SUPPLIER') || hasAuthority('SAMPLE')")
     List<SupplierDto> getAll() {
         return supplierService.findAll().stream()
                 .map(Supplier::toDto)
@@ -28,6 +30,7 @@ class SupplierController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('SUPPLIER') || hasAuthority('SAMPLE')")
     ResponseEntity<SupplierDto> getById(@PathVariable(value = "id") Long id) {
         Optional<Supplier> supplierOptional = supplierService.findById(id);
         if (supplierOptional.isPresent()) {
@@ -38,19 +41,18 @@ class SupplierController {
     }
 
     @PostMapping()
+    @PreAuthorize("hasAuthority('SUPPLIER')")
     ResponseEntity<SupplierDto> addNewSupplier(@RequestBody SupplierDto dto) {
-// Wyłączono weryfikację, bo front wymagał id, natomiast id jest nadawane automatycznie
-//        if (supplierService.isExist(supplierDto)) {
-//            return status(HttpStatus.UNPROCESSABLE_ENTITY).build();
-//        }
         return ok(supplierService.create(Supplier.buildFrom(dto)).toDto());
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('SUPPLIER')")
     void delete(@PathVariable(value = "id") Long id) {
         supplierService.deleteById(id);}
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('SUPPLIER')")
     ResponseEntity<SupplierDto> updateSupplier(@PathVariable(value = "id") Long id, @RequestBody SupplierDto supplierDto) {
         try{
             SupplierDto dto = supplierService.updateSupplier(id, supplierDto).toDto();

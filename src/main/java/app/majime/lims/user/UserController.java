@@ -23,12 +23,13 @@ class UserController {
     }
 
     @GetMapping()
+    @PreAuthorize("hasAuthority('ADMIN')")
     List<User> getAll() {
         return userService.findAll();
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN_READ') || hasAuthority('ADMIN_WRITE')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<UserRead> editUser(@PathVariable(value = "id") Long id, @RequestBody UserWrite user) {
         return ResponseEntity.ok(User.toUserRead(userService.editUser(id, user)));
     }
@@ -39,16 +40,19 @@ class UserController {
     }
 
     @PostMapping("/signup")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<UserRead> register(@RequestBody UserWrite user) {
         return ResponseEntity.ok(User.toUserRead(userService.signUp(User.buildFrom(user))));
     }
 
     @PutMapping("/change-password")
+    @PreAuthorize("hasAuthority('USER')")
     public ResponseEntity<UserRead> resetPassword(HttpServletRequest req, @RequestBody UserChangePasswordRequest userChangePasswordRequest) {
         return ResponseEntity.ok(User.toUserRead(userService.resetPassword(req.getRemoteUser(), userChangePasswordRequest)));
     }
 
     @GetMapping("/refresh")
+    @PreAuthorize("hasAuthority('USER')")
     public UserAuth refresh(HttpServletRequest req) {
         return new UserAuth(userService.refresh(req.getRemoteUser()));
     }

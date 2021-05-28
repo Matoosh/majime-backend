@@ -33,7 +33,6 @@ public class Batch {
 
     private String manufacturerBatchNo;
 
-//    @NonNull
     private String deleted;
 
     private String createdBy;
@@ -60,9 +59,6 @@ public class Batch {
     @ManyToOne()
     @JoinColumn(name = "material_id")
     private Material material;
-
-//    @OneToMany(mappedBy = "batch")
-//    private Set<Sample> batchSamples;
 
     public BatchDto toDto() {
         return BatchDto.builder()

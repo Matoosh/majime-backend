@@ -13,7 +13,6 @@ import javax.persistence.*;
 @RequiredArgsConstructor
 @ToString
 @Builder
-//@Embeddable
 public class Address {
 
     @Id

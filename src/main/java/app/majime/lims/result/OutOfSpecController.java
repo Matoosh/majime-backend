@@ -3,6 +3,7 @@ package app.majime.lims.result;
 import app.majime.lims.RestConstants;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
@@ -20,6 +21,7 @@ class OutOfSpecController {
     private final OutOfSpecService outOfSpecService;
 
     @GetMapping()
+    @PreAuthorize("hasAuthority('OOS')")
     List<OutOfSpecDto> getAll(){
         return outOfSpecService
                 .findAll()
@@ -29,6 +31,7 @@ class OutOfSpecController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('OOS')")
     ResponseEntity<OutOfSpecDto> getById(@PathVariable(value = "id") Long id) {
         Optional<OutOfSpec> outOfSpecOptional = outOfSpecService.findById(id);
         if(outOfSpecOptional.isPresent()){
@@ -39,6 +42,7 @@ class OutOfSpecController {
     }
 
     @GetMapping("/result/{id}")
+    @PreAuthorize("hasAuthority('OOS')")
     ResponseEntity<OutOfSpecDto> getOutOfSpecByResultId(@PathVariable(value = "id") Long id) {
         try {
             return ok(outOfSpecService.findByResultId(id).toDto());
@@ -48,11 +52,13 @@ class OutOfSpecController {
     }
 
     @PostMapping()
+    @PreAuthorize("hasAuthority('OOS')")
     ResponseEntity<OutOfSpecDto> addNew(@RequestBody OutOfSpecDto outOfSpecDto) {
         return ok(outOfSpecService.create(OutOfSpec.buildFrom(outOfSpecDto)).toDto());
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('OOS')")
     ResponseEntity<OutOfSpecDto> updateResult(@PathVariable(value = "id") Long id, @RequestBody OutOfSpecDto outOfSpecDto) {
         try{
             OutOfSpecDto result = outOfSpecService.update(id, outOfSpecDto).toDto();

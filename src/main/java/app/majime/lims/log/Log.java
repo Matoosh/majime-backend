@@ -45,7 +45,7 @@ class Log {
     @Column(columnDefinition = "jsonb")
     JsonNode new_row_data;
 
-    String dml_timestamp; //timestamp
+    String dml_timestamp;
     String dml_created_by;
     String dml_reason;
 

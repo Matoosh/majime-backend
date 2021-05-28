@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.Embeddable;
@@ -23,6 +24,7 @@ class LabController {
     private final LabService labService;
 
     @GetMapping
+    @PreAuthorize("hasAuthority('LAB') || hasAuthority('ADMIN') || hasAuthority('BATCH_ADOPTION')")
     List<LabDto> getAll() {
         return labService.findAll().stream()
                 .map(Lab::toDto)
@@ -30,6 +32,7 @@ class LabController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('LAB') || hasAuthority('ADMIN') || hasAuthority('BATCH_ADOPTION')")
     ResponseEntity<LabDto> getById(@PathVariable(value = "id") Long id) {
         Optional<Lab> labOptional = labService.findById(id);
         if (labOptional.isPresent()) {
@@ -40,18 +43,17 @@ class LabController {
     }
 
     @PostMapping()
+    @PreAuthorize("hasAuthority('LAB')")
     ResponseEntity<LabDto> addNewLab(@RequestBody LabDto labDto) {
-// Wyłączono weryfikację, bo front wymagał id, natomiast id jest nadawane automatycznie
-//        if (labService.isExist(labDto)) {
-//            return status(HttpStatus.UNPROCESSABLE_ENTITY).build();
-//        }
         return ok(labService.create(Lab.buildFrom(labDto)).toDto());
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('LAB')")
     void delete(@PathVariable(value = "id") Long id) {labService.deleteById(id);}
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('LAB')")
     ResponseEntity<LabDto> updateLab(@PathVariable(value = "id") Long id, @RequestBody LabDto labDto) {
         try{
             LabDto dto = labService.updateLab(id, labDto).toDto();
