@@ -21,6 +21,7 @@ class OutOfSpecController {
     private final OutOfSpecService outOfSpecService;
 
     @GetMapping()
+    @PreAuthorize("hasAuthority('OOS')")
     List<OutOfSpecDto> getAll(){
         return outOfSpecService
                 .findAll()
@@ -30,6 +31,7 @@ class OutOfSpecController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('OOS')")
     ResponseEntity<OutOfSpecDto> getById(@PathVariable(value = "id") Long id) {
         Optional<OutOfSpec> outOfSpecOptional = outOfSpecService.findById(id);
         if(outOfSpecOptional.isPresent()){
@@ -40,6 +42,7 @@ class OutOfSpecController {
     }
 
     @GetMapping("/result/{id}")
+    @PreAuthorize("hasAuthority('OOS')")
     ResponseEntity<OutOfSpecDto> getOutOfSpecByResultId(@PathVariable(value = "id") Long id) {
         try {
             return ok(outOfSpecService.findByResultId(id).toDto());
@@ -55,6 +58,7 @@ class OutOfSpecController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('OOS')")
     ResponseEntity<OutOfSpecDto> updateResult(@PathVariable(value = "id") Long id, @RequestBody OutOfSpecDto outOfSpecDto) {
         try{
             OutOfSpecDto result = outOfSpecService.update(id, outOfSpecDto).toDto();

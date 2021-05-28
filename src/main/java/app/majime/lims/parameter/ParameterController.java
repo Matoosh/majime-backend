@@ -23,6 +23,7 @@ class ParameterController {
     private final ParameterService parameterService;
 
     @GetMapping()
+    @PreAuthorize("hasAuthority('SPECIFICATION') || hasAuthority('REPORTS') || hasAuthority('ENTER_RESULTS')")
     List<ParameterDto> getAll() {
         return parameterService.findAll().stream()
                 .map(Parameter::toDto)
@@ -30,6 +31,7 @@ class ParameterController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('SPECIFICATION') || hasAuthority('REPORTS') || hasAuthority('ENTER_RESULTS')")
     ResponseEntity<ParameterDto> getById(@PathVariable(value = "id") Long id){
         Optional<Parameter> parameterOptional = parameterService.findById(id);
         if(parameterOptional.isPresent()){
@@ -40,11 +42,13 @@ class ParameterController {
     }
 
     @PostMapping()
+    @PreAuthorize("hasAuthority('SPECIFICATION') || hasAuthority('REPORTS') || hasAuthority('ENTER_RESULTS')")
     ResponseEntity<ParameterDto> addNewParameter(@RequestBody ParameterDto newParameter){
         return ok(parameterService.create(Parameter.buildFrom(newParameter)).toDto());
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('SPECIFICATION') || hasAuthority('REPORTS') || hasAuthority('ENTER_RESULTS')")
     ResponseEntity<ParameterDto> deleteParameter(@PathVariable(value = "id") Long id) {
         try{
             ParameterDto parameter = parameterService.deleteParameter(id).toDto();;
@@ -56,7 +60,7 @@ class ParameterController {
     }
 
     @GetMapping("/spec/{id}")
-    @PreAuthorize("hasAuthority('ENTER_RESULTS')")
+    @PreAuthorize("hasAuthority('SPECIFICATION') || hasAuthority('REPORTS') || hasAuthority('ENTER_RESULTS')")
     List<ParameterDto> getParameterBySpecificationId(@PathVariable(value = "id") Long id) {
         List <Parameter> parametersList = parameterService.findBySpecificationId(id);
         return parametersList
@@ -66,6 +70,7 @@ class ParameterController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('SPECIFICATION') || hasAuthority('REPORTS') || hasAuthority('ENTER_RESULTS')")
     ResponseEntity<ParameterDto> updateParameter(@PathVariable(value = "id") Long id, @RequestBody ParameterDto parameterDto) {
         try{
             ParameterDto parameter = parameterService.updateParameter(id, parameterDto).toDto();
@@ -74,33 +79,4 @@ class ParameterController {
             return notFound().build();
         }
     }
-
-/*
-    @PutMapping("/border/{id}")
-    ResponseEntity<Parameter> updateStatus(@PathVariable(value = "id") Long id,@RequestBody Parameter newParameter){
-        Optional<Parameter> parameterOptional = repository.findById(id);
-        if(parameterOptional.isPresent()){
-            Parameter parameter = parameterOptional.get();
-            parameter.setBorder(newParameter.getBorder());
-            repository.save(parameter);
-            return ResponseEntity.ok(parameter);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
-    @PutMapping("/type/{id}")
-    ResponseEntity<Parameter> updateType(@PathVariable(value = "id") Long id,@RequestBody Parameter newParameter){
-        Optional<Parameter> parameterOptional = repository.findById(id);
-        if(parameterOptional.isPresent()){
-            Parameter parameter = parameterOptional.get();
-            parameter.setType(newParameter.getType());
-            repository.save(parameter);
-            return ResponseEntity.ok(parameter);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
- */
 }

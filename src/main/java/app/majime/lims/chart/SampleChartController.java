@@ -2,6 +2,7 @@ package app.majime.lims.chart;
 
 import app.majime.lims.RestConstants;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +17,7 @@ class SampleChartController {
     private final SampleChartService service;
 
     @GetMapping("/count")
+    @PreAuthorize("hasAuthority('USER')")
     List<SampleChartDto> getSampleChart() {
         return service.getSampleChart().stream()
                 .map(SampleChart::toDto)
