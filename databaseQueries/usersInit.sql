@@ -2,7 +2,7 @@
 -- Zapytanie uzupełnia bazę danych o następujące tabele: permission, role, role_permissions, lab_user, user_role
 --
 -- permission
-TRUNCATE TABLE public.permission CASCADE;
+--TRUNCATE TABLE public.permission CASCADE;
 INSERT INTO public.permission (id, code, description, name) VALUES (1, 'ADMIN', 'Nadaje dostęp do podstrony Użytkownicy oraz Role i uprawnienia', 'Uprawnienia administracyjne');
 INSERT INTO public.permission (id, code, description, name) VALUES (2, 'USER', 'Uprawniają do wyświetlania listy próbek, zmiany hasła i tak dalej.', 'Podstawowe uprawnienia');
 INSERT INTO public.permission (id, code, description, name) VALUES (3, 'SAMPLE', 'Uprawnienie dające dostęp do podstrony Zgłoszenie próby oraz operacji wykonywanych w tle', 'Zgłoszenie próby');
@@ -20,7 +20,7 @@ INSERT INTO public.permission (id, code, description, name) VALUES (14, 'MATERIA
 INSERT INTO public.permission (id, code, description, name) VALUES (15, 'SUPPLIER ', 'Uprawnienie dające dostęp do podstrony Dostawcy oraz operacji wykonywanych w tle', 'Dostawcy');
 INSERT INTO public.permission (id, code, description, name) VALUES (16, 'MANUFACTURER', 'Uprawnienie dające dostęp do podstrony Producenci oraz operacji wykonywanych w tle', 'Producenci');
 --role
-TRUNCATE TABLE public.role CASCADE;
+--TRUNCATE TABLE public.role CASCADE;
 INSERT INTO public.role (id, deleted, name) VALUES (1, 'FALSE', 'Administrator');
 INSERT INTO public.role (id, deleted, name) VALUES (2, 'FALSE', 'Pracownik administracyjny');
 INSERT INTO public.role (id, deleted, name) VALUES (3, 'FALSE', 'Kierownik pracownii');
@@ -29,7 +29,7 @@ INSERT INTO public.role (id, deleted, name) VALUES (5, 'FALSE', 'Próbkarz');
 INSERT INTO public.role (id, deleted, name) VALUES (6, 'FALSE', 'Laborant');
 INSERT INTO public.role (id, deleted, name) VALUES (7, 'FALSE', 'Analityk');
 --role_permission
-TRUNCATE TABLE public.role_permission CASCADE;
+--TRUNCATE TABLE public.role_permission CASCADE;
 INSERT INTO public.role_permission (role_id, permission_id) VALUES (1, 1);
 INSERT INTO public.role_permission (role_id, permission_id) VALUES (1, 2);
 INSERT INTO public.role_permission (role_id, permission_id) VALUES (1, 3);
@@ -78,7 +78,7 @@ INSERT INTO public.lab (id, created_by, deleted, name, reason, address_id) VALUE
 --lab_user
 
  */
-TRUNCATE TABLE public.lab_user CASCADE;
+--TRUNCATE TABLE public.lab_user CASCADE;
 INSERT INTO public.lab_user (id, created_by, deleted, email, first_name, last_name, password, phone, reason, lab_id) VALUES (1, null, 'FALSE', 'administracja@majime.app', 'Jan', 'Brzechwa', '$2a$12$yNlbhpJlmPpMasc4Wh06IepaPRP6Mr6gtgMyln86E.Y1NyljuMlRC', '', null, 1);
 INSERT INTO public.lab_user (id, created_by, deleted, email, first_name, last_name, password, phone, reason, lab_id) VALUES (2, null, 'FALSE', 'laborant@majime.app', 'Roman', 'Dmowski', '$2a$12$k4S6qZ1SsBEtbaaPeUvwb.lyyKym4QtFWBYY1J2.LkW/CyiT2lrb.', '', null, 1);
 INSERT INTO public.lab_user (id, created_by, deleted, email, first_name, last_name, password, phone, reason, lab_id) VALUES (3, null, 'FALSE', 'probkarz@majime.app', 'Wojciech', 'Celiński', '$2a$12$6sPzaG9cGJ8F8.xT.4K3luJS.lwVp64f0zXS4rNo9edImrfG4gGwC', '', null, 1);
@@ -87,7 +87,7 @@ INSERT INTO public.lab_user (id, created_by, deleted, email, first_name, last_na
 INSERT INTO public.lab_user (id, created_by, deleted, email, first_name, last_name, password, phone, reason, lab_id) VALUES (6, null, 'FALSE', 'klaboratorium@majime.app', 'Mariusz', 'Skrzat', '$2a$12$KOLw1q0lFYLl8CzxS.vfwuLYLM2ER8OAyTj5sN3Z1tEL/FqlqImTO', '', null, 1);
 INSERT INTO public.lab_user (id, created_by, deleted, email, first_name, last_name, password, phone, reason, lab_id) VALUES (7, null, 'FALSE', 'administrator@majime.app', 'Mateusz', 'Nieogarnięty', '$2a$12$dLII3WNHFC7KiU63GSoHGu1ElGPdRK1o/kLmSx02XngaRHG6hZt2m', '', null, 1);
 --user_role
-TRUNCATE TABLE public.user_role CASCADE;
+--TRUNCATE TABLE public.user_role CASCADE;
 INSERT INTO public.user_role (user_id, role_id) VALUES (1, 2);
 INSERT INTO public.user_role (user_id, role_id) VALUES (2, 6);
 INSERT INTO public.user_role (user_id, role_id) VALUES (3, 5);

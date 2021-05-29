@@ -8,5 +8,4 @@
 4. triggers.sql
 5. mockData.sql
 6. userInit.sql
-7. sampleStatusByResult
  */
