@@ -1,6 +1,4 @@
 -- uruchamianie innych skryptów
--- \i other_script.sql
-
 --\i mockData.sql;
 
 /*
@@ -8,4 +6,7 @@
 2. statusLog.sql
 3. functions.sql
 4. triggers.sql
+5. mockData.sql
+6. userInit.sql
+7. sampleStatusByResult
  */
