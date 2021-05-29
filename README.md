@@ -22,7 +22,6 @@ File -> Open -> majime-backend/pom.xml
 4. triggers.sql
 5. mockData.sql
 6. userInit.sql
-7. sampleStatusByResult.sql
 ## Contributors
 <table>
   <td align="center"><a href="https://github.com/Pirer24"><img src="https://avatars.githubusercontent.com/u/36137210?v=4" width="100px;" alt="Pirer24"/><br /><sub><b>Pirer24</b></sub></a><br /><a href="https://github.com/Matoosh/majime-backend/commits?author=Pirer24" title="Code">💻</a></td>
