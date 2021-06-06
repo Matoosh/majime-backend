@@ -64,9 +64,6 @@ public class Sample {
     @OneToMany(fetch = LAZY,mappedBy = "sample")
     private Set<SampleLab> sampleLabs;
 
-    @OneToMany(fetch = LAZY,mappedBy = "sample")
-    private Set<SampleStatusHistory> sampleStatusHistory;
-
     @Enumerated(STRING)
     private StatusDeleted deleted;
 

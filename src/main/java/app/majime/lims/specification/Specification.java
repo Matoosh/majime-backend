@@ -49,9 +49,6 @@ public class Specification {
 
     @Enumerated(STRING)
     private SpecificationStatus status;
- 
-    @OneToMany(mappedBy = "specification")
-    private Set<SpecificationStatusHistory> specificationStatusHistories;
 
     @ManyToOne
     @JoinColumn(name = "material_id")
