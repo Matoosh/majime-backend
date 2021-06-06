@@ -18,8 +18,8 @@ import javax.persistence.*;
 public class Manufacturer {
 
     @Id
-    @SequenceGenerator(name="supplier_seq", sequenceName="supplier_id_seq", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "supplier_seq")
+    @SequenceGenerator(name="manufacturer_seq", sequenceName="manufacturer_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "manufacturer_seq")
     private Long id;
 
     @NonNull
