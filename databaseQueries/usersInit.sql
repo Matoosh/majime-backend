@@ -66,6 +66,7 @@ INSERT INTO public.role_permission (role_id, permission_id) VALUES (2, 15);
 INSERT INTO public.role_permission (role_id, permission_id) VALUES (2, 14);
 INSERT INTO public.role_permission (role_id, permission_id) VALUES (6, 6);
 INSERT INTO public.role_permission (role_id, permission_id) VALUES (6, 5);
+INSERT INTO public.role_permission (role_id, permission_id) VALUES (6, 2);
 INSERT INTO public.role_permission (role_id, permission_id) VALUES (5, 2);
 INSERT INTO public.role_permission (role_id, permission_id) VALUES (5, 4);
 INSERT INTO public.role_permission (role_id, permission_id) VALUES (7, 6);
