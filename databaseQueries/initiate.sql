@@ -2,6 +2,7 @@
 --\i mockData.sql;
 
 /*
+0. createDatabase.sql
 1. auditLog.sql
 2. statusLog.sql
 3. functions.sql
